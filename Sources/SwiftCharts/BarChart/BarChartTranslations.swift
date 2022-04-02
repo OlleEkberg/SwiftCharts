@@ -8,12 +8,12 @@
 import Foundation
 import SwiftUI
 
-struct BarChartTranslations {
-    static let sortBy = NSLocalizedString("SORT_BY", comment: "")
-    static let sortSmallestFirst = NSLocalizedString("SORT_SMALLEST_FIRST", comment: "")
-    static let sortLargestFirst = NSLocalizedString("SORT_LARGEST_FIRST", comment: "")
-    static let sortOriginal = NSLocalizedString("SORT_ORIGINAL", comment: "")
-    static let sortAlphabetical = NSLocalizedString("SORT_ALPHABETICAL", comment: "")
-    static let amount = NSLocalizedString("AMOUNT", comment: "")
-    static let percent = NSLocalizedString("PERCENT", comment: "")
+public struct BarChartTranslations {
+    public static let sortBy = NSLocalizedString("SORT_BY", comment: "")
+    public static let sortSmallestFirst = NSLocalizedString("SORT_SMALLEST_FIRST", comment: "")
+    public static let sortLargestFirst = NSLocalizedString("SORT_LARGEST_FIRST", comment: "")
+    public static let sortOriginal = NSLocalizedString("SORT_ORIGINAL", comment: "")
+    public static let sortAlphabetical = NSLocalizedString("SORT_ALPHABETICAL", comment: "")
+    public static let amount = NSLocalizedString("AMOUNT", comment: "")
+    public static let percent = NSLocalizedString("PERCENT", comment: "")
 }
