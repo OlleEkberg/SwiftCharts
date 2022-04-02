@@ -212,11 +212,11 @@ private extension BarChart.ChartView {
     }
 }
 
-struct BarChartView_Previews: PreviewProvider {
+struct ChartView_Previews: PreviewProvider {
     static let data: [BarChart.Data] = [BarChart.Data(name: "First Value", amount: 122), BarChart.Data(name: "Second Value", amount: 6), BarChart.Data(name: "Third Value", amount: 783), BarChart.Data(name: "Fourth Value", amount: 300, additionalInfo: [.init(name: "Extra data", value: "22"), .init(name: "Extra Data 2", value: "Looks cool!")]), BarChart.Data(name: "Fifth Values", amount: 12), BarChart.Data(name: "Sixth Values", amount: 64), BarChart.Data(name: "Seventh Values", amount: 1200), BarChart.Data(name: "Eight Value", amount: 366, additionalInfo: [.init(name: "On Extra Value", value: "This is it.")]), BarChart.Data(name: "Ninth Value", amount: 100), BarChart.Data(name: "Tenth Value", amount: 86), BarChart.Data(name: "Eleventh Value", amount: 1002), BarChart.Data(name: "Twelvth Value", amount: 14)]
     
     static let vm = BarChart.ViewModel(data: data, sortMethod: .smallFirst)
     static var previews: some View {
-        BarChart.ChartView(with: vm, maxBarsOnScreen: 8).preferredColorScheme(.dark)
+        BarChart.ChartView(with: vm, maxBarsOnScreen: 8)
     }
 }

@@ -1,4 +1,5 @@
 # SwiftCharts
 
-A description of this package.
+A swift package for creating charts with swiftui.
+
 # SwiftCharts

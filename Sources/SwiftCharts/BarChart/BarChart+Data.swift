@@ -26,8 +26,6 @@ extension BarChart {
     }
 }
 
-
-
 extension BarChart.Data {
     public struct AdditionalInfo: Hashable {
         let name: String
