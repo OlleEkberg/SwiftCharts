@@ -15,7 +15,7 @@ public struct BarData: Identifiable, Hashable {
     let amount: Float
     let additionalInfo: [AdditionalInfo]?
     let barConfig: Config
-    let id = UUID()
+    public let id = UUID()
     
     public init(name: String, amount: Float, additionalInfo: [AdditionalInfo]? = nil, barConfig: Config = .init()) {
         self.amount = amount
@@ -38,7 +38,7 @@ extension BarData {
         let titleFont: Font
         let textFont: Font
         
-        init(barColor: Color = .bar, backgroundColor: Color = .barBackground, textColor: Color = .primaryText, titleFont: Font = .largeTitle, textFont: Font = .body) {
+        public init(barColor: Color = .bar, backgroundColor: Color = .barBackground, textColor: Color = .primaryText, titleFont: Font = .largeTitle, textFont: Font = .body) {
             self.barColor = barColor
             self.backgroundColor = backgroundColor
             self.textColor = textColor
