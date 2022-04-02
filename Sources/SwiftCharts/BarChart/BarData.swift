@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 import SwiftUI
 
-struct BarData: Identifiable, Hashable {
+public struct BarData: Identifiable, Hashable {
     
     let name: String
     let amount: Float
@@ -17,7 +17,7 @@ struct BarData: Identifiable, Hashable {
     let barConfig: Config
     let id = UUID()
     
-    init(name: String, amount: Float, additionalInfo: [AdditionalInfo]? = nil, barConfig: Config = .init()) {
+    public init(name: String, amount: Float, additionalInfo: [AdditionalInfo]? = nil, barConfig: Config = .init()) {
         self.amount = amount
         self.name = name
         self.additionalInfo = additionalInfo

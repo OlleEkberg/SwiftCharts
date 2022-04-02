@@ -9,9 +9,9 @@ import Foundation
 import SwiftUI
 
 
-class BarChartViewModel: ObservableObject {
+public class BarChartViewModel: ObservableObject {
     
-    enum SortMethod: CaseIterable {
+    public enum SortMethod: CaseIterable {
         case smallFirst,
              largeFirst,
              alpabetical,

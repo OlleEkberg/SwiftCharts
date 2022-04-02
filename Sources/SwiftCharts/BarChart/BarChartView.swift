@@ -8,7 +8,7 @@
 import SwiftUI
 
 extension BarChartView {
-    struct SortConfig {
+    public struct SortConfig {
         let shouldShow: Bool
         let titleFont: Font
         let titleColor: Color
@@ -31,7 +31,7 @@ extension BarChartView {
     }
 }
 
-struct BarChartView: View {
+public struct BarChartView: View {
     @ObservedObject private var viewModel: BarChartViewModel
     @State private var previewModeActive: Bool = false
     @State private var showSort: Bool = false
