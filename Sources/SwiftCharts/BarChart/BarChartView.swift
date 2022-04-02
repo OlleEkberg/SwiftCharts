@@ -202,8 +202,6 @@ private extension BarChartView {
             percent = 0.02
         }
         
-        print("Bar height: \(viewHeight * percent) - view: \(viewHeight)")
-        
         return viewHeight * percent
     }
     
