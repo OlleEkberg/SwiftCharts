@@ -18,7 +18,7 @@ extension BarChartView {
         let imageColor: Color
         let image: Image
         
-        init(shouldShow: Bool = true, titleFont: Font = .largeTitle, titleColor: Color = .primaryText, titleBackgroundColor: Color = .primaryBackground, methodTextColor: Color = .buttonText, methodFont: Font = .body, imageColor: Color = .primaryText, image: Image = Image(systemName: "slider.horizontal.3")) {
+        public init(shouldShow: Bool = true, titleFont: Font = .largeTitle, titleColor: Color = .primaryText, titleBackgroundColor: Color = .primaryBackground, methodTextColor: Color = .buttonText, methodFont: Font = .body, imageColor: Color = .primaryText, image: Image = Image(systemName: "slider.horizontal.3")) {
             self.shouldShow = shouldShow
             self.titleFont = titleFont
             self.titleColor = titleColor
