@@ -202,6 +202,8 @@ private extension BarChartView {
             percent = 0.02
         }
         
+        print("Bar height: \(viewHeight * percent) - view: \(viewHeight)")
+        
         return viewHeight * percent
     }
     
@@ -235,7 +237,7 @@ private extension BarChartView {
 }
 
 struct BarChartView_Previews: PreviewProvider {
-    static let data: [BarData] = [BarData(name: "First Values", amount: 122), BarData(name: "Second Values", amount: 6), BarData(name: "Third Values", amount: 783), BarData(name: "Fourth Values", amount: 300, additionalInfo: [.init(name: "Hej", value: "Okej"), .init(name: "Jaså", value: "jajaja")]), BarData(name: "First Values", amount: 122), BarData(name: "Second Values", amount: 6), BarData(name: "Third Values", amount: 783), BarData(name: "Fourth Values", amount: 300, additionalInfo: [.init(name: "Hej", value: "Okej"), .init(name: "Jaså", value: "jajaja")]), BarData(name: "First Values", amount: 122), BarData(name: "Second Values", amount: 6), BarData(name: "Third Values", amount: 783), BarData(name: "Fourth Values", amount: 300, additionalInfo: [.init(name: "Hej", value: "Okej"), .init(name: "Jaså", value: "jajaja")])]
+    static let data: [BarData] = [BarData(name: "First Value", amount: 122), BarData(name: "Second Value", amount: 6), BarData(name: "Third Value", amount: 783), BarData(name: "Fourth Value", amount: 300, additionalInfo: [.init(name: "Extra data", value: "22"), .init(name: "Extra Data 2", value: "Looks cool!")]), BarData(name: "Fifth Values", amount: 12), BarData(name: "Sixth Values", amount: 64), BarData(name: "Seventh Values", amount: 1200), BarData(name: "Eight Value", amount: 366, additionalInfo: [.init(name: "On Extra Value", value: "This is it.")]), BarData(name: "Ninth Value", amount: 100), BarData(name: "Tenth Value", amount: 86), BarData(name: "Eleventh Value", amount: 1002), BarData(name: "Twelvth Value", amount: 14)]
     
     static let vm = BarChartViewModel(data: data, sortMethod: .smallFirst)
     static var previews: some View {
