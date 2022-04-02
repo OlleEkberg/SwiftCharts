@@ -40,7 +40,7 @@ public struct BarChartView: View {
     private let maxBarsOnScreen: Int
     @State private var firstValue = true
     
-    init(with viewModel: BarChartViewModel, backgroundColor: Color = .primaryBackground, sortConfig: SortConfig = .init(), maxBarsOnScreen: Int = 6) {
+    public init(with viewModel: BarChartViewModel, backgroundColor: Color = .primaryBackground, sortConfig: SortConfig = .init(), maxBarsOnScreen: Int = 6) {
         self.viewModel = viewModel
         self.backgroundColor = backgroundColor
         self.sortConfig = sortConfig

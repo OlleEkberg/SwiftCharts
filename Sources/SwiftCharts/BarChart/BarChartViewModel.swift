@@ -48,7 +48,7 @@ public class BarChartViewModel: ObservableObject {
         return value
     }
     
-    init(data: [BarData], sortMethod: SortMethod = .original) {
+    public init(data: [BarData], sortMethod: SortMethod = .original) {
         self.data = data
         self.currentSortMethod = sortMethod
         
