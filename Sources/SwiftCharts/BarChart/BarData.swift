@@ -26,12 +26,12 @@ public struct BarData: Identifiable, Hashable {
 }
 
 extension BarData {
-    struct AdditionalInfo: Hashable {
+    public struct AdditionalInfo: Hashable {
         let name: String
         let value: String
     }
     
-    struct Config: Hashable {
+    public struct Config: Hashable {
         let barColor: Color
         let backgroundColor: Color
         let textColor: Color

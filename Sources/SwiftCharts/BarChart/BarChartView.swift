@@ -47,7 +47,7 @@ public struct BarChartView: View {
         self.maxBarsOnScreen = maxBarsOnScreen
     }
     
-    var body: some View {
+    public var body: some View {
         VStack(alignment: .trailing) {
             if sortConfig.shouldShow {
                 sortButton()
