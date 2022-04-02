@@ -1,5 +1,5 @@
 //
-//  BarData.swift
+//  BarChart+Data.swift
 //  Carbon Positive
 //
 //  Created by Olle  Ekberg on 2022-03-27.
@@ -8,23 +8,27 @@
 import Foundation
 import SwiftUI
 
-public struct BarData: Identifiable, Hashable {
-    
-    let name: String
-    let amount: Float
-    let additionalInfo: [AdditionalInfo]?
-    let barConfig: Config
-    public let id = UUID()
-    
-    public init(name: String, amount: Float, additionalInfo: [AdditionalInfo]? = nil, barConfig: Config = .init()) {
-        self.amount = amount
-        self.name = name
-        self.additionalInfo = additionalInfo
-        self.barConfig = barConfig
+extension BarChart {
+    public struct Data: Identifiable, Hashable {
+        
+        let name: String
+        let amount: Float
+        let additionalInfo: [AdditionalInfo]?
+        let barConfig: Config
+        public let id = UUID()
+        
+        public init(name: String, amount: Float, additionalInfo: [AdditionalInfo]? = nil, barConfig: Config = .init()) {
+            self.amount = amount
+            self.name = name
+            self.additionalInfo = additionalInfo
+            self.barConfig = barConfig
+        }
     }
 }
 
-extension BarData {
+
+
+extension BarChart.Data {
     public struct AdditionalInfo: Hashable {
         let name: String
         let value: String
