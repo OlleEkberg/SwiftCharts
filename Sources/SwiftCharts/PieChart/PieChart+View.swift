@@ -46,7 +46,7 @@ extension PieChart {
                         .foregroundColor(self.backgroundColor)
                     ForEach(viewModel.slices, id: \.self) { slice in
                         sliceView(slice)
-                            .scaleEffect(self.selectedSlice?.id == slice.id ? 1.05 : 1)
+                            .scaleEffect(scaleEffect(slice))
                             .animation(Animation.spring())
                     }
                     .frame(width: size.width, height: size.width)
@@ -110,6 +110,14 @@ extension PieChart {
             }
             
             selectedSlice = slice
+        }
+        
+        private func scaleEffect(_ slice: PieChart.Slice) -> CGFloat {
+            guard selectedSlice != nil else {
+                return 1
+            }
+            
+            return slice == selectedSlice ? 1.05 : 0.95
         }
         
 //        private func updateUI(_ slice: PieChart.piece) {
