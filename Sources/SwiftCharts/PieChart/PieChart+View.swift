@@ -46,26 +46,26 @@ extension PieChart {
                             .animation(Animation.spring())
                     }
                     .frame(width: geometry.size.width, height: geometry.size.width)
-                    Circle()
-                        .fill(.yellow)
-                        .frame(width: geometry.size.width * innerRadiusFraction, height: geometry.size.width * innerRadiusFraction)
-                        .onTapGesture {
-//                            resetValues()
-                        }
-                    VStack {
-                        Text(title)
-                            .font(.title)
-                            .foregroundColor(Color.gray)
-                            .onTapGesture {
-//                                resetValues()
-                            }
-                        Text("\(viewModel.maxAmount)")
-                            .font(.title)
-                            .foregroundColor(.black)
-                            .onTapGesture {
-//                                resetValues()
-                            }
-                    }
+//                    Circle()
+//                        .fill(.yellow)
+//                        .frame(width: geometry.size.width * innerRadiusFraction, height: geometry.size.width * innerRadiusFraction)
+//                        .onTapGesture {
+////                            resetValues()
+//                        }
+//                    VStack {
+//                        Text(title)
+//                            .font(.title)
+//                            .foregroundColor(Color.gray)
+//                            .onTapGesture {
+////                                resetValues()
+//                            }
+//                        Text("\(viewModel.maxAmount)")
+//                            .font(.title)
+//                            .foregroundColor(.black)
+//                            .onTapGesture {
+////                                resetValues()
+//                            }
+//                    }
                 }
             }
         }
