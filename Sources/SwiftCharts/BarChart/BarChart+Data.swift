@@ -30,6 +30,11 @@ extension BarChart.Data {
     public struct AdditionalInfo: Hashable {
         let name: String
         let value: String
+        
+        public init(name: String, value: String) {
+            self.name = name
+            self.value = value
+        }
     }
     
     public struct Config: Hashable {
