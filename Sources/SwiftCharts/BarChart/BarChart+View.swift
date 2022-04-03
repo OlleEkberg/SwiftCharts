@@ -217,6 +217,6 @@ struct ChartView_Previews: PreviewProvider {
     
     static let vm = BarChart.ViewModel(data: data, sortMethod: .smallFirst)
     static var previews: some View {
-        BarChart.ChartView(with: vm, maxBarsOnScreen: 8)
+        BarChart.ChartView(viewModel: vm, maxBarsOnScreen: 8)
     }
 }
