@@ -21,7 +21,9 @@ extension PieChart {
         }
         
         func add(_ slice: PieChart.Slice) {
-            slices.append(slice)
+            var tempSlices = slices
+            tempSlices.append(slice)
+            slices = createPiepieces(tempSlices)
         }
         
         func remove(_ slice: PieChart.Slice) {
@@ -31,8 +33,8 @@ extension PieChart {
             slices.remove(at: index)
         }
         
-        private func createPiepieces(_ pieces: [PieChart.Slice]) -> [PieChart.Slice] {
-            let sum = pieces.reduce(0) { $0 + $1.amount }
+        private func createPiepieces(_ slices: [PieChart.Slice]) -> [PieChart.Slice] {
+            let sum = slices.reduce(0) { $0 + $1.amount }
             var endDeg: Double = 0
             
             var tempSlices: [PieChart.Slice] = []
@@ -47,6 +49,7 @@ extension PieChart {
                 endDeg += degrees
             }
             
+            print("Temp Slices: \(tempSlices)")
             return tempSlices
         }
     }
