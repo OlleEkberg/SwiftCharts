@@ -15,15 +15,13 @@ extension PieChart {
         let colors: [Color] = [.red, .blue, .green, .yellow]
         
         @ObservedObject private var viewModel: PieChart.ViewModel
-        @State private var title: String = "Total"
-//        @State private var amount: String
-        @State private var tappedSlice: PieChart.Slice? = nil {
-            didSet {
-                self.previouslyTappedSlice = oldValue
-            }
-        }
-        @State private var previouslyTappedSlice: PieChart.Slice? = nil
-//        private let formatter: (Double) -> String
+        @State private var selectedSlice: PieChart.Slice? = nil
+//        @State private var tappedSlice: PieChart.Slice? = nil {
+//            didSet {
+//                self.previouslyTappedSlice = oldValue
+//            }
+//        }
+//        @State private var previouslyTappedSlice: PieChart.Slice? = nil
         private var backgroundColor: Color
         private var widthFraction: CGFloat
         private var innerRadiusFraction: CGFloat
@@ -48,7 +46,7 @@ extension PieChart {
                         .foregroundColor(self.backgroundColor)
                     ForEach(viewModel.slices, id: \.self) { slice in
                         sliceView(slice)
-                            .scaleEffect(self.tappedSlice?.name == slice.name ? 1.03 : 1)
+                            .scaleEffect(self.selectedSlice?.id == slice.id ? 1.03 : 1)
                             .animation(Animation.spring())
                     }
                     .frame(width: size.width, height: size.width)
@@ -83,6 +81,7 @@ extension PieChart {
                             .fill(colors.randomElement()!)
                             .onTapGesture {
                                 //updateUI(piepieceData)
+                                selectedSlice = slice
                             }
                             
                             Text("piece.percent")
@@ -92,7 +91,7 @@ extension PieChart {
                                 )
                                 .foregroundColor(Color.white)
                                 .onTapGesture {
-                                    //updateUI(piepieceData)
+                                    selectedSlice = slice
                                 }
                         }
                     }
@@ -104,12 +103,12 @@ extension PieChart {
             return body
         }
         
-//        private func updateUI(_ piepieceData: PieChart.piece) {
-//            title = piepieceData.name
-//            amount = piepieceData.amount
+//        private func updateUI(_ slice: PieChart.piece) {
+//            title = slice.name
+//            amount = slice.amount
 //
-//            pieceData.forEach { type in
-//                if piepieceData.name == type.name {
+//            slices.forEach { current in
+//                if slice.id == current.id {
 //                    tappedpiece = type
 //                }
 //            }
