@@ -46,26 +46,27 @@ extension PieChart {
                             .animation(Animation.spring())
                     }
                     .frame(width: geometry.size.width, height: geometry.size.width)
-//                    Circle()
-//                        .fill(self.backgroundColor)
+                    Circle()
+                        .fill(self.backgroundColor)
 //                        .frame(width: geometry.size.width * innerRadiusFraction, height: geometry.size.width * innerRadiusFraction)
-//                        .onTapGesture {
-////                            resetValues()
-//                        }
-//                    VStack {
-//                        Text(title)
-//                            .font(.title)
-//                            .foregroundColor(Color.gray)
-//                            .onTapGesture {
-////                                resetValues()
-//                            }
-//                        Text("\(viewModel.maxAmount)")
-//                            .font(.title)
-//                            .foregroundColor(.black)
-//                            .onTapGesture {
-////                                resetValues()
-//                            }
-//                    }
+                        .frame(width: 2, height: 2)
+                        .onTapGesture {
+//                            resetValues()
+                        }
+                    VStack {
+                        Text(title)
+                            .font(.title)
+                            .foregroundColor(Color.gray)
+                            .onTapGesture {
+//                                resetValues()
+                            }
+                        Text("\(viewModel.maxAmount)")
+                            .font(.title)
+                            .foregroundColor(.black)
+                            .onTapGesture {
+//                                resetValues()
+                            }
+                    }
                 }
             }
         }
