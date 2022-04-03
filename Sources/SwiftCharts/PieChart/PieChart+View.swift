@@ -46,7 +46,7 @@ extension PieChart {
                         .foregroundColor(self.backgroundColor)
                     ForEach(viewModel.slices, id: \.self) { slice in
                         sliceView(slice)
-                            .scaleEffect(self.selectedSlice?.id == slice.id ? 1.03 : 1)
+                            .scaleEffect(self.selectedSlice?.id == slice.id ? 1.05 : 1)
                             .animation(Animation.spring())
                     }
                     .frame(width: size.width, height: size.width)
@@ -80,8 +80,7 @@ extension PieChart {
                             }
                             .fill(colors.randomElement()!)
                             .onTapGesture {
-                                //updateUI(piepieceData)
-                                selectedSlice = slice
+                                selectSlice(slice)
                             }
                             
                             Text("piece.percent")
@@ -91,7 +90,7 @@ extension PieChart {
                                 )
                                 .foregroundColor(Color.white)
                                 .onTapGesture {
-                                    selectedSlice = slice
+                                    selectSlice(slice)
                                 }
                         }
                     }
@@ -101,6 +100,16 @@ extension PieChart {
             }
             
             return body
+        }
+        
+        private func selectSlice(_ slice: PieChart.Slice) {
+            guard selectedSlice == nil else {
+                selectedSlice = nil
+                
+                return
+            }
+            
+            selectedSlice = slice
         }
         
 //        private func updateUI(_ slice: PieChart.piece) {
