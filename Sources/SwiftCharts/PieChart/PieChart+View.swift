@@ -47,9 +47,8 @@ extension PieChart {
                     }
                     .frame(width: geometry.size.width, height: geometry.size.width)
                     Circle()
-                        .fill(self.backgroundColor)
-//                        .frame(width: geometry.size.width * innerRadiusFraction, height: geometry.size.width * innerRadiusFraction)
-                        .frame(width: 2, height: 2)
+                        .fill(.yellow)
+                        .frame(width: geometry.size.width * innerRadiusFraction, height: geometry.size.width * innerRadiusFraction)
                         .onTapGesture {
 //                            resetValues()
                         }
