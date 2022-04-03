@@ -148,7 +148,7 @@ private extension BarChart.ChartView {
         return VStack {
             ZStack(alignment: .bottom) {
                 RoundedRectangle(cornerRadius: cornerRadius)
-                    .foregroundColor(data.barConfig.backgroundColor)
+                    .foregroundColor(Color("BarBackground"))
                 RoundedRectangle(cornerRadius: cornerRadius)
                     .foregroundColor(data.barConfig.barColor.opacity(barOpacity(data)))
                     .frame(height: barHeight(data, viewHeight: height), alignment: .bottom)
