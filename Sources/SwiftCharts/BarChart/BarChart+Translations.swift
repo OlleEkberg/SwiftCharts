@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 extension BarChart {
-     struct Translations {
+     enum Translations {
          static let sortBy = NSLocalizedString("SWIFTCHARTS.BARCHART.SORT.BY", bundle: .module, comment: "")
          static let sortSmallestFirst = NSLocalizedString("SWIFTCHARTS.BARCHART.SORT.SMALLEST.FIRST", bundle: .module, comment: "")
          static let sortLargestFirst = NSLocalizedString("SWIFTCHARTS.BARCHART.SORT.LARGEST.FIRST", bundle: .module, comment: "")

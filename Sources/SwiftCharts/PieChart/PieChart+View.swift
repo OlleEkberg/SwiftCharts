@@ -33,8 +33,6 @@ extension PieChart {
             self.backgroundColor = backgroundColor
             self.widthFraction = widthFraction
             self.innerRadiusFraction = innerRadiusFraction
-//            self.amount = String(data.compactMap { $0.amountAsDouble }.reduce(0, +))
-//            self.sliceData = data
         }
         
         public var body: some View {
@@ -43,36 +41,36 @@ extension PieChart {
                     RoundedRectangle(cornerRadius: 20)
                         .foregroundColor(self.backgroundColor)
                     ForEach(viewModel.slices, id: \.self) { slice in
-                        pieSliceView(slice)
+                        piepieceView(slice)
                             .scaleEffect(self.tappedSlice?.name == slice.name ? 1.03 : 1)
                             .animation(Animation.spring())
                     }
                     .frame(width: geometry.size.width, height: geometry.size.width)
-                    Circle()
-                        .fill(self.backgroundColor)
-                        .frame(width: geometry.size.width * innerRadiusFraction, height: geometry.size.width * innerRadiusFraction)
-                        .onTapGesture {
-//                            resetValues()
-                        }
-                    VStack {
-                        Text(title)
-                            .font(.title)
-                            .foregroundColor(Color.gray)
-                            .onTapGesture {
-//                                resetValues()
-                            }
-                        Text("\(viewModel.maxAmount)")
-                            .font(.title)
-                            .foregroundColor(.black)
-                            .onTapGesture {
-//                                resetValues()
-                            }
-                    }
+//                    Circle()
+//                        .fill(self.backgroundColor)
+//                        .frame(width: geometry.size.width * innerRadiusFraction, height: geometry.size.width * innerRadiusFraction)
+//                        .onTapGesture {
+////                            resetValues()
+//                        }
+//                    VStack {
+//                        Text(title)
+//                            .font(.title)
+//                            .foregroundColor(Color.gray)
+//                            .onTapGesture {
+////                                resetValues()
+//                            }
+//                        Text("\(viewModel.maxAmount)")
+//                            .font(.title)
+//                            .foregroundColor(.black)
+//                            .onTapGesture {
+////                                resetValues()
+//                            }
+//                    }
                 }
             }
         }
         
-        private func pieSliceView(_ slice: PieChart.Slice) -> some View {
+        private func piepieceView(_ slice: PieChart.Slice) -> some View {
             
             var body: some View {
                 GeometryReader { geometry in
@@ -97,17 +95,17 @@ extension PieChart {
                             }
                             .fill(colors.randomElement()!)
                             .onTapGesture {
-                                //updateUI(pieSliceData)
+                                //updateUI(piepieceData)
                             }
                             
-                            Text(slice.percent)
+                            Text("piece.percent")
                                 .position(
                                     x: geometry.size.width * 0.5 * CGFloat(1.0 + 0.78 * cos(midRadians)),
                                     y: geometry.size.height * 0.5 * CGFloat(1.0 - 0.78 * sin(midRadians))
                                 )
                                 .foregroundColor(Color.white)
                                 .onTapGesture {
-                                    //updateUI(pieSliceData)
+                                    //updateUI(piepieceData)
                                 }
                         }
                     }
@@ -119,21 +117,21 @@ extension PieChart {
             return body
         }
         
-//        private func updateUI(_ pieSliceData: PieChart.Slice) {
-//            title = pieSliceData.name
-//            amount = pieSliceData.amount
+//        private func updateUI(_ piepieceData: PieChart.piece) {
+//            title = piepieceData.name
+//            amount = piepieceData.amount
 //
-//            sliceData.forEach { type in
-//                if pieSliceData.name == type.name {
-//                    tappedSlice = type
+//            pieceData.forEach { type in
+//                if piepieceData.name == type.name {
+//                    tappedpiece = type
 //                }
 //            }
 //        }
 //
 //        private func resetValues() {
 //            title = "Total"
-//            tappedSlice = nil
-//            amount = String(sliceData.compactMap { $0.amountAsDouble }.reduce(0, +))
+//            tappedpiece = nil
+//            amount = String(pieceData.compactMap { $0.amountAsDouble }.reduce(0, +))
 //        }
         
         
