@@ -51,8 +51,8 @@ extension PieChart {
                             .animation(Animation.spring())
                     }
                     .frame(width: size.width, height: size.width)
+                    .padding()
                 }
-                .padding()
             }
             return body
         }
