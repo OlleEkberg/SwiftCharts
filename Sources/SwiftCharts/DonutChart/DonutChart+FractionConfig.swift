@@ -1,5 +1,5 @@
 //
-//  PieChart+FractionConfig.swift
+//  DonutChart+FractionConfig.swift
 //  
 //
 //  Created by Olle  Ekberg on 2022-04-03.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-extension PieChart {
+extension DonutChart {
     public struct FractionConfig {
         let widthFraction: CGFloat
         let innerRadiusFraction: CGFloat
