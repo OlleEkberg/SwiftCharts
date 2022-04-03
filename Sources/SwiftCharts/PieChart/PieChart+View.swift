@@ -37,6 +37,7 @@ extension PieChart {
             GeometryReader { geometry in
                 pieChart(geometry.size)
             }
+            .padding()
         }
         
         func pieChart(_ size: CGSize) -> some View {
@@ -51,7 +52,6 @@ extension PieChart {
                             .animation(Animation.spring())
                     }
                     .frame(width: size.width, height: size.width)
-                    .padding()
                 }
             }
             return body
