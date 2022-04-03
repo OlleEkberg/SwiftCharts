@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 extension BarChart {
-    public class ViewModel: ObservableObject {
+    public class ViewModel: ObservableObject, ChartViewModel {
         
         public enum SortMethod: CaseIterable {
             case smallFirst,
@@ -31,24 +31,19 @@ extension BarChart {
             }
         }
         
-        @Published private(set) var data: [BarChart.Data]
+        @Published private(set) var data: [BarChart.Bar]
         private(set) var currentSortMethod: SortMethod
-        private(set) var selectedData: BarChart.Data? = nil
+        private(set) var selectedData: BarChart.Bar? = nil
         private(set) var previousSelectedIndex: Int? = nil
-        private var originalSortedData: [BarChart.Data]
+        private var originalSortedData: [BarChart.Bar]
         var amountOfData: Int {
             data.count
         }
-        var maxValue: Float {
-            var value: Float = 0
-            data.forEach { data in
-                value += data.amount
-            }
-            
-            return value
+        var maxAmount: Float {
+            data.reduce(.zero) { $0 + $1.amount }
         }
         
-        public init(data: [BarChart.Data], sortMethod: SortMethod = .original) {
+        public init(data: [BarChart.Bar], sortMethod: SortMethod = .original) {
             self.data = data
             self.currentSortMethod = sortMethod
             
@@ -56,6 +51,17 @@ extension BarChart {
             if sortMethod != .original {
                 sort(by: sortMethod)
             }
+        }
+        
+        func add(_ bar: BarChart.Bar) {
+            data.append(bar)
+        }
+        
+        func remove(_ bar: BarChart.Bar) {
+            guard let index = data.firstIndex(where: { $0.id == bar.id }) else {
+                return
+            }
+            data.remove(at: index)
         }
         
         func sort(by method: SortMethod) {
@@ -73,7 +79,7 @@ extension BarChart {
             currentSortMethod = method
         }
         
-        func didSelect(data selectedData: BarChart.Data) {
+        func didSelect(data selectedData: BarChart.Bar) {
             guard let currentIndex = data.firstIndex(where: { $0 == selectedData }) else {
                 return
             }
@@ -82,7 +88,7 @@ extension BarChart {
             self.selectedData = selectedData
         }
         
-        func didReset(data selectedData: BarChart.Data) {
+        func didReset(data selectedData: BarChart.Bar) {
             if self.selectedData != nil {
                 data.move(from: 0, to: previousSelectedIndex!)
                 resetSelectedData()

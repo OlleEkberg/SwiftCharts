@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 extension BarChart {
-    public struct Data: Identifiable, Hashable {
+    public struct Bar: Identifiable, Hashable {
         
         let name: String
         let amount: Float
@@ -26,18 +26,8 @@ extension BarChart {
     }
 }
 
-extension BarChart.Data {
-    public struct AdditionalInfo: Hashable {
-        let name: String
-        let value: String
-        
-        public init(name: String, value: String) {
-            self.name = name
-            self.value = value
-        }
-    }
-    
-    public struct Config: Hashable {
+extension BarChart.Bar {
+    public struct Config: Hashable, DataConfig {
         let barColor: Color
         let backgroundColor: Color
         let textColor: Color

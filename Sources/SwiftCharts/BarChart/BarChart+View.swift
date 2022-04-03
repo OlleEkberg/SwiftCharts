@@ -126,7 +126,7 @@ private extension BarChart.ChartView {
                 Text("\(BarChart.Translations.amount): \(data.amount)")
                     .font(data.barConfig.textFont)
                     .foregroundColor(data.barConfig.textColor)
-                let percent = Float(data.amount / viewModel.maxValue * 100)
+                let percent = Float(data.amount / viewModel.maxAmount * 100)
                 Text("\(BarChart.Translations.percent): \(percent)%")
                     .font(data.barConfig.textFont)
                     .foregroundColor(data.barConfig.textColor)
@@ -142,7 +142,7 @@ private extension BarChart.ChartView {
         }
     }
     
-    func barChartBar(_ data: BarChart.Data, geometrySize: CGSize) -> some View {
+    func barChartBar(_ data: BarChart.Bar, geometrySize: CGSize) -> some View {
         
         let height = geometrySize.height
         return VStack {
@@ -164,7 +164,7 @@ private extension BarChart.ChartView {
 
 //MARK: - Calculations -
 private extension BarChart.ChartView {
-    func barBlur(_ data: BarChart.Data) -> CGFloat {
+    func barBlur(_ data: BarChart.Bar) -> CGFloat {
         guard viewModel.selectedData != nil else {
             return 0
         }
@@ -172,9 +172,9 @@ private extension BarChart.ChartView {
         return data == viewModel.selectedData ? 0 : 8
     }
     
-    func barHeight(_ data: BarChart.Data, viewHeight: CGFloat) -> CGFloat {
+    func barHeight(_ data: BarChart.Bar, viewHeight: CGFloat) -> CGFloat {
         
-        var percent = CGFloat(data.amount / viewModel.maxValue)
+        var percent = CGFloat(data.amount / viewModel.maxAmount)
         
         if percent < 0.02 {
             percent = 0.02
@@ -183,7 +183,7 @@ private extension BarChart.ChartView {
         return viewHeight * percent
     }
     
-    func barScale(_ data: BarChart.Data) -> CGFloat {
+    func barScale(_ data: BarChart.Bar) -> CGFloat {
         guard viewModel.selectedData != nil else {
             return 1
         }
@@ -191,7 +191,7 @@ private extension BarChart.ChartView {
         return data == viewModel.selectedData ? 1 : 0.9
     }
     
-    func barOpacity(_ data: BarChart.Data) -> CGFloat {
+    func barOpacity(_ data: BarChart.Bar) -> CGFloat {
         guard viewModel.selectedData != nil else {
             return 1
         }
@@ -213,7 +213,7 @@ private extension BarChart.ChartView {
 }
 
 struct ChartView_Previews: PreviewProvider {
-    static let data: [BarChart.Data] = [BarChart.Data(name: "First Value", amount: 122), BarChart.Data(name: "Second Value", amount: 6), BarChart.Data(name: "Third Value", amount: 783), BarChart.Data(name: "Fourth Value", amount: 300, additionalInfo: [.init(name: "Extra data", value: "22"), .init(name: "Extra Data 2", value: "Looks cool!")]), BarChart.Data(name: "Fifth Values", amount: 12), BarChart.Data(name: "Sixth Values", amount: 64), BarChart.Data(name: "Seventh Values", amount: 1200), BarChart.Data(name: "Eight Value", amount: 366, additionalInfo: [.init(name: "On Extra Value", value: "This is it.")]), BarChart.Data(name: "Ninth Value", amount: 100), BarChart.Data(name: "Tenth Value", amount: 86), BarChart.Data(name: "Eleventh Value", amount: 1002), BarChart.Data(name: "Twelvth Value", amount: 14)]
+    static let data: [BarChart.Bar] = [BarChart.Bar(name: "First Value", amount: 122), BarChart.Bar(name: "Second Value", amount: 6), BarChart.Bar(name: "Third Value", amount: 783), BarChart.Bar(name: "Fourth Value", amount: 300, additionalInfo: [.init(name: "Extra data", value: "22"), .init(name: "Extra Data 2", value: "Looks cool!")]), BarChart.Bar(name: "Fifth Values", amount: 12), BarChart.Bar(name: "Sixth Values", amount: 64), BarChart.Bar(name: "Seventh Values", amount: 1200), BarChart.Bar(name: "Eight Value", amount: 366, additionalInfo: [.init(name: "On Extra Value", value: "This is it.")]), BarChart.Bar(name: "Ninth Value", amount: 100), BarChart.Bar(name: "Tenth Value", amount: 86), BarChart.Bar(name: "Eleventh Value", amount: 1002), BarChart.Bar(name: "Twelvth Value", amount: 14)]
     
     static let vm = BarChart.ViewModel(data: data, sortMethod: .smallFirst)
     static var previews: some View {
