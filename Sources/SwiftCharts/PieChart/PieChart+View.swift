@@ -36,7 +36,6 @@ extension PieChart {
         public var body: some View {
             GeometryReader { geometry in
                 pieChart(geometry.size)
-                    .padding()
             }
         }
         
@@ -51,7 +50,7 @@ extension PieChart {
                             .blur(radius: sliceBlur(slice))
                             .animation(Animation.spring())
                     }
-                    .frame(width: size.width, height: size.width)
+                    .frame(width: size.width * 0.95, height: size.width * 0.95)
                 }
             }
             return body
