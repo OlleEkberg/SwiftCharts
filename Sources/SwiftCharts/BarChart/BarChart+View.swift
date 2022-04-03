@@ -12,10 +12,10 @@ extension BarChart {
         @ObservedObject private var viewModel: ViewModel
         @State private var previewModeActive: Bool = false
         @State private var showSort: Bool = false
+        @State private var firstValue = true
         private let backgroundColor: Color
         private let sortConfig: SortConfig
         private let maxBarsOnScreen: Int
-        @State private var firstValue = true
         
         public init(with viewModel: ViewModel, backgroundColor: Color = .primaryBackground, sortConfig: SortConfig = .init(), maxBarsOnScreen: Int = 6) {
             self.viewModel = viewModel
@@ -148,7 +148,7 @@ private extension BarChart.ChartView {
         return VStack {
             ZStack(alignment: .bottom) {
                 RoundedRectangle(cornerRadius: cornerRadius)
-                    .foregroundColor(data.barConfig.backgroundColor)
+                    .foregroundColor(.green)
                 RoundedRectangle(cornerRadius: cornerRadius)
                     .foregroundColor(data.barConfig.barColor.opacity(barOpacity(data)))
                     .frame(height: barHeight(data, viewHeight: height), alignment: .bottom)
