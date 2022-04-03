@@ -9,8 +9,8 @@ import SwiftUI
 
 extension PieChart {
     public struct Slice: Identifiable, Hashable {
-        var startAngle: Angle?
-        var endAngle: Angle?
+        var startAngle: Angle? = nil
+        var endAngle: Angle? = nil
         let name: String
         let amount: Float
         let percent: String
