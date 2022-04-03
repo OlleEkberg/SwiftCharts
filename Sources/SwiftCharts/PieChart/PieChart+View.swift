@@ -36,8 +36,8 @@ extension PieChart {
         public var body: some View {
             GeometryReader { geometry in
                 pieChart(geometry.size)
+                    .padding()
             }
-            .padding()
         }
         
         func pieChart(_ size: CGSize) -> some View {
