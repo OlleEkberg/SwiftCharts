@@ -52,6 +52,7 @@ extension PieChart {
                     }
                     .frame(width: size.width, height: size.width)
                 }
+                .padding()
             }
             return body
         }
