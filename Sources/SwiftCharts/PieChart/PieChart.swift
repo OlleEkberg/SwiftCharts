@@ -8,4 +8,4 @@
 import Foundation
 
 // NameSpace
-enum PieChart {}
+public enum PieChart {}
