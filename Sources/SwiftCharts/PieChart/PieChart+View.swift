@@ -10,7 +10,7 @@ import SwiftUI
 
 extension PieChart {
 
-    struct ChartView: View {
+    public struct ChartView: View {
         
         let colors: [Color] = [.red, .blue, .green, .yellow]
         
@@ -28,7 +28,7 @@ extension PieChart {
         private var widthFraction: CGFloat
         private var innerRadiusFraction: CGFloat
         
-        init(viewModel: PieChart.ViewModel, backgroundColor: Color = .white, widthFraction: CGFloat = 0.75, innerRadiusFraction: CGFloat = 0.60) {
+        public init(viewModel: PieChart.ViewModel, backgroundColor: Color = .white, widthFraction: CGFloat = 0.75, innerRadiusFraction: CGFloat = 0.60) {
             self.viewModel = viewModel
             self.backgroundColor = backgroundColor
             self.widthFraction = widthFraction
@@ -43,7 +43,7 @@ extension PieChart {
             return String(doubleValues.compactMap { $0 }.reduce(0, +))
         }
         
-        var body: some View {
+        public var body: some View {
             GeometryReader { geometry in
                 ZStack {
                     RoundedRectangle(cornerRadius: 20)

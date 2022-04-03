@@ -17,7 +17,7 @@ extension BarChart {
         private let sortConfig: SortConfig
         private let maxBarsOnScreen: Int
         
-        public init(with viewModel: ViewModel, backgroundColor: Color = .primaryBackground, sortConfig: SortConfig = .init(), maxBarsOnScreen: Int = 6) {
+        public init(viewModel: ViewModel, backgroundColor: Color = .primaryBackground, sortConfig: SortConfig = .init(), maxBarsOnScreen: Int = 6) {
             self.viewModel = viewModel
             self.backgroundColor = backgroundColor
             self.sortConfig = sortConfig
