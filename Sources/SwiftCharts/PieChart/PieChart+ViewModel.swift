@@ -19,7 +19,7 @@ extension PieChart {
         }
         
         public init(slices: [PieChart.Slice]) {
-            self.slices = createPiepieces(slices)
+            self.slices = createPieSlices(slices)
         }
         
         func add(_ slice: PieChart.Slice) {
@@ -44,6 +44,7 @@ extension PieChart {
             var endDeg: Double = 0
             
             var tempSlices: [PieChart.Slice] = []
+            var smallChartSlices = SmallPieSliceCollection(slices: [])
             
             slices.forEach { slice in
                 let degrees: Double = Double(slice.amount * 360 / sum)
@@ -51,9 +52,11 @@ extension PieChart {
                 tempSlice.startAngle = Angle(degrees: endDeg)
                 tempSlice.endAngle = Angle(degrees: endDeg + degrees)
                 if getPercent(slice) <= 2 {
-                    smallSlices.slices.append(tempSlice)
-                    smallSlices.startAngle = Angle(degrees: endDeg)
-                    smallSlices.endAngle += Angle(degrees: endDeg + degrees)
+                    
+                    smallChartSlices.slices.append(tempSlice)
+                    smallChartSlices.startAngle = Angle(degrees: endDeg)
+                    smallChartSlices.endAngle = (smallChartSlices.endAngle ?? Angle(degrees: 0)) + Angle(degrees: endDeg + degrees)
+                    smallSlices = smallChartSlices
                 } else {
                     tempSlices.append(tempSlice)
                 }
@@ -62,7 +65,7 @@ extension PieChart {
             }
             
             if let smallSlices = smallSlices {
-                let slice = PieChart.Slice(name: "Other", amount: smallSlices.slices.reduce(0) { $0 + $1.amount })
+                var slice = PieChart.Slice(name: "Other", amount: smallSlices.slices.reduce(0) { $0 + $1.amount })
                 slice.startAngle = smallSlices.startAngle
                 slice.endAngle = smallSlices.endAngle
                 
