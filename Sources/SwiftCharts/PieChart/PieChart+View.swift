@@ -14,15 +14,11 @@ extension PieChart {
         
         @ObservedObject private var viewModel: PieChart.ViewModel
         @State private var selectedSlice: PieChart.Slice? = nil
-        private var backgroundColor: Color
-        private var widthFraction: CGFloat
-        private var innerRadiusFraction: CGFloat
+        private let backgroundColor: Color
         
-        public init(viewModel: PieChart.ViewModel, backgroundColor: Color = .white, widthFraction: CGFloat = 0.75, innerRadiusFraction: CGFloat = 0.60) {
+        public init(viewModel: PieChart.ViewModel, backgroundColor: Color = .white) {
             self.viewModel = viewModel
             self.backgroundColor = backgroundColor
-            self.widthFraction = widthFraction
-            self.innerRadiusFraction = innerRadiusFraction
         }
         
         public var body: some View {
@@ -43,9 +39,6 @@ extension PieChart {
                             .frame(width: size.width * 0.95, height: size.width * 0.95)
                             .onTapGesture {
                                 selectSlice(slice)
-                            }
-                            .onLongPressGesture {
-                                viewModel.remove(slice)
                             }
                     }
                     if let selectedSlice = selectedSlice {
