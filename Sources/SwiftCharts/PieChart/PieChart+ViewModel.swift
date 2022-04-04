@@ -53,8 +53,7 @@ extension PieChart {
                 tempSlice.endAngle = Angle(degrees: endDeg + degrees)
                 if Float(slice.amount / sum * 100) <= 2 {
                     smallChartSlices.slices.append(tempSlice)
-                    smallChartSlices.startAngle = Angle(degrees: endDeg)
-                    smallChartSlices.endAngle = (smallChartSlices.endAngle ?? Angle(degrees: 0)) + Angle(degrees: endDeg + degrees)
+                    smallChartSlices.sum = sum
                     smallSlices = smallChartSlices
                 } else {
                     tempSlices.append(tempSlice)
@@ -79,7 +78,14 @@ extension PieChart {
 extension PieChart.ViewModel {
     struct SmallPieSliceCollection {
         var slices: [PieChart.Slice]
-        var startAngle: Angle? = nil
-        var endAngle: Angle? = nil
+        var sum: Float = 0
+        var startAngle: Angle {
+            Angle(degrees: 0)
+        }
+        var endAngle: Angle {
+            let amount = slices.reduce(0) { $0 + $1.amount }
+            let degrees: Double = Double(amount * 360 / sum)
+            return Angle(degrees: 0 + degrees)
+        }
     }
 }
