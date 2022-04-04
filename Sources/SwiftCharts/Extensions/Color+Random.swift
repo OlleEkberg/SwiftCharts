@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-extension Color {
+public extension Color {
     static let random: Color = Color(red: Double.random(in: 0.00...1.00), green: Double.random(in: 0.00...1.00), blue: Double.random(in: 0.00...1.00))
-    
 }
