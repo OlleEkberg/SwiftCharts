@@ -78,7 +78,7 @@ extension PieChart {
                                 selectSlice(slice)
                             }
                             
-                            Text(viewModel.getPercent(slice))
+                            Text("\(viewModel.getPercent(slice))")
                                 .position(
                                     x: geometry.size.width * 0.5 * CGFloat(1.0 * cos(midRadians)),
                                     y: geometry.size.height * 0.5 * CGFloat(1.0 * sin(midRadians))
@@ -101,8 +101,8 @@ extension PieChart {
             var body: some View {
                 VStack(alignment: .leading) {
                     Text(slice.name)
-                    Text(slice.amount)
-                    Text(viewModel.getPercent(slice))
+                    Text("\(slice.amount)")
+                    Text("\(viewModel.getPercent(slice))")
                 }
             }
             
