@@ -80,8 +80,8 @@ extension PieChart {
                             
                             Text("\(viewModel.getPercent(slice))")
                                 .position(
-                                    x: geometry.size.width * 0.5 * CGFloat(1.0 * cos(midRadians)),
-                                    y: geometry.size.height * 0.5 * CGFloat(1.0 * sin(midRadians))
+                                    x: geometry.size.width * 0.5 * CGFloat(1.0 + 0.5 * cos(midRadians)),
+                                    y: geometry.size.height * 0.5 * CGFloat(1.0 - 0.5 * sin(midRadians))
                                 )
                                 .foregroundColor(Color.white)
                                 .onTapGesture {
