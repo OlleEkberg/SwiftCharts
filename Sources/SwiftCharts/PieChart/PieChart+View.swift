@@ -50,6 +50,7 @@ extension PieChart {
                     
                     if let selectedSlice = selectedSlice {
                         infoView(selectedSlice)
+                            .frame(alignment: .leading)
                             .onTapGesture {
                                 self.selectedSlice = nil
                             }
@@ -90,9 +91,6 @@ extension PieChart {
                                         y: geometry.size.height * smallMultiplier * CGFloat(mediumMultiplier - smallMultiplier * sin(midRadians))
                                     )
                                     .foregroundColor(Color.white)
-//                                    .onTapGesture {
-//                                        selectSlice(slice)
-//                                    }
                             }
                         }
                     }
