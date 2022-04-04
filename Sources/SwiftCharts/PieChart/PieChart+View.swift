@@ -79,16 +79,18 @@ extension PieChart {
                             .onTapGesture {
                                 selectSlice(slice)
                             }
-                            let percent = String(format: "%.2f", viewModel.getPercent(slice))
-                            Text("\(percent)%")
-                                .position(
-                                    x: geometry.size.width * 0.5 * CGFloat(1.0 + 0.5 * cos(midRadians)),
-                                    y: geometry.size.height * 0.5 * CGFloat(1.0 - 0.5 * sin(midRadians))
-                                )
-                                .foregroundColor(Color.white)
-                                .onTapGesture {
-                                    selectSlice(slice)
-                                }
+                            if selectedSlice == nil {
+                                let percent = String(format: "%.2f", viewModel.getPercent(slice))
+                                Text("\(percent)%")
+                                    .position(
+                                        x: geometry.size.width * 0.5 * CGFloat(1.0 + 0.5 * cos(midRadians)),
+                                        y: geometry.size.height * 0.5 * CGFloat(1.0 - 0.5 * sin(midRadians))
+                                    )
+                                    .foregroundColor(Color.white)
+                                    .onTapGesture {
+                                        selectSlice(slice)
+                                    }
+                            }
                         }
                     }
                     
