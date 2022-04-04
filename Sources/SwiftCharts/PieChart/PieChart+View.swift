@@ -45,6 +45,7 @@ extension PieChart {
                     .frame(width: size.width * 0.95, height: size.width * 0.95, alignment: .center)
                     if let selectedSlice = selectedSlice {
                         infoView(selectedSlice)
+                            .frame(alignment: .topLeading)
                     }
                 }
             }
@@ -57,7 +58,7 @@ extension PieChart {
                 GeometryReader { geometry in
                     if let startAngle = slice.startAngle, let endAngle = slice.endAngle {
                         let midRadians = Double.pi / 2.0 - (startAngle + endAngle).radians / 2.0
-                        ZStack {
+                        ZStack(alignment: .center) {
                             Path { path in
                                 let width: CGFloat = min(geometry.size.width, geometry.size.height)
                                 let height = width
