@@ -35,7 +35,7 @@ extension PieChart {
         }
         
         func getPercent(_ slice: PieChart.Slice) -> Float {
-            slice.amount / maxAmount
+            Float(slice.amount / maxAmount * 100)
         }
         
         private func createPiepieces(_ slices: [PieChart.Slice]) -> [PieChart.Slice] {
