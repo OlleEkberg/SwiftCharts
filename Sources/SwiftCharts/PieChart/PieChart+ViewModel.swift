@@ -13,6 +13,7 @@ extension PieChart {
         
         @Published private(set) var slices: [PieChart.Slice] = []
         var selecedSlice: PieChart.Slice? = nil
+        var smallSlices: SmallPieSliceCollection? = nil
         var maxAmount: Float {
             slices.reduce(0) { $0 + $1.amount }
         }
@@ -24,7 +25,7 @@ extension PieChart {
         func add(_ slice: PieChart.Slice) {
             var tempSlices = slices
             tempSlices.append(slice)
-            slices = createPiepieces(tempSlices)
+            slices = createPieSlices(tempSlices)
         }
         
         func remove(_ slice: PieChart.Slice) {
@@ -38,7 +39,7 @@ extension PieChart {
             Float(slice.amount / maxAmount * 100)
         }
         
-        private func createPiepieces(_ slices: [PieChart.Slice]) -> [PieChart.Slice] {
+        private func createPieSlices(_ slices: [PieChart.Slice]) -> [PieChart.Slice] {
             let sum = slices.reduce(0) { $0 + $1.amount }
             var endDeg: Double = 0
             
@@ -49,13 +50,34 @@ extension PieChart {
                 var tempSlice = slice
                 tempSlice.startAngle = Angle(degrees: endDeg)
                 tempSlice.endAngle = Angle(degrees: endDeg + degrees)
-                tempSlices.append(tempSlice)
+                if getPercent(slice) <= 2 {
+                    smallSlices.slices.append(tempSlice)
+                    smallSlices.startAngle = Angle(degrees: endDeg)
+                    smallSlices.endAngle += Angle(degrees: endDeg + degrees)
+                } else {
+                    tempSlices.append(tempSlice)
+                }
                 
                 endDeg += degrees
             }
             
-            print("Temp Slices: \(tempSlices)")
+            if let smallSlices = smallSlices {
+                let slice = PieChart.Slice(name: "Other", amount: smallSlices.slices.reduce(0) { $0 + $1.amount })
+                slice.startAngle = smallSlices.startAngle
+                slice.endAngle = smallSlices.endAngle
+                
+                tempSlices.append(slice)
+            }
+            
             return tempSlices
         }
+    }
+}
+
+extension PieChart.ViewModel {
+    struct SmallPieSliceCollection {
+        var slices: [PieChart.Slice]
+        var startAngle: Angle? = nil
+        var endAngle: Angle? = nil
     }
 }
