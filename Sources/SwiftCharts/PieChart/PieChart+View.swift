@@ -35,7 +35,7 @@ extension PieChart {
         
         func pieChart(_ size: CGSize) -> some View {
             var body: some View {
-                ZStack {
+                ZStack(alignment: .center) {
                     ForEach(viewModel.slices, id: \.self) { slice in
                         sliceView(slice)
                             .scaleEffect(sliceScale(slice))
