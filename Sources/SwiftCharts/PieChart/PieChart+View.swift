@@ -42,8 +42,9 @@ extension PieChart {
                             .scaleEffect(sliceScale(slice))
                             .blur(radius: sliceBlur(slice))
                             .animation(Animation.spring())
+                            .frame(width: size.width * 0.95, height: size.width * 0.95, alignment: .center)
                     }
-                    .frame(width: size.width * 0.95, height: size.width * 0.95, alignment: .center)
+                    
                     if let selectedSlice = selectedSlice {
                         infoView(selectedSlice)
                             .frame(alignment: .topLeading)
