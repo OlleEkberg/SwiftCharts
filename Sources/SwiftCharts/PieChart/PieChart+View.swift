@@ -88,11 +88,11 @@ extension PieChart {
                                     Text("\(percent)%")
                                         .font(slice.config.textFont)
                                         .foregroundColor(slice.config.textColor)
-                                        .position(
-                                            x: geometry.size.width * smallMultiplier * CGFloat(mediumMultiplier + smallMultiplier * cos(midRadians)),
-                                            y: geometry.size.height * smallMultiplier * CGFloat(mediumMultiplier - smallMultiplier * sin(midRadians))
-                                        )
                                 }
+                                .position(
+                                    x: geometry.size.width * smallMultiplier * CGFloat(mediumMultiplier + smallMultiplier * cos(midRadians)),
+                                    y: geometry.size.height * smallMultiplier * CGFloat(mediumMultiplier - smallMultiplier * sin(midRadians))
+                                )
                                 
 //                                    .position(
 //                                        x: geometry.size.width * smallMultiplier * CGFloat(mediumMultiplier + smallMultiplier * cos(midRadians)),
