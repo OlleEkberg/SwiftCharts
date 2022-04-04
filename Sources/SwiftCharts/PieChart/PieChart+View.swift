@@ -43,6 +43,9 @@ extension PieChart {
                             .blur(radius: sliceBlur(slice))
                             .animation(Animation.spring())
                             .frame(width: size.width * 0.95, height: size.width * 0.95)
+                            .onTapGesture {
+                                selectSlice(slice)
+                            }
                     }
                     
                     if let selectedSlice = selectedSlice {
@@ -62,7 +65,7 @@ extension PieChart {
                 GeometryReader { geometry in
                     if let startAngle = slice.startAngle, let endAngle = slice.endAngle {
                         let midRadians = Double.pi / bigMultiplier - (startAngle + endAngle).radians / bigMultiplier
-                        ZStack/*(alignment: .center)*/ {
+                        ZStack {
                             Path { path in
                                 let width: CGFloat = min(geometry.size.width, geometry.size.height)
                                 let height = width
@@ -79,9 +82,6 @@ extension PieChart {
                                 
                             }
                             .fill(colors.randomElement()!)
-                            .onTapGesture {
-                                selectSlice(slice)
-                            }
                             if selectedSlice == nil {
                                 let percent = String(format: "%.2f", viewModel.getPercent(slice))
                                 Text("\(percent)%")
@@ -90,15 +90,14 @@ extension PieChart {
                                         y: geometry.size.height * smallMultiplier * CGFloat(mediumMultiplier - smallMultiplier * sin(midRadians))
                                     )
                                     .foregroundColor(Color.white)
-                                    .onTapGesture {
-                                        selectSlice(slice)
-                                    }
+//                                    .onTapGesture {
+//                                        selectSlice(slice)
+//                                    }
                             }
                         }
                     }
                     
                 }
-//                .aspectRatio(1, contentMode: .fit)
             }
             
             return body
@@ -142,24 +141,6 @@ extension PieChart {
             
             return slice == selectedSlice ? 0 : 8
         }
-        
-//        private func updateUI(_ slice: PieChart.piece) {
-//            title = slice.name
-//            amount = slice.amount
-//
-//            slices.forEach { current in
-//                if slice.id == current.id {
-//                    tappedpiece = type
-//                }
-//            }
-//        }
-//
-//        private func resetValues() {
-//            title = "Total"
-//            tappedpiece = nil
-//            amount = String(pieceData.compactMap { $0.amountAsDouble }.reduce(0, +))
-//        }
-        
         
         //MARK: Constants
         let smallMultiplier = 0.5
