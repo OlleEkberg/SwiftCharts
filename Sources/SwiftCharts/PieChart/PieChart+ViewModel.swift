@@ -32,7 +32,10 @@ extension PieChart {
             guard let index = slices.firstIndex(where: { $0.id == slice.id }) else {
                 return
             }
-            slices.remove(at: index)
+            var tempSlices = slices
+            tempSlices.remove(at: index)
+            let newSlices = createPieSlices(tempSlices)
+            slices = newSlices
         }
         
         func getPercent(_ slice: PieChart.Slice) -> Float {

@@ -44,8 +44,10 @@ extension PieChart {
                             .onTapGesture {
                                 selectSlice(slice)
                             }
+                            .onLongPressGesture {
+                                viewModel.remove(slice)
+                            }
                     }
-                    
                     if let selectedSlice = selectedSlice {
                         infoView(selectedSlice)
                             .frame(alignment: .leading)
