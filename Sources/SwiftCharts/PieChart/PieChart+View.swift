@@ -48,7 +48,7 @@ extension PieChart {
                     if let selectedSlice = selectedSlice {
                         infoView(selectedSlice)
                             .onTapGesture {
-                                selectedSlice = nil
+                                self.selectedSlice = nil
                             }
                     }
                 }
@@ -106,7 +106,7 @@ extension PieChart {
         
         private func infoView(_ slice: PieChart.Slice) -> some View {
             var body: some View {
-                VStack(alignment: .topLeading) {
+                VStack(alignment: .leading) {
                     Text(slice.name)
                     Text("\(slice.amount)")
                     let percent = String(format: "%.2f", viewModel.getPercent(slice))
