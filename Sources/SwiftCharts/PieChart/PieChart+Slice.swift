@@ -14,14 +14,14 @@ extension PieChart {
         let name: String
         let amount: Float
         let additionalInfo: [AdditionalInfo]?
-        let sliceConfig: Config
+        let config: Config
         public let id = UUID()
         
-        public init(name: String, amount: Float, additionalInfo: [AdditionalInfo]? = nil, sliceConfig: Config = .init()) {
+        public init(name: String, amount: Float, additionalInfo: [AdditionalInfo]? = nil, config: Config = .init()) {
             self.name = name
             self.amount = amount
             self.additionalInfo = additionalInfo
-            self.sliceConfig = sliceConfig
+            self.config = config
         }
     }
 }

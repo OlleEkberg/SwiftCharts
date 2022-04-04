@@ -12,7 +12,10 @@ extension PieChart {
 
     public struct ChartView: View {
         
-        let colors: [Color] = [.red, .blue, .green, .yellow]
+        let colorValue: ClosedRange<Double> = 0.00...1.00
+        var color: Color {
+            Color(red: Double.random(in: colorValue), green: Double.random(in: colorValue), blue: Double.random(in: colorValue))
+        }
         
         @ObservedObject private var viewModel: PieChart.ViewModel
         @State private var selectedSlice: PieChart.Slice? = nil
@@ -73,7 +76,6 @@ extension PieChart {
                                 let center = CGPoint(x: width * smallMultiplier, y: height * smallMultiplier)
                                 
                                 path.move(to: center)
-
                                 path.addArc(
                                     center: center,
                                     radius: width * smallMultiplier,
@@ -82,15 +84,16 @@ extension PieChart {
                                     clockwise: false)
                                 
                             }
-                            .fill(colors.randomElement()!)
+                            .fill(color)
                             if selectedSlice == nil {
                                 let percent = String(format: "%.2f", viewModel.getPercent(slice))
                                 Text("\(percent)%")
+                                    .font(slice.config.textFont)
+                                    .foregroundColor(slice.config.textColor)
                                     .position(
                                         x: geometry.size.width * smallMultiplier * CGFloat(mediumMultiplier + smallMultiplier * cos(midRadians)),
                                         y: geometry.size.height * smallMultiplier * CGFloat(mediumMultiplier - smallMultiplier * sin(midRadians))
                                     )
-                                    .foregroundColor(Color.white)
                             }
                         }
                     }
@@ -105,17 +108,21 @@ extension PieChart {
             var body: some View {
                 VStack {
                     Text(slice.name)
-                        .font(.largeTitle)
+                        .font(slice.config.titleFont)
+                        .foregroundColor(slice.config.textColor)
                         .frame(alignment: .center)
                     Text("\(Translations.amount): \(slice.amount)")
-                        .font(.headline)
+                        .font(slice.config.textFont)
+                        .foregroundColor(slice.config.textColor)
                     let percent = String(format: "%.2f", viewModel.getPercent(slice))
                     Text("\(Translations.percent): \(percent)%")
-                        .font(.headline)
+                        .font(slice.config.textFont)
+                        .foregroundColor(slice.config.textColor)
                     if let additionalInfo = slice.additionalInfo {
                         ForEach(additionalInfo, id: \.self) { info in
                             Text("\(info.name): \(info.value)")
-                                .font(.headline)
+                                .font(slice.config.textFont)
+                                .foregroundColor(slice.config.textColor)
                         }
                     }
                 }
