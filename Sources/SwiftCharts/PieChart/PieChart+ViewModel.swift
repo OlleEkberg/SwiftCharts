@@ -65,10 +65,9 @@ extension PieChart {
             
             if let smallSlices = smallSlices {
                 var slice = PieChart.Slice(name: "Other", amount: smallSlices.slices.reduce(0) { $0 + $1.amount })
-                slice.startAngle = Angle(degrees: 360 - endDeg)
+                slice.startAngle = Angle(degrees: 0 + endDeg)
                 slice.endAngle = smallSlices.endAngle
                 
-                print(slice)
                 tempSlices.append(slice)
             }
             
