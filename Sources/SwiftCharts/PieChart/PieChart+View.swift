@@ -30,7 +30,7 @@ extension PieChart {
         public var body: some View {
             GeometryReader { geometry in
                 pieChart(geometry.size)
-                    .frame(width: geometry.size.width, height: geometry.size.height, alignment: .center)
+                    .frame(width: geometry.size.width, height: geometry.size.height)
             }
         }
         
