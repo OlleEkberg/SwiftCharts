@@ -30,12 +30,13 @@ extension PieChart {
         public var body: some View {
             GeometryReader { geometry in
                 pieChart(geometry.size)
+                    .frame(width: geometry.size.width, height: geometry.size.height, alignment: .center)
             }
         }
         
         func pieChart(_ size: CGSize) -> some View {
             var body: some View {
-                ZStack(alignment: .center) {
+                ZStack {
                     ForEach(viewModel.slices, id: \.self) { slice in
                         sliceView(slice)
                             .scaleEffect(sliceScale(slice))
