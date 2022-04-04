@@ -58,20 +58,20 @@ extension PieChart {
             var body: some View {
                 GeometryReader { geometry in
                     if let startAngle = slice.startAngle, let endAngle = slice.endAngle {
-                        let midRadians = Double.pi / 2.0 - (startAngle + endAngle).radians / 2.0
+                        let midRadians = Double.pi / bigMultiplier - (startAngle + endAngle).radians / bigMultiplier
                         ZStack(alignment: .center) {
                             Path { path in
                                 let width: CGFloat = min(geometry.size.width, geometry.size.height)
                                 let height = width
-                                let center = CGPoint(x: width * 0.5, y: height * 0.5)
+                                let center = CGPoint(x: width * smallMultiplier, y: height * smallMultiplier)
                                 
                                 path.move(to: center)
 
                                 path.addArc(
                                     center: center,
-                                    radius: width * 0.5,
-                                    startAngle: Angle(degrees: -90.0) + startAngle,
-                                    endAngle: Angle(degrees: -90.0) + endAngle,
+                                    radius: width * smallMultiplier,
+                                    startAngle: Angle(degrees: -angleDegrees) + startAngle,
+                                    endAngle: Angle(degrees: -angleDegrees) + endAngle,
                                     clockwise: false)
                                 
                             }
@@ -83,8 +83,8 @@ extension PieChart {
                                 let percent = String(format: "%.2f", viewModel.getPercent(slice))
                                 Text("\(percent)%")
                                     .position(
-                                        x: geometry.size.width * 0.5 * CGFloat(1.0 + 0.5 * cos(midRadians)),
-                                        y: geometry.size.height * 0.5 * CGFloat(1.0 - 0.5 * sin(midRadians))
+                                        x: geometry.size.width * smallMultiplier * CGFloat(mediumMultiplier + smallMultiplier * cos(midRadians)),
+                                        y: geometry.size.height * smallMultiplier * CGFloat(mediumMultiplier - smallMultiplier * sin(midRadians))
                                     )
                                     .foregroundColor(Color.white)
                                     .onTapGesture {
@@ -95,7 +95,7 @@ extension PieChart {
                     }
                     
                 }
-                .aspectRatio(1, contentMode: .fit)
+//                .aspectRatio(1, contentMode: .fit)
             }
             
             return body
@@ -103,7 +103,7 @@ extension PieChart {
         
         private func infoView(_ slice: PieChart.Slice) -> some View {
             var body: some View {
-                VStack(alignment: .leading) {
+                VStack {
                     Text(slice.name)
                     Text("\(slice.amount)")
                     let percent = String(format: "%.2f", viewModel.getPercent(slice))
@@ -158,5 +158,11 @@ extension PieChart {
 //        }
         
         
+        //MARK: Constants
+        let smallMultiplier = 0.5
+        let mediumMultiplier = 1.0
+        let bigMultiplier = 2.0
+        let angleDegrees = 90.0
+        let ninetyFivePercent = 95.0
     }
 }
