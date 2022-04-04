@@ -103,11 +103,23 @@ extension PieChart {
         
         private func infoView(_ slice: PieChart.Slice) -> some View {
             var body: some View {
-                VStack(alignment: .leading) {
+                VStack {
                     Text(slice.name)
+                        .font(.largeTitle)
+                        .frame(alignment: .center)
+                    Spacer()
+                        .foregroundColor(.white)
                     Text("\(slice.amount)")
+                        .font(.headline)
                     let percent = String(format: "%.2f", viewModel.getPercent(slice))
                     Text("\(percent)%")
+                        .font(.headline)
+                    if let additionalInfo = slice.additionalInfo {
+                        ForEach(additionalInfo, id: \.self) { info in
+                            Text("\(info.name): \(info.value)")
+                                .font(.headline)
+                        }
+                    }
                 }
                 .padding()
                 .background(
