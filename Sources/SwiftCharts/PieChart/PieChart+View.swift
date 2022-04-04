@@ -16,12 +16,6 @@ extension PieChart {
         
         @ObservedObject private var viewModel: PieChart.ViewModel
         @State private var selectedSlice: PieChart.Slice? = nil
-//        @State private var tappedSlice: PieChart.Slice? = nil {
-//            didSet {
-//                self.previouslyTappedSlice = oldValue
-//            }
-//        }
-//        @State private var previouslyTappedSlice: PieChart.Slice? = nil
         private var backgroundColor: Color
         private var widthFraction: CGFloat
         private var innerRadiusFraction: CGFloat
@@ -42,8 +36,6 @@ extension PieChart {
         func pieChart(_ size: CGSize) -> some View {
             var body: some View {
                 ZStack {
-                    RoundedRectangle(cornerRadius: 20)
-                        .foregroundColor(self.backgroundColor)
                     ForEach(viewModel.slices, id: \.self) { slice in
                         sliceView(slice)
                             .scaleEffect(sliceScale(slice))
@@ -51,6 +43,9 @@ extension PieChart {
                             .animation(Animation.spring())
                     }
                     .frame(width: size.width * 0.95, height: size.width * 0.95)
+                    if let selectedSlice = selectedSlice {
+                        Text(selectedSlice.name)
+                    }
                 }
             }
             return body
@@ -69,8 +64,7 @@ extension PieChart {
                                 let center = CGPoint(x: width * 0.5, y: height * 0.5)
                                 
                                 path.move(to: center)
-                                
-                                // offset of 90 degrees because, in the SwiftUI coordinate system, the 0 degree starts at 3 o’clock instead of o’clock
+
                                 path.addArc(
                                     center: center,
                                     radius: width * 0.5,
