@@ -46,7 +46,9 @@ extension PieChart {
             var smallSlices = SmallPieSliceCollection(slices: [])
             
             slices.forEach { slice in
-                if Float(slice.amount / sum * 100) > 2 {
+                let percent = Float(slice.amount / sum * 100)
+                print("Percent \(percent)")
+                if  percent > 2 {
                     tempSlices.append(slice)
                 } else {
                     smallSlices.slices.append(slice)
