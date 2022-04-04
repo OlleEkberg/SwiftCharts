@@ -77,7 +77,7 @@ extension PieChart {
                             .onTapGesture {
                                 selectSlice(slice)
                             }
-                            let percent = String(format: "%.2f", "\(viewModel.getPercent(slice))")
+                            let percent = String(format: "%.2f", viewModel.getPercent(slice))
                             Text("\(percent)%")
                                 .position(
                                     x: geometry.size.width * 0.5 * CGFloat(1.0 + 0.5 * cos(midRadians)),
@@ -102,7 +102,7 @@ extension PieChart {
                 VStack(alignment: .leading) {
                     Text(slice.name)
                     Text("\(slice.amount)")
-                    let percent = String(format: "%.2f", "\(viewModel.getPercent(slice))")
+                    let percent = String(format: "%.2f", viewModel.getPercent(slice))
                     Text("\(percent)%")
                 }
             }
