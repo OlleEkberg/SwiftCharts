@@ -86,7 +86,7 @@ extension PieChart {
                                     .font(slice.config.textFont)
                                     .foregroundColor(slice.config.textColor)
                                     .position(
-                                        x: geometry.size.width * mediumMultiplier * CGFloat(mediumMultiplier + mediumMultiplier * cos(midRadians)),
+                                        x: geometry.size.width * smallMultiplier * CGFloat(mediumMultiplier + smallMultiplier * cos(midRadians)),
                                         y: geometry.size.height * smallMultiplier * CGFloat(mediumMultiplier - smallMultiplier * sin(midRadians))
                                     )
 //                                    .position(
