@@ -12,11 +12,6 @@ extension PieChart {
 
     public struct ChartView: View {
         
-        let colorValue: ClosedRange<Double> = 0.00...1.00
-        var color: Color {
-            Color(red: Double.random(in: colorValue), green: Double.random(in: colorValue), blue: Double.random(in: colorValue))
-        }
-        
         @ObservedObject private var viewModel: PieChart.ViewModel
         @State private var selectedSlice: PieChart.Slice? = nil
         private var backgroundColor: Color
@@ -84,7 +79,7 @@ extension PieChart {
                                     clockwise: false)
                                 
                             }
-                            .fill(color)
+                            .fill(slice.config.sliceColor)
                             if selectedSlice == nil {
                                 let percent = String(format: "%.2f", viewModel.getPercent(slice))
                                 Text("\(percent)%")

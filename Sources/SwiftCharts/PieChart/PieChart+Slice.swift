@@ -33,8 +33,13 @@ extension PieChart.Slice {
         let titleFont: Font
         let textFont: Font
         
-        public init(sliceColor: Color = .bar, textColor: Color = .primaryText, titleFont: Font = .largeTitle, textFont: Font = .body) {
-            self.sliceColor = sliceColor
+        public init(sliceColor: Color? = nil, textColor: Color = .primaryText, titleFont: Font = .largeTitle, textFont: Font = .body) {
+            if let sliceColor = sliceColor {
+                self.sliceColor = sliceColor
+            } else {
+                self.sliceColor = .random
+            }
+            
             self.textColor = textColor
             self.titleFont = titleFont
             self.textFont = textFont
