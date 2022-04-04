@@ -51,8 +51,7 @@ extension PieChart {
                 var tempSlice = slice
                 tempSlice.startAngle = Angle(degrees: endDeg)
                 tempSlice.endAngle = Angle(degrees: endDeg + degrees)
-                if getPercent(slice) <= 2 {
-                    
+                if Float(slice.amount / sum * 100) <= 2 {
                     smallChartSlices.slices.append(tempSlice)
                     smallChartSlices.startAngle = Angle(degrees: endDeg)
                     smallChartSlices.endAngle = (smallChartSlices.endAngle ?? Angle(degrees: 0)) + Angle(degrees: endDeg + degrees)
