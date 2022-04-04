@@ -68,9 +68,10 @@ extension PieChart {
             let sum = slices.reduce(0) { $0 + $1.amount }
             var endDeg: Double = 0
             
-            var tempSlices = separateSmallSlices(slices)
+            let separatedSlices = separateSmallSlices(slices)
+            var tempSlices = [PieChart.Slice]()
             
-            slices.forEach { slice in
+            separatedSlices.forEach { slice in
                 let degrees: Double = Double(slice.amount * 360 / sum)
                 var tempSlice = slice
                 tempSlice.startAngle = Angle(degrees: endDeg)
