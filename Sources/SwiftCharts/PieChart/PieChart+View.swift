@@ -161,7 +161,7 @@ extension PieChart {
         
         private func sliceBlur(_ slice: PieChart.Slice) -> CGFloat {
             guard selectedSlice != nil else {
-                return 1
+                return 0
             }
             
             return slice == selectedSlice ? 0 : 8
