@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  PieChart+View.swift
 //  
 //
 //  Created by Olle  Ekberg on 2022-04-03.
@@ -47,7 +47,9 @@ extension PieChart {
                     
                     if let selectedSlice = selectedSlice {
                         infoView(selectedSlice)
-                            .frame(alignment: .topLeading)
+                            .onTapGesture {
+                                selectedSlice = nil
+                            }
                     }
                 }
             }
@@ -104,7 +106,7 @@ extension PieChart {
         
         private func infoView(_ slice: PieChart.Slice) -> some View {
             var body: some View {
-                VStack {
+                VStack(alignment: .topLeading) {
                     Text(slice.name)
                     Text("\(slice.amount)")
                     let percent = String(format: "%.2f", viewModel.getPercent(slice))

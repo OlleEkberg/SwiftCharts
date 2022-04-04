@@ -1,5 +1,5 @@
 //
-//  PieChart+Piece.swift
+//  PieChart+Slice.swift
 //  
 //
 //  Created by Olle  Ekberg on 2022-04-03.
