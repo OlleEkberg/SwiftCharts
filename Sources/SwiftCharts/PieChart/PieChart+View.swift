@@ -109,6 +109,7 @@ extension PieChart {
                     let percent = String(format: "%.2f", viewModel.getPercent(slice))
                     Text("\(percent)%")
                 }
+                .padding()
                 .background(
                     RoundedRectangle(cornerRadius: 8, style: .continuous)
                         .foregroundColor(.black.opacity(0.7))
