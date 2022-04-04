@@ -42,9 +42,9 @@ extension PieChart {
                             .blur(radius: sliceBlur(slice))
                             .animation(Animation.spring())
                     }
-                    .frame(width: size.width * 0.95, height: size.width * 0.95)
+                    .frame(width: size.width * 0.95, height: size.width * 0.95, alignment: .center)
                     if let selectedSlice = selectedSlice {
-                        Text(selectedSlice.name)
+                        infoView(selectedSlice)
                     }
                 }
             }
@@ -78,10 +78,10 @@ extension PieChart {
                                 selectSlice(slice)
                             }
                             
-                            Text("piece.percent")
+                            Text(viewModel.getPercent(slice))
                                 .position(
-                                    x: geometry.size.width * 0.5 * CGFloat(1.0 + 0.78 * cos(midRadians)),
-                                    y: geometry.size.height * 0.5 * CGFloat(1.0 - 0.78 * sin(midRadians))
+                                    x: geometry.size.width * 0.5 * CGFloat(1.0 * cos(midRadians)),
+                                    y: geometry.size.height * 0.5 * CGFloat(1.0 * sin(midRadians))
                                 )
                                 .foregroundColor(Color.white)
                                 .onTapGesture {
@@ -92,6 +92,18 @@ extension PieChart {
                     
                 }
                 .aspectRatio(1, contentMode: .fit)
+            }
+            
+            return body
+        }
+        
+        private func infoView(_ slice: PieChart.Slice) -> some View {
+            var body: some View {
+                VStack(alignment: .leading) {
+                    Text(slice.name)
+                    Text(slice.amount)
+                    Text(viewModel.getPercent(slice))
+                }
             }
             
             return body

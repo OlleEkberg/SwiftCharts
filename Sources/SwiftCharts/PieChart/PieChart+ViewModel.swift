@@ -34,6 +34,10 @@ extension PieChart {
             slices.remove(at: index)
         }
         
+        func getPercent(_ slice: PieChart.Slice) -> Float {
+            slice.amount / maxAmount
+        }
+        
         private func createPiepieces(_ slices: [PieChart.Slice]) -> [PieChart.Slice] {
             let sum = slices.reduce(0) { $0 + $1.amount }
             var endDeg: Double = 0
