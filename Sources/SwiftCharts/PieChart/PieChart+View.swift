@@ -107,8 +107,6 @@ extension PieChart {
                     Text(slice.name)
                         .font(.largeTitle)
                         .frame(alignment: .center)
-                    Divider()
-                        .background(Color.white)
                     Text("\(slice.amount)")
                         .font(.headline)
                     let percent = String(format: "%.2f", viewModel.getPercent(slice))
