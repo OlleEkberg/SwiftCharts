@@ -42,7 +42,7 @@ extension PieChart {
                             .scaleEffect(sliceScale(slice))
                             .blur(radius: sliceBlur(slice))
                             .animation(Animation.spring())
-                            .frame(width: size.width * 0.95, height: size.width * 0.95, alignment: .center)
+                            .frame(width: size.width * 0.95, height: size.width * 0.95)
                     }
                     
                     if let selectedSlice = selectedSlice {
@@ -62,7 +62,7 @@ extension PieChart {
                 GeometryReader { geometry in
                     if let startAngle = slice.startAngle, let endAngle = slice.endAngle {
                         let midRadians = Double.pi / bigMultiplier - (startAngle + endAngle).radians / bigMultiplier
-                        ZStack(alignment: .center) {
+                        ZStack/*(alignment: .center)*/ {
                             Path { path in
                                 let width: CGFloat = min(geometry.size.width, geometry.size.height)
                                 let height = width
