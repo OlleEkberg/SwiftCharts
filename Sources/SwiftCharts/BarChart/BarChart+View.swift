@@ -95,7 +95,7 @@ private extension BarChart.ChartView {
             }
             .sheet(isPresented: $showSort) {
                 VStack {
-                    Text(BarChart.Translations.sortBy)
+                    Text(Translations.sortBy)
                         .font(sortConfig.titleFont)
                         .foregroundColor(sortConfig.titleColor)
                         .padding()
@@ -123,11 +123,11 @@ private extension BarChart.ChartView {
                     .foregroundColor(data.barConfig.textColor)
                 Divider()
                     .background(data.barConfig.textColor)
-                Text("\(BarChart.Translations.amount): \(data.amount)")
+                Text("\(Translations.amount): \(data.amount)")
                     .font(data.barConfig.textFont)
                     .foregroundColor(data.barConfig.textColor)
                 let percent = Float(data.amount / viewModel.maxAmount * 100)
-                Text("\(BarChart.Translations.percent): \(percent)%")
+                Text("\(Translations.percent): \(percent)%")
                     .font(data.barConfig.textFont)
                     .foregroundColor(data.barConfig.textColor)
                 if let additionalInfo = viewModel.selectedData?.additionalInfo {

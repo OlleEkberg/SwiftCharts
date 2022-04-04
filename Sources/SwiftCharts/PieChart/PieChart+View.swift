@@ -107,10 +107,10 @@ extension PieChart {
                     Text(slice.name)
                         .font(.largeTitle)
                         .frame(alignment: .center)
-                    Text("\(slice.amount)")
+                    Text("\(Translations.amount): \(slice.amount)")
                         .font(.headline)
                     let percent = String(format: "%.2f", viewModel.getPercent(slice))
-                    Text("\(percent)%")
+                    Text("\(Translations.percent): \(percent)%")
                         .font(.headline)
                     if let additionalInfo = slice.additionalInfo {
                         ForEach(additionalInfo, id: \.self) { info in
