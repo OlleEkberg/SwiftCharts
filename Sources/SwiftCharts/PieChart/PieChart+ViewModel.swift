@@ -13,7 +13,7 @@ extension PieChart {
         
         @Published private(set) var slices: [PieChart.Slice] = []
         var selecedSlice: PieChart.Slice? = nil
-        var smallSlices: SmallPieSliceCollection? = nil
+        var smallSlices: SmallPieSliceCollection = .init(slices: [])
         var maxAmount: Float {
             slices.reduce(0) { $0 + $1.amount }
         }
@@ -39,35 +39,43 @@ extension PieChart {
             Float(slice.amount / maxAmount * 100)
         }
         
+        private func separateSmallSlices(_ slices: [PieChart.Slice]) -> [PieChart.Slice] {
+            
+            let sum = slices.reduce(0) { $0 + $1.amount }
+            var tempSlices: [PieChart.Slice] = []
+            var smallSlices = SmallPieSliceCollection(slices: [])
+            
+            slices.forEach { slice in
+                if Float(slice.amount / sum * 100) > 2 {
+                    tempSlices.append(slice)
+                } else {
+                    smallSlices.slices.append(slice)
+                }
+            }
+            
+            if !smallSlices.slices.isEmpty {
+                self.smallSlices = smallSlices
+                let otherSlice = PieChart.Slice(name: "Other", amount: smallSlices.slices.reduce(0) { $0 + $1.amount })
+                tempSlices.append(otherSlice)
+            }
+            
+            return tempSlices
+        }
+        
         private func createPieSlices(_ slices: [PieChart.Slice]) -> [PieChart.Slice] {
             let sum = slices.reduce(0) { $0 + $1.amount }
             var endDeg: Double = 0
             
-            var tempSlices: [PieChart.Slice] = []
-            var smallChartSlices = SmallPieSliceCollection(slices: [])
+            var tempSlices = separateSmallSlices(slices)
             
             slices.forEach { slice in
                 let degrees: Double = Double(slice.amount * 360 / sum)
                 var tempSlice = slice
                 tempSlice.startAngle = Angle(degrees: endDeg)
                 tempSlice.endAngle = Angle(degrees: endDeg + degrees)
-                if Float(slice.amount / sum * 100) <= 2 {
-                    smallChartSlices.slices.append(tempSlice)
-                    smallChartSlices.sum = sum
-                    smallSlices = smallChartSlices
-                } else {
-                    tempSlices.append(tempSlice)
-                }
+                tempSlices.append(tempSlice)
                 
                 endDeg += degrees
-            }
-            
-            if let smallSlices = smallSlices {
-                var slice = PieChart.Slice(name: "Other", amount: smallSlices.slices.reduce(0) { $0 + $1.amount })
-                slice.startAngle = Angle(degrees: 360 - endDeg)
-                slice.endAngle = smallSlices.endAngle
-                
-                tempSlices.append(slice)
             }
             
             return tempSlices
