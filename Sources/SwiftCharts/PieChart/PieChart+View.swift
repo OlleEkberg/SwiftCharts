@@ -40,6 +40,7 @@ extension PieChart {
                                 .padding()
                         }
                     }
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
                 }
             }
         }
