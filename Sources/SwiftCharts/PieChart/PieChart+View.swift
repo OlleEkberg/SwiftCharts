@@ -31,30 +31,13 @@ extension PieChart {
                 ScrollView {
                     VStack(alignment: .leading) {
                         Text("Other")
-                            .frame(alignment: .center)
                             .font(.largeTitle)
                             .padding()
                         Divider()
                         ForEach(viewModel.smallSlices.slices, id: \.self) { slice in
-                            Text(slice.name)
-                                .font(slice.config.titleFont)
-                            let amount = String(format: "%.2f", slice.amount)
-                            Text("\(Translations.amount): \(amount)")
-                                .font(slice.config.textFont)
-                                .foregroundColor(slice.config.textColor)
-                            let percent = String(format: "%.2f", viewModel.getPercent(slice))
-                            Text("\(Translations.percent): \(percent)%")
-                                .font(slice.config.textFont)
-                                .foregroundColor(slice.config.textColor)
-                            if let additionalInfo = slice.additionalInfo {
-                                ForEach(additionalInfo, id: \.self) { info in
-                                    Text("\(info.name): \(info.value)")
-                                        .font(slice.config.textFont)
-                                        .foregroundColor(slice.config.textColor)
-                                }
-                            }
+                            infoText(slice)
+                                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
                         }
-                        Spacer()
                     }
                 }
             }
@@ -136,6 +119,19 @@ extension PieChart {
         
         private func infoView(_ slice: PieChart.Slice) -> some View {
             var body: some View {
+                infoText(slice)
+                .padding()
+                .background(
+                    RoundedRectangle(cornerRadius: 8, style: .continuous)
+                        .foregroundColor(.black.opacity(0.7))
+                )
+            }
+            
+            return body
+        }
+        
+        private func infoText(_ slice: PieChart.Slice) -> some View {
+            var body: some View {
                 VStack {
                     Text(slice.name)
                         .font(slice.config.titleFont)
@@ -157,11 +153,6 @@ extension PieChart {
                         }
                     }
                 }
-                .padding()
-                .background(
-                    RoundedRectangle(cornerRadius: 8, style: .continuous)
-                        .foregroundColor(.black.opacity(0.7))
-                )
             }
             
             return body
