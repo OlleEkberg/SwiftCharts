@@ -36,11 +36,10 @@ extension PieChart {
                         Divider()
                         ForEach(viewModel.smallSlices.slices, id: \.self) { slice in
                             infoText(slice)
-                                .frame(alignment: .leading)
+                                .frame(maxWidth: .infinity, maxHeight: .infinity)
                                 .padding()
                         }
                     }
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
                 }
             }
         }
