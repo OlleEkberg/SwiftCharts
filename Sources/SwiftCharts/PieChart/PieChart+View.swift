@@ -29,7 +29,7 @@ extension PieChart {
             }
             .sheet(isPresented: $showOtherSheet) {
                 ScrollView {
-                    VStack(alignment: .leading) {
+                    VStack {
                         Text("Other")
                             .font(.largeTitle)
                             .padding()
