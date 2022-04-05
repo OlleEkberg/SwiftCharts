@@ -37,6 +37,7 @@ extension PieChart {
                         ForEach(viewModel.smallSlices.slices, id: \.self) { slice in
                             infoText(slice)
                                 .frame(alignment: .leading)
+                                .padding()
                         }
                     }
                 }
