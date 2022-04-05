@@ -31,6 +31,7 @@ extension PieChart {
                 ScrollView {
                     VStack(alignment: .leading) {
                         Text("Other")
+                            .frame(alignment: .center)
                             .font(.largeTitle)
                             .padding()
                         Divider()
