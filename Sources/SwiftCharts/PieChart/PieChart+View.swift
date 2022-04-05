@@ -41,15 +41,18 @@ extension PieChart {
                             Text("\(Translations.amount): \(amount)")
                                 .font(slice.config.textFont)
                                 .foregroundColor(slice.config.textColor)
+                                .frame(alignment: .leading)
                             let percent = String(format: "%.2f", viewModel.getPercent(slice))
                             Text("\(Translations.percent): \(percent)%")
                                 .font(slice.config.textFont)
                                 .foregroundColor(slice.config.textColor)
+                                .frame(alignment: .leading)
                             if let additionalInfo = slice.additionalInfo {
                                 ForEach(additionalInfo, id: \.self) { info in
                                     Text("\(info.name): \(info.value)")
                                         .font(slice.config.textFont)
                                         .foregroundColor(slice.config.textColor)
+                                        .frame(alignment: .leading)
                                 }
                             }
                         }
