@@ -14,6 +14,7 @@ extension PieChart {
         
         @ObservedObject private var viewModel: PieChart.ViewModel
         @State private var selectedSlice: PieChart.Slice? = nil
+        @State private var showOtherSheet = false
         private let backgroundColor: Color
         
         public init(viewModel: PieChart.ViewModel, backgroundColor: Color = .white) {
@@ -25,6 +26,13 @@ extension PieChart {
             GeometryReader { geometry in
                 pieChart(geometry.size)
                     .frame(width: geometry.size.width, height: geometry.size.height)
+            }
+            .sheet(isPresented: $showOtherSheet) {
+                VStack {
+                    ForEach(viewModel.smallSlices.slices, id: \.self) { slice in
+                        infoView(slice)
+                    }
+                }
             }
         }
         
@@ -38,7 +46,11 @@ extension PieChart {
                             .animation(Animation.spring())
                             .frame(width: size.width * 0.95, height: size.width * 0.95)
                             .onTapGesture {
-                                selectSlice(slice)
+                                if slice.name == "Other" {
+                                    showOtherSheet = true
+                                } else {
+                                    selectSlice(slice)
+                                }
                             }
                     }
                     if let selectedSlice = selectedSlice {
@@ -88,11 +100,6 @@ extension PieChart {
                                     x: geometry.size.width * smallMultiplier * CGFloat(mediumMultiplier + smallMultiplier * cos(midRadians)),
                                     y: geometry.size.height * smallMultiplier * CGFloat(mediumMultiplier - smallMultiplier * sin(midRadians))
                                 )
-                                
-//                                    .position(
-//                                        x: geometry.size.width * smallMultiplier * CGFloat(mediumMultiplier + smallMultiplier * cos(midRadians)),
-//                                        y: geometry.size.height * smallMultiplier * CGFloat(mediumMultiplier - smallMultiplier * sin(midRadians))
-//                                    )
                             }
                         }
                     }

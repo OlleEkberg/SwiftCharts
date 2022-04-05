@@ -50,7 +50,6 @@ extension PieChart {
             
             slices.forEach { slice in
                 let percent = Float(slice.amount / sum * 100)
-                print("Percent \(percent)")
                 if  percent > 2 {
                     tempSlices.append(slice)
                 } else {
