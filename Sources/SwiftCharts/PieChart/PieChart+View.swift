@@ -26,22 +26,22 @@ extension PieChart {
             GeometryReader { geometry in
                 pieChart(geometry.size)
                     .frame(width: geometry.size.width, height: geometry.size.height)
-            }
-            .sheet(isPresented: $showOtherSheet) {
-                ScrollView {
-                    VStack {
-                        Text("Other")
-                            .font(.largeTitle)
-                            .padding()
-                        Divider()
-                        ForEach(viewModel.smallSlices.slices, id: \.self) { slice in
-                            infoText(slice)
-                                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                                .padding()
+                    .sheet(isPresented: $showOtherSheet) {
+                        ScrollView {
+                            VStack {
+                                Text("Other")
+                                    .font(.largeTitle)
+                                    .padding()
+                                Divider()
+                                ForEach(viewModel.smallSlices.slices, id: \.self) { slice in
+                                    infoText(slice)
+                                        .padding()
+                                }
+                            }
                         }
                     }
-                }
             }
+            
         }
         
         func pieChart(_ size: CGSize) -> some View {
