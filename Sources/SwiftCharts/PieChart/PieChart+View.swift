@@ -133,7 +133,7 @@ extension PieChart {
         
         private func infoText(_ slice: PieChart.Slice) -> some View {
             var body: some View {
-                VStack {
+                VStack(alignment: .leading) {
                     Text(slice.name)
                         .font(slice.config.titleFont)
                         .foregroundColor(slice.config.textColor)
