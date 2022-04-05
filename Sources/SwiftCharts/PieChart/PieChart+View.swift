@@ -29,8 +29,27 @@ extension PieChart {
             }
             .sheet(isPresented: $showOtherSheet) {
                 VStack {
+                    Text("Other")
+                        .font(.largeTitle)
+                        .padding()
                     ForEach(viewModel.smallSlices.slices, id: \.self) { slice in
-                        infoView(slice)
+                        Text(slice.name)
+                            .font(slice.config.titleFont)
+                        let amount = String(format: "%.2f", slice.amount)
+                        Text("\(Translations.amount): \(amount)")
+                            .font(slice.config.textFont)
+                            .foregroundColor(slice.config.textColor)
+                        let percent = String(format: "%.2f", viewModel.getPercent(slice))
+                        Text("\(Translations.percent): \(percent)%")
+                            .font(slice.config.textFont)
+                            .foregroundColor(slice.config.textColor)
+                        if let additionalInfo = slice.additionalInfo {
+                            ForEach(additionalInfo, id: \.self) { info in
+                                Text("\(info.name): \(info.value)")
+                                    .font(slice.config.textFont)
+                                    .foregroundColor(slice.config.textColor)
+                            }
+                        }
                     }
                 }
             }
