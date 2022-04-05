@@ -28,28 +28,32 @@ extension PieChart {
                     .frame(width: geometry.size.width, height: geometry.size.height)
             }
             .sheet(isPresented: $showOtherSheet) {
-                VStack {
-                    Text("Other")
-                        .font(.largeTitle)
-                        .padding()
-                    ForEach(viewModel.smallSlices.slices, id: \.self) { slice in
-                        Text(slice.name)
-                            .font(slice.config.titleFont)
-                        let amount = String(format: "%.2f", slice.amount)
-                        Text("\(Translations.amount): \(amount)")
-                            .font(slice.config.textFont)
-                            .foregroundColor(slice.config.textColor)
-                        let percent = String(format: "%.2f", viewModel.getPercent(slice))
-                        Text("\(Translations.percent): \(percent)%")
-                            .font(slice.config.textFont)
-                            .foregroundColor(slice.config.textColor)
-                        if let additionalInfo = slice.additionalInfo {
-                            ForEach(additionalInfo, id: \.self) { info in
-                                Text("\(info.name): \(info.value)")
-                                    .font(slice.config.textFont)
-                                    .foregroundColor(slice.config.textColor)
+                ScrollView {
+                    VStack {
+                        Text("Other")
+                            .font(.largeTitle)
+                            .padding()
+                        Divider()
+                        ForEach(viewModel.smallSlices.slices, id: \.self) { slice in
+                            Text(slice.name)
+                                .font(slice.config.titleFont)
+                            let amount = String(format: "%.2f", slice.amount)
+                            Text("\(Translations.amount): \(amount)")
+                                .font(slice.config.textFont)
+                                .foregroundColor(slice.config.textColor)
+                            let percent = String(format: "%.2f", viewModel.getPercent(slice))
+                            Text("\(Translations.percent): \(percent)%")
+                                .font(slice.config.textFont)
+                                .foregroundColor(slice.config.textColor)
+                            if let additionalInfo = slice.additionalInfo {
+                                ForEach(additionalInfo, id: \.self) { info in
+                                    Text("\(info.name): \(info.value)")
+                                        .font(slice.config.textFont)
+                                        .foregroundColor(slice.config.textColor)
+                                }
                             }
                         }
+                        Spacer()
                     }
                 }
             }
