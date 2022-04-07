@@ -43,8 +43,8 @@ extension PieChart {
                                             .padding()
                                     }
                                 }
+                                .frame(width: geometry.size.width, height: geometry.size.height, alignment: .leading)
                             }
-                            .frame(width: geometry.size.width, height: geometry.size.height, alignment: .leading)
                         }
                     Spacer()
                 }
