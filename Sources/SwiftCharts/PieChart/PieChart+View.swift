@@ -41,8 +41,9 @@ extension PieChart {
                                     Divider()
                                     ForEach(viewModel.smallSlices.slices, id: \.self) { slice in
                                         infoText(slice)
-                                            .padding([.leading], 12)
+                                            .padding()
                                     }
+                                    .padding()
                                 }
                             }
                         }
