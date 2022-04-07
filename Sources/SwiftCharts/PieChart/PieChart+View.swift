@@ -28,7 +28,7 @@ extension PieChart {
                     sliceInfo()
                         .frame(width: geometry.size.width, alignment: .leading)
                     pieChart(geometry.size)
-                        .frame(width: geometry.size.width, height: geometry.size.height)
+                        .frame(width: geometry.size.width, height: geometry.size.width)
                         .sheet(isPresented: $showOtherSheet) {
                             ScrollView {
                                 VStack {
