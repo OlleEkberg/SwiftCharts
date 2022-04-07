@@ -59,7 +59,7 @@ extension PieChart {
             
             if !smallSlices.slices.isEmpty {
                 self.smallSlices = smallSlices
-                let otherSlice = PieChart.Slice(name: "Other", amount: smallSlices.slices.reduce(0) { $0 + $1.amount })
+                let otherSlice = PieChart.Slice(name: Translations.others, amount: smallSlices.slices.reduce(0) { $0 + $1.amount })
                 tempSlices.append(otherSlice)
             }
             

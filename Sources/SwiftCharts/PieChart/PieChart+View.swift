@@ -33,7 +33,7 @@ extension PieChart {
                         .sheet(isPresented: $showOtherSheet) {
                             ScrollView {
                                 VStack {
-                                    Text("Other")
+                                    Text(Translations.others)
                                         .font(.largeTitle)
                                         .padding()
                                     Divider()
@@ -59,7 +59,7 @@ extension PieChart {
                             .animation(Animation.spring())
                             .frame(width: size.width * 0.95, height: size.width * 0.95)
                             .onTapGesture {
-                                if slice.name == "Other" {
+                                if slice.name == Translations.others {
                                     showOtherSheet = true
                                 } else {
                                     selectSlice(slice)
@@ -136,7 +136,7 @@ extension PieChart {
                     .blur(radius: sliceBlur(slice))
                     .animation(Animation.spring())
                     .onTapGesture {
-                        if slice.name == "Other" {
+                        if slice.name == Translations.others {
                             showOtherSheet = true
                         } else {
                             selectSlice(slice)

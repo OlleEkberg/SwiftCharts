@@ -16,4 +16,6 @@ enum Translations {
     static let sortLargestFirst = NSLocalizedString("SWIFTCHARTS.BARCHART.SORT.LARGEST.FIRST", bundle: .module, comment: "")
     static let sortOriginal = NSLocalizedString("SWIFTCHARTS.BARCHART.SORT.ORIGINAL", bundle: .module, comment: "")
     static let sortAlphabetical = NSLocalizedString("SWIFTCHARTS.BARCHART.SORT.ALPHABETICAL", bundle: .module, comment: "")
+    
+    static let others = NSLocalizedString("SWIFTCHARTS.PIECHART.OTHERS", bundle: .module, comment: "")
 }
