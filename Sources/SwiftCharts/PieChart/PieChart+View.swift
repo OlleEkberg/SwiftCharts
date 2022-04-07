@@ -39,7 +39,7 @@ extension PieChart {
                                         .font(.largeTitle)
                                         .padding()
                                     Divider()
-                                    ForEach(viewModel.smallSlices.slices, id: \.self) { slice in
+                                    List(viewModel.smallSlices.slices, id: \.self) { slice in
                                         infoText(slice)
                                             .padding()
                                     }
