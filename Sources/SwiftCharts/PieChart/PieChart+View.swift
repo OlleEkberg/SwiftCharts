@@ -25,6 +25,7 @@ extension PieChart {
         public var body: some View {
             GeometryReader { geometry in
                 VStack {
+                    Spacer()
                     sliceInfo()
                         .frame(width: geometry.size.width, alignment: .leading)
                         .padding(EdgeInsets(top: 0, leading: 12, bottom: 0, trailing: 0))
