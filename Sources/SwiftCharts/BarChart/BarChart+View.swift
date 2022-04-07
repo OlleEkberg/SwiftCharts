@@ -63,7 +63,7 @@ extension BarChart {
                                     HStack {
                                         Spacer(minLength: width)
                                         barInfo()
-                                            .padding(EdgeInsets(top: 12, leading: 12, bottom: 0, trailing: 0))
+                                            .padding([.top, .leading], 12)
                                     }
                                 }
                             }
