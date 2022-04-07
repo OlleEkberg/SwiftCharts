@@ -96,18 +96,18 @@ extension PieChart {
                             }
                             .fill(slice.config.sliceColor)
                             if selectedSlice == nil {
-                                VStack {
-                                    Text(slice.name)
-                                        .font(slice.config.textFont)
-                                    let percent = String(format: "%.2f", viewModel.getPercent(slice))
-                                    Text("\(percent)%")
-                                        .font(slice.config.textFont)
-                                        .foregroundColor(slice.config.textColor)
-                                }
-                                .position(
-                                    x: geometry.size.width * smallMultiplier * CGFloat(mediumMultiplier + smallMultiplier * cos(midRadians)),
-                                    y: geometry.size.height * smallMultiplier * CGFloat(mediumMultiplier - smallMultiplier * sin(midRadians))
-                                )
+//                                VStack {
+//                                    Text(slice.name)
+//                                        .font(slice.config.textFont)
+//                                    let percent = String(format: "%.2f", viewModel.getPercent(slice))
+//                                    Text("\(percent)%")
+//                                        .font(slice.config.textFont)
+//                                        .foregroundColor(slice.config.textColor)
+//                                }
+//                                .position(
+//                                    x: geometry.size.width * smallMultiplier * CGFloat(mediumMultiplier + smallMultiplier * cos(midRadians)),
+//                                    y: geometry.size.height * smallMultiplier * CGFloat(mediumMultiplier - smallMultiplier * sin(midRadians))
+//                                )
                             }
                         }
                     }
