@@ -61,7 +61,7 @@ extension PieChart {
                         .fill(self.backgroundColor)
                         .frame(width: size.width * config.innerRadiusFraction, height: size.width * config.innerRadiusFraction)
                     VStack {
-                        Text(Translations.maxAmount)
+                        Text(Translations.totalAmount)
                             .font(.title)
                             .foregroundColor(Color.gray)
                         let amount = String(format: "%.2f", viewModel.maxAmount)
