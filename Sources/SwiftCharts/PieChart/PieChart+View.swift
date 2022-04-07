@@ -17,20 +17,24 @@ extension PieChart {
         @State private var showOtherSheet = false
         private let backgroundColor: Color
         private let type: ChartType
+        private let infoList: Bool
         
-        public init(viewModel: PieChart.ViewModel, backgroundColor: Color = .white, type: ChartType = .pie) {
+        public init(viewModel: PieChart.ViewModel, backgroundColor: Color = .white, type: ChartType = .pie, withInfoList: Bool = true) {
             self.viewModel = viewModel
             self.backgroundColor = backgroundColor
             self.type = type
+            self.infoList = withInfoList
         }
         
         public var body: some View {
             GeometryReader { geometry in
                 VStack {
                     Spacer()
-                    sliceInfo()
-                        .frame(width: geometry.size.width, alignment: .leading)
-                        .padding([.leading], 12)
+                    if infoList {
+                        sliceInfo()
+                            .frame(width: geometry.size.width, alignment: .leading)
+                            .padding([.leading], 12)
+                    }
                     pieChart(geometry.size)
                         .frame(width: geometry.size.width, height: geometry.size.width)
                         .sheet(isPresented: $showOtherSheet) {
