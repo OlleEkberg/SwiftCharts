@@ -24,24 +24,26 @@ extension PieChart {
         
         public var body: some View {
             GeometryReader { geometry in
-                pieChart(geometry.size)
-                    .frame(width: geometry.size.width, height: geometry.size.height)
-                    .sheet(isPresented: $showOtherSheet) {
-                        ScrollView {
-                            VStack {
-                                Text("Other")
-                                    .font(.largeTitle)
-                                    .padding()
-                                Divider()
-                                ForEach(viewModel.smallSlices.slices, id: \.self) { slice in
-                                    infoText(slice)
+                VStack {
+                    sliceInfo()
+                    pieChart(geometry.size)
+                        .frame(width: geometry.size.width, height: geometry.size.height)
+                        .sheet(isPresented: $showOtherSheet) {
+                            ScrollView {
+                                VStack {
+                                    Text("Other")
+                                        .font(.largeTitle)
                                         .padding()
+                                    Divider()
+                                    ForEach(viewModel.smallSlices.slices, id: \.self) { slice in
+                                        infoText(slice)
+                                            .padding()
+                                    }
                                 }
                             }
                         }
-                    }
+                }
             }
-            
         }
         
         func pieChart(_ size: CGSize) -> some View {
@@ -112,6 +114,21 @@ extension PieChart {
                         }
                     }
                     
+                }
+            }
+            
+            return body
+        }
+        
+        private func sliceInfo() -> some View {
+            var body: some View {
+                ForEach(viewModel.slices, id: \.self) { slice in
+                    HStack {
+                        RoundedRectangle(cornerRadius: 8, style: .continuous)
+                            .frame(width: 10, height: 8)
+                            .foregroundColor(slice.config.sliceColor)
+                        Text(slice.name)
+                    }
                 }
             }
             
