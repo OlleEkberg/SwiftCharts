@@ -27,6 +27,7 @@ extension PieChart {
                 VStack {
                     sliceInfo()
                         .frame(width: geometry.size.width, alignment: .leading)
+                        .padding(EdgeInsets(top: 0, leading: 12, bottom: 0, trailing: 0))
                     pieChart(geometry.size)
                         .frame(width: geometry.size.width, height: geometry.size.width)
                         .sheet(isPresented: $showOtherSheet) {
