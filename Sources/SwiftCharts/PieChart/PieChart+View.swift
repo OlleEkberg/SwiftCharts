@@ -33,7 +33,7 @@ extension PieChart {
                         .frame(width: geometry.size.width, height: geometry.size.width)
                         .sheet(isPresented: $showOtherSheet) {
                             ScrollView {
-                                VStack {
+                                VStack(alignment: .leading) {
                                     Text(Translations.others)
                                         .font(.largeTitle)
                                         .padding()
@@ -43,7 +43,6 @@ extension PieChart {
                                             .padding()
                                     }
                                 }
-                                .frame(width: geometry.size.width, height: geometry.size.height, alignment: .leading)
                             }
                         }
                     Spacer()
