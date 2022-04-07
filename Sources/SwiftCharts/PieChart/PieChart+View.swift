@@ -24,11 +24,9 @@ extension PieChart {
         
         public var body: some View {
             GeometryReader { geometry in
-                VStack {
-                    Spacer()
+                VStack(alignment: .center) {
                     sliceInfo()
                         .frame(width: geometry.size.width, alignment: .leading)
-                        .padding()
                     pieChart(geometry.size)
                         .frame(width: geometry.size.width, height: geometry.size.height)
                         .sheet(isPresented: $showOtherSheet) {
@@ -45,7 +43,6 @@ extension PieChart {
                                 }
                             }
                         }
-                    Spacer()
                 }
             }
         }
