@@ -18,4 +18,5 @@ enum Translations {
     static let sortAlphabetical = NSLocalizedString("SWIFTCHARTS.BARCHART.SORT.ALPHABETICAL", bundle: .module, comment: "")
     
     static let others = NSLocalizedString("SWIFTCHARTS.PIECHART.OTHERS", bundle: .module, comment: "")
+    static let maxAmount = NSLocalizedString("SWIFTCHARTS.PIECHART.MAX.AMOUNT", bundle: .module, comment: "")
 }

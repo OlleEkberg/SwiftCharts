@@ -61,14 +61,18 @@ extension PieChart {
                         .fill(self.backgroundColor)
                         .frame(width: size.width * config.innerRadiusFraction, height: size.width * config.innerRadiusFraction)
                     VStack {
-                        Text("Max Amount")
+                        Text(Translations.maxAmount)
                             .font(.title)
                             .foregroundColor(Color.gray)
-                        Text("\(viewModel.maxAmount)")
+                        let amount = String(format: "%.2f", viewModel.maxAmount)
+                        Text(amount)
                             .font(.title)
                             .foregroundColor(.black)
                     }
                 }
+                .scaleEffect(sliceScale())
+                .blur(radius: sliceBlur())
+                .animation(Animation.spring())
             }
             
             return body
@@ -212,7 +216,7 @@ extension PieChart {
             selectedSlice = slice
         }
         
-        private func sliceScale(_ slice: PieChart.Slice) -> CGFloat {
+        private func sliceScale(_ slice: PieChart.Slice? = nil) -> CGFloat {
             guard selectedSlice != nil else {
                 return 1
             }
@@ -220,7 +224,7 @@ extension PieChart {
             return slice == selectedSlice ? 1.05 : 0.95
         }
         
-        private func sliceBlur(_ slice: PieChart.Slice) -> CGFloat {
+        private func sliceBlur(_ slice: PieChart.Slice? = nil) -> CGFloat {
             guard selectedSlice != nil else {
                 return 0
             }
