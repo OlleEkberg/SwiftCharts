@@ -43,7 +43,7 @@ extension PieChart {
                                         infoText(slice)
                                             .padding()
                                     }
-                                    .padding([.leading])
+                                    .padding([.leading, .trailing])
                                 }
                             }
                         }
@@ -86,7 +86,6 @@ extension PieChart {
             var body: some View {
                 GeometryReader { geometry in
                     if let startAngle = slice.startAngle, let endAngle = slice.endAngle {
-                        let midRadians = Double.pi / bigMultiplier - (startAngle + endAngle).radians / bigMultiplier
                         ZStack {
                             Path { path in
                                 let width: CGFloat = min(geometry.size.width, geometry.size.height)
@@ -103,20 +102,6 @@ extension PieChart {
                                 
                             }
                             .fill(slice.config.sliceColor)
-                            if selectedSlice == nil {
-//                                VStack {
-//                                    Text(slice.name)
-//                                        .font(slice.config.textFont)
-//                                    let percent = String(format: "%.2f", viewModel.getPercent(slice))
-//                                    Text("\(percent)%")
-//                                        .font(slice.config.textFont)
-//                                        .foregroundColor(slice.config.textColor)
-//                                }
-//                                .position(
-//                                    x: geometry.size.width * smallMultiplier * CGFloat(mediumMultiplier + smallMultiplier * cos(midRadians)),
-//                                    y: geometry.size.height * smallMultiplier * CGFloat(mediumMultiplier - smallMultiplier * sin(midRadians))
-//                                )
-                            }
                         }
                     }
                     
