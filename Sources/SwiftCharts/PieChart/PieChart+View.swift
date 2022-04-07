@@ -33,7 +33,7 @@ extension PieChart {
                         .frame(width: geometry.size.width, height: geometry.size.width)
                         .sheet(isPresented: $showOtherSheet) {
                             ScrollView {
-                                VStack(alignment: .leading) {
+                                VStack {
                                     Text(Translations.others)
                                         .frame(width: geometry.size.width, alignment: .center)
                                         .font(.largeTitle)
@@ -41,6 +41,7 @@ extension PieChart {
                                     Divider()
                                     ForEach(viewModel.smallSlices.slices, id: \.self) { slice in
                                         infoText(slice)
+                                            .frame(alignment: .leading)
                                             .padding()
                                     }
                                 }
