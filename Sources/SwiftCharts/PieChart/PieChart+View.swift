@@ -26,7 +26,7 @@ extension PieChart {
             GeometryReader { geometry in
                 VStack {
                     sliceInfo()
-                        .frame(alignment: .leading)
+                        .frame(width: geometry.size.width, alignment: .leading)
                     pieChart(geometry.size)
                         .frame(width: geometry.size.width, height: geometry.size.height)
                         .sheet(isPresented: $showOtherSheet) {
