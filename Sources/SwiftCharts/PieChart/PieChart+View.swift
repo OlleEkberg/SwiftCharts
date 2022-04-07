@@ -35,9 +35,9 @@ extension PieChart {
                             ScrollView {
                                 VStack(alignment: .leading) {
                                     Text(Translations.others)
+                                        .frame(width: geometry.size.width, alignment: .center)
                                         .font(.largeTitle)
                                         .padding()
-                                        .frame(alignment: .center)
                                     Divider()
                                     ForEach(viewModel.smallSlices.slices, id: \.self) { slice in
                                         infoText(slice)
