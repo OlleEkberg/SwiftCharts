@@ -35,13 +35,13 @@ extension PieChart {
                             ScrollView {
                                 VStack(alignment: .leading) {
                                     Text(Translations.others)
-                                        .frame(alignment: .center)
+                                        .frame(width: geometry.size.width, alignment: .center)
                                         .font(.largeTitle)
                                         .padding()
                                     Divider()
                                     ForEach(viewModel.smallSlices.slices, id: \.self) { slice in
                                         infoText(slice)
-//                                            .padding()
+                                            .padding([.leading], 12)
                                     }
                                 }
                             }
