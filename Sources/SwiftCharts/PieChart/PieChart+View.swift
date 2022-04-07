@@ -34,9 +34,12 @@ extension PieChart {
                         .sheet(isPresented: $showOtherSheet) {
                             ScrollView {
                                 VStack {
-                                    Text(Translations.others)
-                                        .font(.largeTitle)
-                                        .padding()
+                                    HStack {
+                                        RoundedRectangle(cornerRadius: 8, style: .continuous)
+                                            .frame(width: 20, height: 16)
+                                            .foregroundColor(slice.config.sliceColor)
+                                        Text(slice.name)
+                                    }
                                     Divider()
                                     ForEach(viewModel.smallSlices.slices, id: \.self) { slice in
                                         infoText(slice)
