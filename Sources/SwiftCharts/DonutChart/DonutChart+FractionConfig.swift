@@ -12,7 +12,7 @@ extension DonutChart {
         let widthFraction: CGFloat
         let innerRadiusFraction: CGFloat
         
-        init(widthFraction: CGFloat = 0.75, innerRadiusFraction: CGFloat = 0.60) {
+        public init(widthFraction: CGFloat = 0.75, innerRadiusFraction: CGFloat = 0.60) {
             self.widthFraction = widthFraction
             self.innerRadiusFraction = innerRadiusFraction
         }

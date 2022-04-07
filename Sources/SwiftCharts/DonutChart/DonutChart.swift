@@ -8,4 +8,4 @@
 import Foundation
 
 // Namespace
-enum DonutChart {}
+public enum DonutChart {}

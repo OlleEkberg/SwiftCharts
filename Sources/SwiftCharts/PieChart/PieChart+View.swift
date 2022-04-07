@@ -16,10 +16,12 @@ extension PieChart {
         @State private var selectedSlice: PieChart.Slice? = nil
         @State private var showOtherSheet = false
         private let backgroundColor: Color
+        private let type: ChartType
         
-        public init(viewModel: PieChart.ViewModel, backgroundColor: Color = .white) {
+        public init(viewModel: PieChart.ViewModel, backgroundColor: Color = .white, type: ChartType = .pie) {
             self.viewModel = viewModel
             self.backgroundColor = backgroundColor
+            self.type = type
         }
         
         public var body: some View {
@@ -52,6 +54,26 @@ extension PieChart {
             }
         }
         
+        func donutChart(_ size: CGSize, config: DonutChart.FractionConfig) -> some View {
+            var body: some View {
+                ZStack {
+                    Circle()
+                        .fill(self.backgroundColor)
+                        .frame(width: size.width * config.innerRadiusFraction, height: size.width * config.innerRadiusFraction)
+                    VStack {
+                        Text("Max Amount")
+                            .font(.title)
+                            .foregroundColor(Color.gray)
+                        Text("\(viewModel.maxAmount)")
+                            .font(.title)
+                            .foregroundColor(.black)
+                    }
+                }
+            }
+            
+            return body
+        }
+        
         func pieChart(_ size: CGSize) -> some View {
             var body: some View {
                 ZStack {
@@ -68,6 +90,9 @@ extension PieChart {
                                     selectSlice(slice)
                                 }
                             }
+                    }
+                    if case .donut(let config) = type {
+                        donutChart(size, config: config)
                     }
                     if let selectedSlice = selectedSlice {
                         infoView(selectedSlice)
