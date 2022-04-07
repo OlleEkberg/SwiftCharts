@@ -34,12 +34,9 @@ extension PieChart {
                         .sheet(isPresented: $showOtherSheet) {
                             ScrollView {
                                 VStack {
-                                    HStack {
-                                        RoundedRectangle(cornerRadius: 8, style: .continuous)
-                                            .frame(width: 20, height: 16)
-                                            .foregroundColor(slice.config.sliceColor)
-                                        Text(slice.name)
-                                    }
+                                    Text(Translations.others)
+                                        .font(.largeTitle)
+                                        .padding()
                                     Divider()
                                     ForEach(viewModel.smallSlices.slices, id: \.self) { slice in
                                         infoText(slice)
@@ -129,21 +126,23 @@ extension PieChart {
         
         private func sliceInfo() -> some View {
             var body: some View {
-                ForEach(viewModel.slices, id: \.self) { slice in
-                    HStack {
-                        RoundedRectangle(cornerRadius: 8, style: .continuous)
-                            .frame(width: 20, height: 16)
-                            .foregroundColor(slice.config.sliceColor)
-                        Text(slice.name)
-                    }
-                    .scaleEffect(sliceScale(slice))
-                    .blur(radius: sliceBlur(slice))
-                    .animation(Animation.spring())
-                    .onTapGesture {
-                        if slice.name == Translations.others {
-                            showOtherSheet = true
-                        } else {
-                            selectSlice(slice)
+                ScrollView {
+                    ForEach(viewModel.slices, id: \.self) { slice in
+                        HStack {
+                            RoundedRectangle(cornerRadius: 8, style: .continuous)
+                                .frame(width: 20, height: 16)
+                                .foregroundColor(slice.config.sliceColor)
+                            Text(slice.name)
+                        }
+                        .scaleEffect(sliceScale(slice))
+                        .blur(radius: sliceBlur(slice))
+                        .animation(Animation.spring())
+                        .onTapGesture {
+                            if slice.name == Translations.others {
+                                showOtherSheet = true
+                            } else {
+                                selectSlice(slice)
+                            }
                         }
                     }
                 }
