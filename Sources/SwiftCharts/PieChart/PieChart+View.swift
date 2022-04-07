@@ -37,6 +37,7 @@ extension PieChart {
                                     Text(Translations.others)
                                         .font(.largeTitle)
                                         .padding()
+                                        .frame(alignment: .center)
                                     Divider()
                                     ForEach(viewModel.smallSlices.slices, id: \.self) { slice in
                                         infoText(slice)
