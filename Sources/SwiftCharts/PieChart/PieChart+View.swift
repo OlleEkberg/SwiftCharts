@@ -43,7 +43,7 @@ extension PieChart {
                                         infoText(slice)
                                             .padding()
                                     }
-                                    .padding()
+                                    .padding([.leading])
                                 }
                             }
                         }
