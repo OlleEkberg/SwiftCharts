@@ -131,6 +131,9 @@ extension PieChart {
                             .foregroundColor(slice.config.sliceColor)
                         Text(slice.name)
                     }
+                    .scaleEffect(sliceScale(slice))
+                    .blur(radius: sliceBlur(slice))
+                    .animation(Animation.spring())
                     .onTapGesture {
                         if slice.name == "Other" {
                             showOtherSheet = true
