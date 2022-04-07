@@ -130,6 +130,13 @@ extension PieChart {
                             .foregroundColor(slice.config.sliceColor)
                         Text(slice.name)
                     }
+                    .onTapGesture {
+                        if slice.name == "Other" {
+                            showOtherSheet = true
+                        } else {
+                            selectSlice(slice)
+                        }
+                    }
                 }
             }
             
