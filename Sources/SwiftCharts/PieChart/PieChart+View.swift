@@ -26,6 +26,7 @@ extension PieChart {
             GeometryReader { geometry in
                 VStack {
                     sliceInfo()
+                        .frame(alignment: .leading)
                     pieChart(geometry.size)
                         .frame(width: geometry.size.width, height: geometry.size.height)
                         .sheet(isPresented: $showOtherSheet) {
@@ -125,7 +126,7 @@ extension PieChart {
                 ForEach(viewModel.slices, id: \.self) { slice in
                     HStack {
                         RoundedRectangle(cornerRadius: 8, style: .continuous)
-                            .frame(width: 10, height: 8)
+                            .frame(width: 20, height: 16)
                             .foregroundColor(slice.config.sliceColor)
                         Text(slice.name)
                     }
