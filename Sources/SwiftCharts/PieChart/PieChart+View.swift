@@ -24,7 +24,7 @@ extension PieChart {
         
         public var body: some View {
             GeometryReader { geometry in
-                VStack(alignment: .center) {
+                VStack {
                     sliceInfo()
                         .frame(width: geometry.size.width, alignment: .leading)
                     pieChart(geometry.size)
@@ -43,6 +43,7 @@ extension PieChart {
                                 }
                             }
                         }
+                    Spacer()
                 }
             }
         }
