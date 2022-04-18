@@ -72,7 +72,8 @@ extension PieChart {
                             Text(String(format: "%.2f", selectedSlice.amount))
                                 .font(.title)
                                 .foregroundColor(.black)
-                            Text(String(format: "%.2f", viewModel.getPercent(selectedSlice)))
+                            let percent = String(format: "%.2f", viewModel.getPercent(selectedSlice))
+                            Text("\(percent)%")
                                 .font(.title)
                                 .foregroundColor(.black)
                         } else {
@@ -86,9 +87,6 @@ extension PieChart {
                         }
                     }
                 }
-//                .scaleEffect(sliceScale())
-//                .blur(radius: sliceBlur())
-                .animation(Animation.spring())
             }
             
             return body
@@ -111,15 +109,20 @@ extension PieChart {
                                 }
                             }
                     }
-                    if case .donut(let config) = type {
+                    switch type {
+                    case .pie:
+                        if let selectedSlice = selectedSlice {
+                            infoView(selectedSlice)
+                                .frame(alignment: .leading)
+                                .onTapGesture {
+                                    self.selectedSlice = nil
+                                }
+                        }
+                    case .donut(let config):
                         donutChart(size, config: config)
-                    }
-                    if let selectedSlice = selectedSlice {
-//                        infoView(selectedSlice)
-//                            .frame(alignment: .leading)
-//                            .onTapGesture {
-//                                self.selectedSlice = nil
-//                            }
+                            .onTapGesture {
+                                self.selectedSlice = nil
+                            }
                     }
                 }
             }
