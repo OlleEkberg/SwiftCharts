@@ -12,7 +12,6 @@ extension PieChart {
     public class ViewModel: ObservableObject, ChartViewModel {
         
         @Published private(set) var slices: [PieChart.Slice] = []
-        var selecedSlice: PieChart.Slice? = nil
         var smallSlices: SmallPieSliceCollection = .init(slices: [])
         var maxAmount: Float {
             slices.reduce(0) { $0 + $1.amount }

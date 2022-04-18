@@ -65,7 +65,7 @@ extension PieChart {
                         .fill(self.backgroundColor)
                         .frame(width: size.width * config.innerRadiusFraction, height: size.width * config.innerRadiusFraction)
                     VStack {
-                        if let selectedSlice = viewModel.selecedSlice {
+                        if let selectedSlice = selectedSlice {
                             Text(selectedSlice.name)
                                 .font(.title)
                                 .foregroundColor(Color.gray)
@@ -86,8 +86,8 @@ extension PieChart {
                         }
                     }
                 }
-                .scaleEffect(sliceScale())
-                .blur(radius: sliceBlur())
+//                .scaleEffect(sliceScale())
+//                .blur(radius: sliceBlur())
                 .animation(Animation.spring())
             }
             
