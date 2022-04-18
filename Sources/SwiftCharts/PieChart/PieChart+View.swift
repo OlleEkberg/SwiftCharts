@@ -65,11 +65,15 @@ extension PieChart {
                         .fill(self.backgroundColor)
                         .frame(width: size.width * config.innerRadiusFraction, height: size.width * config.innerRadiusFraction)
                     VStack {
-                        Text(Translations.totalAmount)
+                        let selectedSlice = viewModel.selecedSlice
+                        let title = selectedSlice != nil ? selectedSlice?.name : Translations.totalAmount
+                        Text(title ?? "")
                             .font(.title)
                             .foregroundColor(Color.gray)
-                        let amount = String(format: "%.2f", viewModel.maxAmount)
-                        Text(amount)
+                        let amount = (viewModel.selecedSlice?.amount != nil) ? viewModel.selecedSlice?.amount : viewModel.maxAmount
+                        let formattedAmount = String(format: "%.2f", amount ?? 0)
+            
+                        Text(formattedAmount)
                             .font(.title)
                             .foregroundColor(.black)
                     }

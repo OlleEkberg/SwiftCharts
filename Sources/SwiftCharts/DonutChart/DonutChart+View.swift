@@ -17,26 +17,16 @@ extension DonutChart {
         var body: some View {
             GeometryReader { geometry in
                 ZStack {
-                    pie.pieChart(geometry.size)
                     Circle()
                         .fill(.yellow)
                         .frame(width: geometry.size.width * fractionConfig.innerRadiusFraction, height: geometry.size.width * fractionConfig.innerRadiusFraction)
-                        .onTapGesture {
-                            //                            resetValues()
-                        }
                     VStack {
                         Text("title")
                             .font(.title)
                             .foregroundColor(Color.gray)
-                            .onTapGesture {
-                                //                                resetValues()
-                            }
                         Text("viewModel.maxAmount")
                             .font(.title)
                             .foregroundColor(.black)
-                            .onTapGesture {
-                                //                                resetValues()
-                            }
                     }
                 }
             }
