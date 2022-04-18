@@ -65,17 +65,25 @@ extension PieChart {
                         .fill(self.backgroundColor)
                         .frame(width: size.width * config.innerRadiusFraction, height: size.width * config.innerRadiusFraction)
                     VStack {
-                        let selectedSlice = viewModel.selecedSlice
-                        let title = selectedSlice != nil ? selectedSlice?.name : Translations.totalAmount
-                        Text(title ?? "")
-                            .font(.title)
-                            .foregroundColor(Color.gray)
-                        let amount = (viewModel.selecedSlice?.amount != nil) ? viewModel.selecedSlice?.amount : viewModel.maxAmount
-                        let formattedAmount = String(format: "%.2f", amount ?? 0)
-            
-                        Text(formattedAmount)
-                            .font(.title)
-                            .foregroundColor(.black)
+                        if let selectedSlice = viewModel.selecedSlice {
+                            Text(selectedSlice.name)
+                                .font(.title)
+                                .foregroundColor(Color.gray)
+                            Text(String(format: "%.2f", selectedSlice.amount))
+                                .font(.title)
+                                .foregroundColor(.black)
+                            Text(String(format: "%.2f", viewModel.getPercent(selectedSlice)))
+                                .font(.title)
+                                .foregroundColor(.black)
+                        } else {
+                            Text(Translations.totalAmount)
+                                .font(.title)
+                                .foregroundColor(Color.gray)
+                            
+                            Text(String(format: "%.2f", viewModel.maxAmount))
+                                .font(.title)
+                                .foregroundColor(.black)
+                        }
                     }
                 }
                 .scaleEffect(sliceScale())
@@ -107,11 +115,11 @@ extension PieChart {
                         donutChart(size, config: config)
                     }
                     if let selectedSlice = selectedSlice {
-                        infoView(selectedSlice)
-                            .frame(alignment: .leading)
-                            .onTapGesture {
-                                self.selectedSlice = nil
-                            }
+//                        infoView(selectedSlice)
+//                            .frame(alignment: .leading)
+//                            .onTapGesture {
+//                                self.selectedSlice = nil
+//                            }
                     }
                 }
             }
