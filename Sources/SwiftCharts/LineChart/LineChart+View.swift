@@ -20,10 +20,11 @@ extension LineChart {
             GeometryReader { geometry in
                 VStack {
                     createPath(geometry.size.width, height: geometry.size.height)
-                        .stroke(.black, lineWidth: 8)
+                        .stroke(.black, lineWidth: 4)
                 }
                 .frame(width: geometry.size.width, height: geometry.size.height, alignment: .leading)
                 .background(Color.white)
+                .padding()
             }
         }
         
@@ -49,7 +50,7 @@ extension LineChart {
             for point in viewModel.points {
                 offsetX += Int(width/CGFloat(viewModel.points.count))
                 let y = Int(Int(point.amount) * offsetY)
-                print("line: \(offsetX) - \(height)")
+                print("line: \(offsetX) - \(offsetY)")
                 path.addLine(to: .init(x: offsetX, y: y))
             }
             
