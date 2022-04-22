@@ -1,5 +1,5 @@
 //
-//  BarChart+SortConfig.swift
+//  ColumnChart+SortConfig.swift
 //  
 //
 //  Created by Olle  Ekberg on 2022-04-02.
@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-extension BarChart {
+extension ColumnChart {
     public struct SortConfig {
         let shouldShow: Bool
         let titleFont: Font

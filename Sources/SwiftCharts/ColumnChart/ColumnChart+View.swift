@@ -1,5 +1,5 @@
 //
-//  BarChart+ChartView.swift
+//  ColumnChart+ChartView.swift
 //  Carbon Positive
 //
 //  Created by Olle  Ekberg on 2022-03-20.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-extension BarChart {
+extension ColumnChart {
     public struct ChartView: View {
         @ObservedObject private var viewModel: ViewModel
         @State private var previewModeActive: Bool = false
@@ -15,13 +15,13 @@ extension BarChart {
         @State private var firstValue = true
         private let backgroundColor: Color
         private let sortConfig: SortConfig
-        private let maxBarsOnScreen: Int
+        private let maxColumnsOnScreen: Int
         
-        public init(viewModel: ViewModel, backgroundColor: Color = .primaryBackground, sortConfig: SortConfig = .init(), maxBarsOnScreen: Int = 6) {
+        public init(viewModel: ViewModel, backgroundColor: Color = .primaryBackground, sortConfig: SortConfig = .init(), maxColumnsOnScreen: Int = 6) {
             self.viewModel = viewModel
             self.backgroundColor = backgroundColor
             self.sortConfig = sortConfig
-            self.maxBarsOnScreen = maxBarsOnScreen
+            self.maxColumnsOnScreen = maxColumnsOnScreen
         }
         
         public var body: some View {
@@ -34,14 +34,14 @@ extension BarChart {
                     ScrollViewReader { proxy in
                         ScrollView(.horizontal) {
                             ZStack {
-                                let width = barWidth(geometry.size.width)
+                                let width = columnWidth(geometry.size.width)
                                 HStack(alignment: .bottom, spacing: spacing) {
                                     ForEach(viewModel.data, id: \.self) { data in
-                                        barChartBar(data, geometrySize: geometry.size)
+                                        columnChartColumn(data, geometrySize: geometry.size)
                                             .frame(width: width)
-                                            .blur(radius: barBlur(data))
-                                            .opacity(barOpacity(data))
-                                            .scaleEffect(barScale(data))
+                                            .blur(radius: columnBlur(data))
+                                            .opacity(columnOpacity(data))
+                                            .scaleEffect(columnScale(data))
                                             .animation(.default)
                                             .onTapGesture {
                                                 proxy.scrollTo(0)
@@ -62,7 +62,7 @@ extension BarChart {
                                 if previewModeActive {
                                     HStack {
                                         Spacer(minLength: width)
-                                        barInfo()
+                                        columnInfo()
                                             .padding([.top, .leading], 12)
                                     }
                                 }
@@ -82,8 +82,8 @@ extension BarChart {
     }
 }
 
-//MARK: - Bar Views -
-private extension BarChart.ChartView {
+//MARK: - Column Views -
+private extension ColumnChart.ChartView {
     func sortButton() -> some View {
         return sortConfig.image
             .frame(alignment: .trailing)
@@ -99,7 +99,7 @@ private extension BarChart.ChartView {
                         .font(sortConfig.titleFont)
                         .foregroundColor(sortConfig.titleColor)
                         .padding()
-                    List(BarChart.ViewModel.SortMethod.allCases, id: \.self) { method in
+                    List(ColumnChart.ViewModel.SortMethod.allCases, id: \.self) { method in
                         let disabled = method == viewModel.currentSortMethod
                         Button(method.name) {
                             viewModel.sort(by: method)
@@ -115,26 +115,26 @@ private extension BarChart.ChartView {
             }
     }
     
-    func barInfo() -> some View {
+    func columnInfo() -> some View {
         return VStack(alignment: .leading) {
             if let data = viewModel.selectedData {
                 Text(data.name)
-                    .font(data.barConfig.titleFont)
-                    .foregroundColor(data.barConfig.textColor)
+                    .font(data.columnConfig.titleFont)
+                    .foregroundColor(data.columnConfig.textColor)
                 Divider()
-                    .background(data.barConfig.textColor)
+                    .background(data.columnConfig.textColor)
                 Text("\(Translations.amount): \(data.amount)")
-                    .font(data.barConfig.textFont)
-                    .foregroundColor(data.barConfig.textColor)
+                    .font(data.columnConfig.textFont)
+                    .foregroundColor(data.columnConfig.textColor)
                 let percent = Float(data.amount / viewModel.maxAmount * 100)
                 Text("\(Translations.percent): \(percent)%")
-                    .font(data.barConfig.textFont)
-                    .foregroundColor(data.barConfig.textColor)
+                    .font(data.columnConfig.textFont)
+                    .foregroundColor(data.columnConfig.textColor)
                 if let additionalInfo = viewModel.selectedData?.additionalInfo {
                     ForEach(additionalInfo, id: \.self) { info in
                         Text("\(info.name): \(info.value)")
-                            .font(data.barConfig.textFont)
-                            .foregroundColor(data.barConfig.textColor)
+                            .font(data.columnConfig.textFont)
+                            .foregroundColor(data.columnConfig.textColor)
                     }
                 }
             }
@@ -142,20 +142,20 @@ private extension BarChart.ChartView {
         }
     }
     
-    func barChartBar(_ data: BarChart.Bar, geometrySize: CGSize) -> some View {
+    func columnChartColumn(_ data: ColumnChart.Column, geometrySize: CGSize) -> some View {
         
         let height = geometrySize.height
         return VStack {
             ZStack(alignment: .bottom) {
                 RoundedRectangle(cornerRadius: cornerRadius)
-                    .foregroundColor(data.barConfig.backgroundColor)
+                    .foregroundColor(data.columnConfig.backgroundColor)
                 RoundedRectangle(cornerRadius: cornerRadius)
-                    .foregroundColor(data.barConfig.barColor.opacity(barOpacity(data)))
-                    .frame(height: barHeight(data, viewHeight: height), alignment: .bottom)
+                    .foregroundColor(data.columnConfig.columnColor.opacity(columnOpacity(data)))
+                    .frame(height: columnHeight(data, viewHeight: height), alignment: .bottom)
             }
             Text(data.name)
-                .font(data.barConfig.textFont)
-                .foregroundColor(data.barConfig.textColor)
+                .font(data.columnConfig.textFont)
+                .foregroundColor(data.columnConfig.textColor)
                 .lineLimit(1)
                 .truncationMode(.tail)
         }
@@ -163,8 +163,8 @@ private extension BarChart.ChartView {
 }
 
 //MARK: - Calculations -
-private extension BarChart.ChartView {
-    func barBlur(_ data: BarChart.Bar) -> CGFloat {
+private extension ColumnChart.ChartView {
+    func columnBlur(_ data: ColumnChart.Column) -> CGFloat {
         guard viewModel.selectedData != nil else {
             return 0
         }
@@ -172,7 +172,7 @@ private extension BarChart.ChartView {
         return data == viewModel.selectedData ? 0 : 8
     }
     
-    func barHeight(_ data: BarChart.Bar, viewHeight: CGFloat) -> CGFloat {
+    func columnHeight(_ data: ColumnChart.Column, viewHeight: CGFloat) -> CGFloat {
         
         var percent = CGFloat(data.amount / viewModel.maxAmount)
         
@@ -183,7 +183,7 @@ private extension BarChart.ChartView {
         return viewHeight * percent
     }
     
-    func barScale(_ data: BarChart.Bar) -> CGFloat {
+    func columnScale(_ data: ColumnChart.Column) -> CGFloat {
         guard viewModel.selectedData != nil else {
             return 1
         }
@@ -191,7 +191,7 @@ private extension BarChart.ChartView {
         return data == viewModel.selectedData ? 1 : 0.9
     }
     
-    func barOpacity(_ data: BarChart.Bar) -> CGFloat {
+    func columnOpacity(_ data: ColumnChart.Column) -> CGFloat {
         guard viewModel.selectedData != nil else {
             return 1
         }
@@ -199,24 +199,24 @@ private extension BarChart.ChartView {
         return viewModel.selectedData == data ? 1 : 0.7
     }
     
-    func barWidth(_ width: CGFloat) -> CGFloat {
-        var numberOfBarsOnScreen: Int = viewModel.amountOfData
+    func columnWidth(_ width: CGFloat) -> CGFloat {
+        var numberOfColumnsOnScreen: Int = viewModel.amountOfData
         
-        if numberOfBarsOnScreen > maxBarsOnScreen {
-            numberOfBarsOnScreen = maxBarsOnScreen
+        if numberOfColumnsOnScreen > maxColumnsOnScreen {
+            numberOfColumnsOnScreen = maxColumnsOnScreen
         }
         
-        let width = (width / CGFloat(numberOfBarsOnScreen))  - spacing
+        let width = (width / CGFloat(numberOfColumnsOnScreen))  - spacing
         
         return width
     }
 }
 
 struct ChartView_Previews: PreviewProvider {
-    static let data: [BarChart.Bar] = [BarChart.Bar(name: "First Value", amount: 122), BarChart.Bar(name: "Second Value", amount: 6), BarChart.Bar(name: "Third Value", amount: 783), BarChart.Bar(name: "Fourth Value", amount: 300, additionalInfo: [.init(name: "Extra data", value: "22"), .init(name: "Extra Data 2", value: "Looks cool!")]), BarChart.Bar(name: "Fifth Values", amount: 12), BarChart.Bar(name: "Sixth Values", amount: 64), BarChart.Bar(name: "Seventh Values", amount: 1200), BarChart.Bar(name: "Eight Value", amount: 366, additionalInfo: [.init(name: "On Extra Value", value: "This is it.")]), BarChart.Bar(name: "Ninth Value", amount: 100), BarChart.Bar(name: "Tenth Value", amount: 86), BarChart.Bar(name: "Eleventh Value", amount: 1002), BarChart.Bar(name: "Twelvth Value", amount: 14)]
+    static let data: [ColumnChart.Column] = [ColumnChart.Column(name: "First Value", amount: 122), ColumnChart.Column(name: "Second Value", amount: 6), ColumnChart.Column(name: "Third Value", amount: 783), ColumnChart.Column(name: "Fourth Value", amount: 300, additionalInfo: [.init(name: "Extra data", value: "22"), .init(name: "Extra Data 2", value: "Looks cool!")]), ColumnChart.Column(name: "Fifth Values", amount: 12), ColumnChart.Column(name: "Sixth Values", amount: 64), ColumnChart.Column(name: "Seventh Values", amount: 1200), ColumnChart.Column(name: "Eight Value", amount: 366, additionalInfo: [.init(name: "On Extra Value", value: "This is it.")]), ColumnChart.Column(name: "Ninth Value", amount: 100), ColumnChart.Column(name: "Tenth Value", amount: 86), ColumnChart.Column(name: "Eleventh Value", amount: 1002), ColumnChart.Column(name: "Twelvth Value", amount: 14)]
     
-    static let vm = BarChart.ViewModel(data: data, sortMethod: .smallFirst)
+    static let vm = ColumnChart.ViewModel(data: data, sortMethod: .smallFirst)
     static var previews: some View {
-        BarChart.ChartView(viewModel: vm, maxBarsOnScreen: 8)
+        ColumnChart.ChartView(viewModel: vm, maxColumnsOnScreen: 8)
     }
 }

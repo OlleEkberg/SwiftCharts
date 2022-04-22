@@ -8,34 +8,34 @@
 import Foundation
 import SwiftUI
 
-extension BarChart {
-    public struct Bar: Identifiable, Hashable {
+extension ColumnChart {
+    public struct Column: Identifiable, Hashable {
         
         let name: String
         let amount: Float
         let additionalInfo: [AdditionalInfo]?
-        let barConfig: Config
+        let columnConfig: Config
         public let id = UUID()
         
-        public init(name: String, amount: Float, additionalInfo: [AdditionalInfo]? = nil, barConfig: Config = .init()) {
+        public init(name: String, amount: Float, additionalInfo: [AdditionalInfo]? = nil, columnConfig: Config = .init()) {
             self.amount = amount
             self.name = name
             self.additionalInfo = additionalInfo
-            self.barConfig = barConfig
+            self.columnConfig = columnConfig
         }
     }
 }
 
-extension BarChart.Bar {
+extension ColumnChart.Column {
     public struct Config: Hashable, DataConfig {
-        let barColor: Color
+        let columnColor: Color
         let backgroundColor: Color
         let textColor: Color
         let titleFont: Font
         let textFont: Font
         
-        public init(barColor: Color = .bar, backgroundColor: Color = .barBackground, textColor: Color = .primaryText, titleFont: Font = .largeTitle, textFont: Font = .body) {
-            self.barColor = barColor
+        public init(columnColor: Color = .column, backgroundColor: Color = .columnBackground, textColor: Color = .primaryText, titleFont: Font = .largeTitle, textFont: Font = .body) {
+            self.columnColor = columnColor
             self.backgroundColor = backgroundColor
             self.textColor = textColor
             self.titleFont = titleFont

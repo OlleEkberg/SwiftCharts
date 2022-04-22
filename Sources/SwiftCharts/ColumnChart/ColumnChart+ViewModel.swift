@@ -1,5 +1,5 @@
 //
-//  BarChart+ViewModel.swift
+//  ColumnChart+ViewModel.swift
 //  Carbon Positive
 //
 //  Created by Olle  Ekberg on 2022-03-27.
@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-extension BarChart {
+extension ColumnChart {
     public class ViewModel: ObservableObject, ChartViewModel {
         
         public enum SortMethod: CaseIterable {
@@ -31,11 +31,11 @@ extension BarChart {
             }
         }
         
-        @Published private(set) var data: [BarChart.Bar]
+        @Published private(set) var data: [ColumnChart.Column]
         private(set) var currentSortMethod: SortMethod
-        private(set) var selectedData: BarChart.Bar? = nil
+        private(set) var selectedData: ColumnChart.Column? = nil
         private(set) var previousSelectedIndex: Int? = nil
-        private var originalSortedData: [BarChart.Bar]
+        private var originalSortedData: [ColumnChart.Column]
         var amountOfData: Int {
             data.count
         }
@@ -43,7 +43,7 @@ extension BarChart {
             data.reduce(.zero) { $0 + $1.amount }
         }
         
-        public init(data: [BarChart.Bar], sortMethod: SortMethod = .original) {
+        public init(data: [ColumnChart.Column], sortMethod: SortMethod = .original) {
             self.data = data
             self.currentSortMethod = sortMethod
             
@@ -53,12 +53,12 @@ extension BarChart {
             }
         }
         
-        func add(_ bar: BarChart.Bar) {
-            data.append(bar)
+        func add(_ column: ColumnChart.Column) {
+            data.append(column)
         }
         
-        func remove(_ bar: BarChart.Bar) {
-            guard let index = data.firstIndex(where: { $0.id == bar.id }) else {
+        func remove(_ column: ColumnChart.Column) {
+            guard let index = data.firstIndex(where: { $0.id == column.id }) else {
                 return
             }
             data.remove(at: index)
@@ -79,7 +79,7 @@ extension BarChart {
             currentSortMethod = method
         }
         
-        func didSelect(data selectedData: BarChart.Bar) {
+        func didSelect(data selectedData: ColumnChart.Column) {
             guard let currentIndex = data.firstIndex(where: { $0 == selectedData }) else {
                 return
             }
@@ -88,17 +88,17 @@ extension BarChart {
             self.selectedData = selectedData
         }
         
-        func didReset(data selectedData: BarChart.Bar) {
+        func didReset(data selectedData: ColumnChart.Column) {
             if self.selectedData != nil {
                 data.move(from: 0, to: previousSelectedIndex!)
                 resetSelectedData()
                 
                 return
             }
-            guard let pressedBarIndex = data.firstIndex(where: { $0 == selectedData }) else {
+            guard let pressedColumnIndex = data.firstIndex(where: { $0 == selectedData }) else {
                 return
             }
-            data.move(from: pressedBarIndex, to: previousSelectedIndex!)
+            data.move(from: pressedColumnIndex, to: previousSelectedIndex!)
             resetSelectedData()
         }
         
