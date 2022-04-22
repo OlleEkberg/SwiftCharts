@@ -18,17 +18,17 @@ extension LineChart {
         }
         
         public init(points: [LineChart.Point]) {
-            self.points = points.sorted { $0.amount < $1.amount }
+            self.points = points.sorted { $0.date < $1.date }
         }
         
         func add(_ point: LineChart.Point) {
             var tempPoints = points
             tempPoints.append(point)
-            points = tempPoints.sorted { $0.amount < $1.amount }
+            points = tempPoints.sorted { $0.date < $1.date }
         }
         
         func remove(_ point: LineChart.Point) {
-            guard let index = points.firstIndex(where: { $0.date == point.date }) else {
+            guard let index = points.firstIndex(where: { $0.id == point.id }) else {
                 return
             }
             points.remove(at: index)
