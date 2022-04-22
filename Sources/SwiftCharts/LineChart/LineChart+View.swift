@@ -29,8 +29,17 @@ extension LineChart {
         
         func createPath(_ width: CGFloat, height: CGFloat) -> Path {
             guard viewModel.points.count > 1,
-                  let firstPoint = viewModel.points.first else {
+                  let firstPoint = viewModel.points.first,
+                  let largestAmount = viewModel.largestAmount else {
                 return Path()
+            }
+            
+            let offsetY: Int {
+                if largestAmount > height {
+                    return height / largestAmount
+                } else {
+                    return 1
+                }
             }
             
             var offsetX: Int = Int(width/CGFloat(viewModel.points.count))
@@ -39,8 +48,9 @@ extension LineChart {
             
             for point in viewModel.points {
                 offsetX += Int(width/CGFloat(viewModel.points.count))
+                let y = Int(point.amount * offsetY)
                 print("line: \(offsetX) - \(height)")
-                path.addLine(to: .init(x: offsetX, y: Int(point.amount)))
+                path.addLine(to: .init(x: offsetX, y: y))
             }
             
             return path
