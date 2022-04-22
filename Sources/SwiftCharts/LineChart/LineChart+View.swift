@@ -45,7 +45,7 @@ extension LineChart {
             
             var offsetX: Int = Int(width/CGFloat(viewModel.points.count))
             var path = Path()
-            path.move(to: .init(x: offsetX, y: Int(firstPoint.amount)))
+            path.move(to: .init(x: 0, y: Int(firstPoint.amount)))
             
             for point in viewModel.points {
                 offsetX += Int(width/CGFloat(viewModel.points.count))
