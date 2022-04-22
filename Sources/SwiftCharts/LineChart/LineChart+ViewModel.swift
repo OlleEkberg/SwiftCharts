@@ -16,6 +16,9 @@ extension LineChart {
         var maxAmount: Float {
             points.reduce(0) { $0 + $1.amount }
         }
+        var largestAmount: Float? {
+            points.max(by: { $0.amount > $1.amount })?.amount
+        }
         
         public init(points: [LineChart.Point]) {
             self.points = points.sorted { $0.date < $1.date }
