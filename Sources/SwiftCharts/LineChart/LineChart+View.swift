@@ -34,7 +34,8 @@ extension LineChart {
                   let largestAmount = viewModel.largestAmount else {
                 return Path()
             }
-            
+            print(largestAmount)
+            print(height)
             var offsetY: Int {
                 if CGFloat(largestAmount) > height {
                     return Int(height / CGFloat(largestAmount))
