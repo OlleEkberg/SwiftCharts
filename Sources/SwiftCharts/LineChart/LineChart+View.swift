@@ -22,6 +22,7 @@ extension LineChart {
                     createPath(geometry.size.width)
                         .stroke(.black, lineWidth: 8)
                 }
+                .background(Color.white)
             }
         }
         
