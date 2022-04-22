@@ -19,12 +19,12 @@ extension LineChart {
         public var body: some View {
             GeometryReader { geometry in
                 VStack {
-                    createPath(geometry.size.width, height: geometry.size.height)
+                    createPath(geometry.size.width - (padding * 2), height: geometry.size.height)
                         .stroke(.black, lineWidth: 4)
                 }
-                .frame(width: geometry.size.width, height: geometry.size.height, alignment: .leading)
+                .frame(width: geometry.size.width, height: geometry.size.height, alignment: .center)
                 .background(Color.white)
-                .padding()
+                .padding([.horizontal], padding)
             }
         }
         
@@ -34,9 +34,8 @@ extension LineChart {
                   let largestAmount = viewModel.largestAmount else {
                 return Path()
             }
-            print(Int(largestAmount))
-            print(Int(height))
-            print(Int(height) / Int(largestAmount))
+
+            
             var offsetY: Float {
                 if largestAmount > Float(height) {
                     return Float(height) / largestAmount
@@ -52,7 +51,6 @@ extension LineChart {
             for point in viewModel.points {
                 offsetX += Int(width/CGFloat(viewModel.points.count))
                 let y = Int(point.amount * offsetY)
-                print("line: \(offsetX) - \(offsetY)")
                 path.addLine(to: .init(x: offsetX, y: y))
             }
             
@@ -75,6 +73,9 @@ extension LineChart {
             
             return body
         }
+        
+        // Constants
+        let padding: CGFloat = 2
     }
 }
 
