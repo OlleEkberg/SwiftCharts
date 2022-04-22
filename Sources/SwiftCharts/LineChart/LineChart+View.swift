@@ -22,19 +22,17 @@ extension LineChart {
                 VStack {
                     ZStack {
                         let test = createPath(geometry.size.width, height: geometry.size.height)
-                        test.0
+                        test.path
                             .stroke(.black, lineWidth: 4)
-                            .padding()
                         
                         
-                        ForEach(test.1, id: \.x) { p in
+                        ForEach(test.coordinates, id: \.x) { p in
                             Circle()
                                 .foregroundColor(.blue)
                                 .frame(width: 8, height: 8)
                                 .position(x: p.x, y: p.y)
                         }
 //                        createPath(geometry.size.width, height: geometry.size.height)
-                            
                     }
                 }
                 .frame(width: geometry.size.width, height: geometry.size.height, alignment: .center)
@@ -42,7 +40,7 @@ extension LineChart {
             }
         }
         
-        func createPath(_ width: CGFloat, height: CGFloat) -> (Path, [CGPoint])  {
+        func createPath(_ width: CGFloat, height: CGFloat) -> (path: Path, coordinates: [CGPoint])  {
             guard viewModel.points.count > 1,
                   let firstPoint = viewModel.points.first,
                   let largestAmount = viewModel.largestAmount else {
@@ -59,20 +57,20 @@ extension LineChart {
             
             var offsetX: Int = Int(width/CGFloat(viewModel.points.count))
             var path = Path()
-            var firstP = CGPoint(x: 0, y: Int(firstPoint.amount))
-            path.move(to: firstP)
+            var firstCoordinate = CGPoint(x: 0, y: Int(firstPoint.amount))
+            path.move(to: firstCoordinate)
             
-            var points: [CGPoint] = [firstP]
+            var coordinates: [CGPoint] = [firstCoordinate]
             
             for point in viewModel.points {
                 offsetX += Int(width/CGFloat(viewModel.points.count))
                 let y = Int(point.amount * offsetY)
-                let point = CGPoint(x: offsetX, y: y)
-                points.append(point)
-                path.addLine(to: point)
+                let coordinate = CGPoint(x: offsetX, y: y)
+                coordinates.append(coordinate)
+                path.addLine(to: coordinate)
             }
             
-            return (path, points)
+            return (path, coordinates)
         }
         
         func lineChartView() -> some View {
