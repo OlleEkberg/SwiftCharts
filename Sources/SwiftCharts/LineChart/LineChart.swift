@@ -8,4 +8,4 @@
 import Foundation
 
 // Namespace
-enum LineChart {}
+public enum LineChart {}

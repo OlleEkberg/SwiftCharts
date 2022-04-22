@@ -8,10 +8,15 @@
 import SwiftUI
 
 extension LineChart {
-    struct ChartView: View {
+    public struct ChartView: View {
         
         @ObservedObject private var viewModel: LineChart.ViewModel
-        var body: some View {
+        
+        public init(viewModel: LineChart.ViewModel) {
+            self.viewModel = viewModel
+        }
+        
+        public var body: some View {
             GeometryReader { geometry in
                 ForEach(viewModel.points, id: \.self) { point in
                     Text(point.name)

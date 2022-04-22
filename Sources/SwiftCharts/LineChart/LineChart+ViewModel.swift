@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 extension LineChart {
-    class ViewModel: ObservableObject, ChartViewModel {
+    public class ViewModel: ObservableObject, ChartViewModel {
         
         @Published private(set) var points: [LineChart.Point]
         
@@ -17,7 +17,7 @@ extension LineChart {
             points.reduce(0) { $0 + $1.amount }
         }
         
-        init(points: [LineChart.Point]) {
+        public init(points: [LineChart.Point]) {
             self.points = points.sorted { $0.amount < $1.amount }
         }
         
