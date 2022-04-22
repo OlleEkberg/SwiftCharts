@@ -12,6 +12,7 @@ extension LineChart {
         
         @ObservedObject private var viewModel: LineChart.ViewModel
         
+        
         public init(viewModel: LineChart.ViewModel) {
             self.viewModel = viewModel
         }
@@ -19,23 +20,35 @@ extension LineChart {
         public var body: some View {
             GeometryReader { geometry in
                 VStack {
-                    createPath(geometry.size.width - (padding * 2), height: geometry.size.height)
-                        .stroke(.black, lineWidth: 4)
+                    ZStack {
+                        let test = createPath(geometry.size.width, height: geometry.size.height)
+                        test.0
+                            .stroke(.black, lineWidth: 4)
+                            .padding()
+                        
+                        
+                        ForEach(test.1, id: \.x) { p in
+                            Circle()
+                                .foregroundColor(.blue)
+                                .frame(width: 8, height: 8)
+                                .position(x: p.x, y: p.y)
+                        }
+//                        createPath(geometry.size.width, height: geometry.size.height)
+                            
+                    }
                 }
                 .frame(width: geometry.size.width, height: geometry.size.height, alignment: .center)
                 .background(Color.white)
-                .padding([.horizontal], padding)
             }
         }
         
-        func createPath(_ width: CGFloat, height: CGFloat) -> Path {
+        func createPath(_ width: CGFloat, height: CGFloat) -> (Path, [CGPoint])  {
             guard viewModel.points.count > 1,
                   let firstPoint = viewModel.points.first,
                   let largestAmount = viewModel.largestAmount else {
-                return Path()
+                return (Path(), [])
             }
 
-            
             var offsetY: Float {
                 if largestAmount > Float(height) {
                     return Float(height) / largestAmount
@@ -46,15 +59,20 @@ extension LineChart {
             
             var offsetX: Int = Int(width/CGFloat(viewModel.points.count))
             var path = Path()
-            path.move(to: .init(x: 0, y: Int(firstPoint.amount)))
+            var firstP = CGPoint(x: 0, y: Int(firstPoint.amount))
+            path.move(to: firstP)
+            
+            var points: [CGPoint] = [firstP]
             
             for point in viewModel.points {
                 offsetX += Int(width/CGFloat(viewModel.points.count))
                 let y = Int(point.amount * offsetY)
-                path.addLine(to: .init(x: offsetX, y: y))
+                let point = CGPoint(x: offsetX, y: y)
+                points.append(point)
+                path.addLine(to: point)
             }
             
-            return path
+            return (path, points)
         }
         
         func lineChartView() -> some View {
