@@ -37,8 +37,8 @@ extension LineChart {
             print(largestAmount)
             print(height)
             var offsetY: Int {
-                if CGFloat(largestAmount) > height {
-                    return Int(height / CGFloat(largestAmount))
+                if largestAmount > Float(height) {
+                    return Int(Float(height) / largestAmount)
                 } else {
                     return 1
                 }
