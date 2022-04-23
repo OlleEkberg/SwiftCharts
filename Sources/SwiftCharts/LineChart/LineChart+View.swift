@@ -29,6 +29,8 @@ extension LineChart {
                 lineChart
                     .background(lineChartBackground)
                     .overlay(lineChartOverlay, alignment: .leading)
+                lineChartUnderLay
+                    .background(lineChartBackground)
             }
         }
     }
@@ -78,16 +80,19 @@ private extension SwiftCharts.LineChart.ChartView {
             Spacer()
             Text(viewModel.smallestAmount.twoDigitDecimalString())
                 .foregroundColor(config.textColor)
-            HStack {
-                Text("Fisrt Date")
-                    .foregroundColor(config.textColor)
-                Spacer()
-                Text("Mid date")
-                    .foregroundColor(config.textColor)
-                Spacer()
-                Text("Latest Date")
-                    .foregroundColor(config.textColor)
-            }
+        }
+    }
+    
+    var lineChartUnderLay: some View {
+        HStack {
+            Text("Fisrt Date")
+                .foregroundColor(config.textColor)
+            Spacer()
+            Text("Mid date")
+                .foregroundColor(config.textColor)
+            Spacer()
+            Text("Latest Date")
+                .foregroundColor(config.textColor)
         }
     }
 }
