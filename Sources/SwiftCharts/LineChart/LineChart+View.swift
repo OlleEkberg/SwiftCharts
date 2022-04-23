@@ -38,21 +38,21 @@ private extension SwiftCharts.LineChart.ChartView {
     
     func lineChart() -> some View {
         GeometryReader { geometry in
-            
+            let points = createPoints(with: geometry.size)
             ZStack {
-                let points = createPoints(with: geometry.size)
+                
                 
                 Path { path in
                     path.move(to: .init(x: 0, y: 0))
                     path.addLines(points)
                 }
                 .stroke(config.lineColor, style: StrokeStyle(lineWidth: config.lineWidth, lineCap: .round, lineJoin: .round))
-                LinearGradient(colors:
-                                [
-                                    config.lineColor.opacity(0.3),
-                                    config.lineColor.opacity(0.2),
-                                    config.lineColor.opacity(0.1)
-                                ], startPoint: .top, endPoint: .bottom)
+//                LinearGradient(colors:
+//                                [
+//                                    config.lineColor.opacity(0.3),
+//                                    config.lineColor.opacity(0.2),
+//                                    config.lineColor.opacity(0.1)
+//                                ], startPoint: .top, endPoint: .bottom)
             }
         }
     }
