@@ -69,11 +69,10 @@ extension PieChart {
                             Text(selectedSlice.name)
                                 .font(.title)
                                 .foregroundColor(Color.gray)
-                            Text(String(format: "%.2f", selectedSlice.amount))
+                            Text(selectedSlice.amount.twoDigitDecimalString())
                                 .font(.title)
                                 .foregroundColor(.black)
-                            let percent = String(format: "%.2f", viewModel.getPercent(selectedSlice))
-                            Text("\(percent)%")
+                            Text("\(viewModel.getPercent(selectedSlice).twoDigitDecimalString())%")
                                 .font(.title)
                                 .foregroundColor(.black)
                         } else {
@@ -81,7 +80,7 @@ extension PieChart {
                                 .font(.title)
                                 .foregroundColor(Color.gray)
                             
-                            Text(String(format: "%.2f", viewModel.maxAmount))
+                            Text(viewModel.maxAmount.twoDigitDecimalString())
                                 .font(.title)
                                 .foregroundColor(.black)
                         }
@@ -204,12 +203,10 @@ extension PieChart {
                         .font(slice.config.titleFont)
                         .foregroundColor(slice.config.textColor)
                         .frame(alignment: .center)
-                    let amount = String(format: "%.2f", slice.amount)
-                    Text("\(Translations.amount): \(amount)")
+                    Text("\(Translations.amount): \(slice.amount.twoDigitDecimalString())")
                         .font(slice.config.textFont)
                         .foregroundColor(slice.config.textColor)
-                    let percent = String(format: "%.2f", viewModel.getPercent(slice))
-                    Text("\(Translations.percent): \(percent)%")
+                    Text("\(Translations.percent): \(viewModel.getPercent(slice).twoDigitDecimalString())%")
                         .font(slice.config.textFont)
                         .foregroundColor(slice.config.textColor)
                     if let additionalInfo = slice.additionalInfo {

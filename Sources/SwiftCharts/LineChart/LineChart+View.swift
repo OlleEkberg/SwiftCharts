@@ -69,14 +69,14 @@ private extension SwiftCharts.LineChart.ChartView {
     
     var lineChartOverlay: some View {
         VStack {
-            Text("\(viewModel.largestAmount)")
+            Text(viewModel.largestAmount.twoDigitDecimalString())
                 .foregroundColor(config.textColor)
             Spacer()
             let midAmount = (maxY + minY) / 2
-            Text("\(midAmount)")
+            Text(midAmount.twoDigitDecimalString())
                 .foregroundColor(config.textColor)
             Spacer()
-            Text("\(viewModel.smallestAmount)")
+            Text(viewModel.smallestAmount.twoDigitDecimalString())
                 .foregroundColor(config.textColor)
         }
     }
