@@ -16,8 +16,11 @@ extension LineChart {
         var maxAmount: Float {
             points.reduce(0) { $0 + $1.amount }
         }
-        var largestAmount: Float? {
-            points.max(by: { $0.amount < $1.amount })?.amount
+        var largestAmount: Float {
+            points.max(by: { $0.amount < $1.amount })?.amount ?? 0
+        }
+        var smallestAmount: Float {
+            points.min(by: { $0.amount < $1.amount })?.amount ?? 0
         }
         
         public init(points: [LineChart.Point]) {

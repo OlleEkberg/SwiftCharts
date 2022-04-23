@@ -11,83 +11,21 @@ extension LineChart {
     public struct ChartView: View {
         
         @ObservedObject private var viewModel: LineChart.ViewModel
-        
+        let maxY: Float
+        let minY: Float
         
         public init(viewModel: LineChart.ViewModel) {
             self.viewModel = viewModel
+            self.maxY = viewModel.largestAmount
+            self.minY = viewModel.smallestAmount
         }
         
         public var body: some View {
-            GeometryReader { geometry in
-                VStack {
-                    ZStack {
-                        let test = createPath(geometry.size.width, height: geometry.size.height)
-                        test.path
-                            .stroke(.black, lineWidth: 4)
-                        
-                        
-                        ForEach(test.coordinates, id: \.x) { p in
-                            Circle()
-                                .foregroundColor(.blue)
-                                .frame(width: 8, height: 8)
-                                .position(x: p.x, y: p.y)
-                        }
-//                        createPath(geometry.size.width, height: geometry.size.height)
-                    }
-                }
-                .frame(width: geometry.size.width, height: geometry.size.height, alignment: .center)
-                .background(Color.white)
+            VStack {
+                lineChart
+                    .background(lineChartBackground)
+                    .overlay(lineChartOverlay, alignment: .leading)
             }
-        }
-        
-        func createPath(_ width: CGFloat, height: CGFloat) -> (path: Path, coordinates: [CGPoint])  {
-            guard viewModel.points.count > 1,
-                  let firstPoint = viewModel.points.first,
-                  let largestAmount = viewModel.largestAmount else {
-                return (Path(), [])
-            }
-
-            var offsetY: Float {
-                if largestAmount > Float(height) {
-                    return Float(height) / largestAmount
-                } else {
-                    return 1
-                }
-            }
-            
-            var offsetX: Int = Int(width/CGFloat(viewModel.points.count))
-            var path = Path()
-            var firstCoordinate = CGPoint(x: 0, y: Int(firstPoint.amount))
-            path.move(to: firstCoordinate)
-            
-            var coordinates: [CGPoint] = [firstCoordinate]
-            
-            for point in viewModel.points {
-                offsetX += Int(width/CGFloat(viewModel.points.count))
-                let y = Int(point.amount * offsetY)
-                let coordinate = CGPoint(x: offsetX, y: y)
-                coordinates.append(coordinate)
-                path.addLine(to: coordinate)
-            }
-            
-            return (path, coordinates)
-        }
-        
-        func lineChartView() -> some View {
-            
-            var body: some View {
-                if let firstDate = viewModel.points.first?.date,
-                      let lastDate = viewModel.points.last?.date,
-                      let maxHeight = viewModel.largestAmount {
-                    let dates = [firstDate...lastDate]
-                    let height = [0...(maxHeight * 0.2)]
-                    return EmptyView()
-                } else {
-                    return EmptyView()
-                }
-            }
-            
-            return body
         }
         
         // Constants
@@ -95,3 +33,44 @@ extension LineChart {
     }
 }
 
+private extension SwiftCharts.LineChart.ChartView {
+    var lineChart: some View {
+        GeometryReader { geometry in
+            Path { path in
+                for i in viewModel.points.indices {
+                    let xPosition = geometry.size.width / CGFloat(viewModel.points.count) * CGFloat(i + 1)
+                    
+                    let yAxis = maxY - minY
+                    let yPosition = (1 - CGFloat((viewModel.points[i].amount - minY) / yAxis)) * geometry.size.height
+                    
+                    
+                    if i == 0 {
+                        path.move(to: .init(x: xPosition, y: yPosition))
+                    }
+                    path.addLine(to: .init(x: xPosition, y: 0))
+                }
+            }
+            .stroke(.black, style: StrokeStyle(lineWidth: 10, lineCap: .round, lineJoin: .round))
+        }
+    }
+    
+    var lineChartBackground: some View {
+        VStack {
+            Divider()
+            Spacer()
+            Divider()
+            Spacer()
+            Divider()
+        }
+    }
+    
+    var lineChartOverlay: some View {
+        VStack {
+            Text("Heigh")
+            Spacer()
+            Text("Middle")
+            Spacer()
+            Text("Bottom")
+        }
+    }
+}
