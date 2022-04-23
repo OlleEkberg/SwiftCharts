@@ -41,7 +41,7 @@ private extension SwiftCharts.LineChart.ChartView {
                 path.move(to: .init(x: 0, y: 0))
                 
                 for i in viewModel.points.indices {
-                    let xPosition = geometry.size.width / CGFloat(viewModel.points.count) * CGFloat(i)
+                    let xPosition = geometry.size.width / CGFloat(viewModel.points.count - 1) * CGFloat(i)
                     
                     let yAxis = maxY - minY
                     let yPosition = (1 - CGFloat((viewModel.points[i].amount - minY) / yAxis)) * geometry.size.height
