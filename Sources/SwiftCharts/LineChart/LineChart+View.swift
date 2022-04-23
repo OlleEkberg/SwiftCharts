@@ -30,7 +30,6 @@ extension LineChart {
                     .background(lineChartBackground)
                     .overlay(lineChartOverlay, alignment: .leading)
                 lineChartUnderLay
-                    .background(lineChartBackground)
             }
         }
     }
