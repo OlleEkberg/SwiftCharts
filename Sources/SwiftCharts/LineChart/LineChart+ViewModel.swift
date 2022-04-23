@@ -22,6 +22,12 @@ extension LineChart {
         var smallestAmount: Float {
             points.min(by: { $0.amount < $1.amount })?.amount ?? 0
         }
+        var firstDate: Date? {
+            points.first?.date
+        }
+        var latestDate: Date? {
+            points.last?.date
+        }
         
         public init(points: [LineChart.Point]) {
             self.points = points.sorted { $0.date < $1.date }

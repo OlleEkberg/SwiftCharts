@@ -84,14 +84,14 @@ private extension SwiftCharts.LineChart.ChartView {
     
     var lineChartUnderLay: some View {
         HStack {
-            Text("Fisrt Date")
-                .foregroundColor(config.textColor)
-            Spacer()
-            Text("Mid date")
-                .foregroundColor(config.textColor)
-            Spacer()
-            Text("Latest Date")
-                .foregroundColor(config.textColor)
+            if let firstDate = viewModel.firstDate,
+                  let latestDate = viewModel.latestDate {
+                Text("\(firstDate)")
+                    .foregroundColor(config.textColor)
+                Spacer()
+                Text("\(latestDate)")
+                    .foregroundColor(config.textColor)
+            }
         }
     }
 }
