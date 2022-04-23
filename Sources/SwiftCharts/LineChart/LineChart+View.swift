@@ -27,7 +27,7 @@ extension LineChart {
                 lineChart
                     .background(lineChartBackground)
                     .overlay(lineChartOverlay, alignment: .leading)
-                lineChartUnderLay
+                lineChartDates
             }
         }
     }
@@ -38,7 +38,7 @@ private extension SwiftCharts.LineChart.ChartView {
         GeometryReader { geometry in
             Path { path in
                 for i in viewModel.points.indices {
-                    let xPosition = geometry.size.width / CGFloat(viewModel.points.count) * CGFloat(i + 1)
+                    let xPosition = geometry.size.width / CGFloat(viewModel.points.count - 1) * CGFloat(i + 1)
                     
                     let yAxis = maxY - minY
                     let yPosition = (1 - CGFloat((viewModel.points[i].amount - minY) / yAxis)) * geometry.size.height
@@ -80,7 +80,7 @@ private extension SwiftCharts.LineChart.ChartView {
         }
     }
     
-    var lineChartUnderLay: some View {
+    var lineChartDates: some View {
         HStack {
             if let firstDate = viewModel.firstDate,
                   let latestDate = viewModel.latestDate {
