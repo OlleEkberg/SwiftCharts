@@ -39,7 +39,7 @@ private extension SwiftCharts.LineChart.ChartView {
     func lineChart() -> some View {
         GeometryReader { geometry in
             let points = createPoints(with: geometry.size)
-            ZStack {
+//            ZStack {
                 
                 
                 Path { path in
@@ -53,7 +53,7 @@ private extension SwiftCharts.LineChart.ChartView {
 //                                    config.lineColor.opacity(0.2),
 //                                    config.lineColor.opacity(0.1)
 //                                ], startPoint: .top, endPoint: .bottom)
-            }
+//            }
         }
     }
 //    var lineChart: some View {
