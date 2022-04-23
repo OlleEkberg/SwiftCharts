@@ -30,6 +30,9 @@ extension LineChart {
         }
         
         public init(points: [LineChart.Point]) {
+            points.forEach {
+                print($0.date)
+            }
             self.points = points.sorted { $0.date < $1.date }
         }
         
