@@ -58,19 +58,19 @@ private extension SwiftCharts.LineChart.ChartView {
 //    }
     var lineChart: some View {
         GeometryReader { geometry in
-            let points = createPoints(with: geometry.size)
+//            let points = createPoints(with: geometry.size)
             Path { path in
 
                 path.move(to: .init(x: 0, y: 0))
-                path.addLines(points)
-//                for i in viewModel.points.indices {
-//                    let segments = CGFloat(viewModel.points.count - 1)
-//                    let xPosition = geometry.size.width / segments * CGFloat(i)
-//
-//                    let yAxis = maxY - minY
-//                    let yPosition = (1 - CGFloat((viewModel.points[i].amount - minY) / yAxis)) * geometry.size.height
-//                    path.addLine(to: .init(x: xPosition, y: yPosition))
-//                }
+//                path.addLines(points)
+                for i in viewModel.points.indices {
+                    let segments = CGFloat(viewModel.points.count - 1)
+                    let xPosition = geometry.size.width / segments * CGFloat(i)
+
+                    let yAxis = maxY - minY
+                    let yPosition = (1 - CGFloat((viewModel.points[i].amount - minY) / yAxis)) * geometry.size.height
+                    path.addLine(to: .init(x: xPosition, y: yPosition))
+                }
             }
             .stroke(config.lineColor, style: StrokeStyle(lineWidth: config.lineWidth, lineCap: .round, lineJoin: .round))
         }
