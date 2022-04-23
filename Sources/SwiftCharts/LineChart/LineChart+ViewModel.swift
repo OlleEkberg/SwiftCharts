@@ -22,11 +22,11 @@ extension LineChart {
         var smallestAmount: Float {
             points.min(by: { $0.amount < $1.amount })?.amount ?? 0
         }
-        var firstDate: String {
-            formatDate(points.first?.date)
+        var firstDate: Date? {
+            points.first?.date
         }
-        var latestDate: String {
-            formatDate(points.last?.date)
+        var latestDate: Date? {
+            points.last?.date
         }
         
         public init(points: [LineChart.Point]) {
@@ -46,13 +46,13 @@ extension LineChart {
             points.remove(at: index)
         }
         
-        private func formatDate(_ date: Date?) -> String {
+        func formatDate(_ date: Date?, format: String) -> String {
             guard let date = date else {
                 return ""
             }
                 
             let dateformatter = DateFormatter()
-            dateformatter.dateFormat = "YY-MM-dd"
+            dateformatter.dateFormat = format
             
             return dateformatter.string(from: date)
         }

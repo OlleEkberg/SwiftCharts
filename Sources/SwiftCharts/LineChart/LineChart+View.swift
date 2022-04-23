@@ -86,10 +86,10 @@ private extension SwiftCharts.LineChart.ChartView {
         HStack {
             if let firstDate = viewModel.firstDate,
                   let latestDate = viewModel.latestDate {
-                Text(firstDate)
+                Text(viewModel.formatDate(firstDate, format: config.dateFormat))
                     .foregroundColor(config.textColor)
                 Spacer()
-                Text(latestDate)
+                Text(viewModel.formatDate(latestDate, format: config.dateFormat))
                     .foregroundColor(config.textColor)
             }
         }

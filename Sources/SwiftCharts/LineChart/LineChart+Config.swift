@@ -15,13 +15,15 @@ extension LineChart {
         let backgroundColor: Color
         let textColor: Color
         let dividerColor: Color
+        let dateFormat: String
         
-        public init(lineWidth: CGFloat = 2, lineColor: Color = .blue, backgroundColor: Color = .white, textColor: Color = .black, dividerColor: Color = .gray) {
+        public init(lineWidth: CGFloat = 2, lineColor: Color = .blue, backgroundColor: Color = .white, textColor: Color = .black, dividerColor: Color = .gray, dateFormat: String = "dd/MM/YYYY") {
             self.lineWidth = lineWidth
             self.lineColor = lineColor
             self.backgroundColor = backgroundColor
             self.textColor = textColor
             self.dividerColor = dividerColor
+            self.dateFormat = dateFormat
         }
     }
 }
