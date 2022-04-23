@@ -67,11 +67,12 @@ private extension SwiftCharts.LineChart.ChartView {
     
     var lineChartOverlay: some View {
         VStack {
-            Text("Heigh")
+            Text("\(viewModel.largestAmount)")
             Spacer()
-            Text("Middle")
+            let midAmount = (maxY + minY) / 2
+            Text("\(midAmount)")
             Spacer()
-            Text("Bottom")
+            Text("\(viewModel.smallestAmount)")
         }
     }
 }
