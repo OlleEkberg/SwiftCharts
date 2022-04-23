@@ -11,11 +11,13 @@ extension LineChart {
     public struct ChartView: View {
         
         @ObservedObject private var viewModel: LineChart.ViewModel
-        let maxY: Float
-        let minY: Float
+        private let config: Config
+        private let maxY: Float
+        private let minY: Float
         
-        public init(viewModel: LineChart.ViewModel) {
+        public init(viewModel: LineChart.ViewModel, config: LineChart.Config = .init()) {
             self.viewModel = viewModel
+            self.config = config
             self.maxY = viewModel.largestAmount
             self.minY = viewModel.smallestAmount
             
@@ -29,9 +31,6 @@ extension LineChart {
                     .overlay(lineChartOverlay, alignment: .leading)
             }
         }
-        
-        // Constants
-        let padding: CGFloat = 2
     }
 }
 
@@ -51,28 +50,34 @@ private extension SwiftCharts.LineChart.ChartView {
                     path.addLine(to: .init(x: xPosition, y: yPosition))
                 }
             }
-            .stroke(.black, style: StrokeStyle(lineWidth: 10, lineCap: .round, lineJoin: .round))
+            .stroke(config.lineColor, style: StrokeStyle(lineWidth: config.lineWidth, lineCap: .round, lineJoin: .round))
         }
     }
     
     var lineChartBackground: some View {
         VStack {
             Divider()
+                .foregroundColor(config.dividerColor)
             Spacer()
             Divider()
+                .foregroundColor(config.dividerColor)
             Spacer()
             Divider()
+                .foregroundColor(config.dividerColor)
         }
     }
     
     var lineChartOverlay: some View {
         VStack {
             Text("\(viewModel.largestAmount)")
+                .foregroundColor(config.textColor)
             Spacer()
             let midAmount = (maxY + minY) / 2
             Text("\(midAmount)")
+                .foregroundColor(config.textColor)
             Spacer()
             Text("\(viewModel.smallestAmount)")
+                .foregroundColor(config.textColor)
         }
     }
 }
