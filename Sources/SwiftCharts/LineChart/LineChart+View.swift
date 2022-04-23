@@ -18,6 +18,8 @@ extension LineChart {
             self.viewModel = viewModel
             self.maxY = viewModel.largestAmount
             self.minY = viewModel.smallestAmount
+            
+            print("\(self.maxY) - \(self.minY)")
         }
         
         public var body: some View {
@@ -43,11 +45,10 @@ private extension SwiftCharts.LineChart.ChartView {
                     let yAxis = maxY - minY
                     let yPosition = (1 - CGFloat((viewModel.points[i].amount - minY) / yAxis)) * geometry.size.height
                     
-                    
                     if i == 0 {
                         path.move(to: .init(x: xPosition, y: yPosition))
                     }
-                    path.addLine(to: .init(x: xPosition, y: 0))
+                    path.addLine(to: .init(x: xPosition, y: yPosition))
                 }
             }
             .stroke(.black, style: StrokeStyle(lineWidth: 10, lineCap: .round, lineJoin: .round))
