@@ -42,9 +42,9 @@ private extension SwiftCharts.LineChart.ChartView {
                     
                     let yAxis = maxY - minY
                     let yPosition = (1 - CGFloat((viewModel.points[i].amount - minY) / yAxis)) * geometry.size.height
-                    
+                    print(xPosition)
                     if i == 0 {
-                        path.move(to: .init(x: 0, y: yPosition))
+                        path.move(to: .init(x: xPosition, y: yPosition))
                     }
                     path.addLine(to: .init(x: xPosition, y: yPosition))
                 }
