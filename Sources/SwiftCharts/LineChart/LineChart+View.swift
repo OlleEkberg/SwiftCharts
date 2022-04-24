@@ -25,7 +25,7 @@ extension LineChart {
         
         public var body: some View {
             VStack {
-                lineChart
+                lineChart()
                     .background(lineChartBackground)
                     .overlay(lineChartOverlay, alignment: .leading)
                 lineChartDates
@@ -36,45 +36,45 @@ extension LineChart {
 
 private extension SwiftCharts.LineChart.ChartView {
     
-//    func lineChart() -> some View {
-//        GeometryReader { geometry in
-//            let points = createPoints(with: geometry.size)
-////            ZStack {
-//
-//
-//                Path { path in
-//                    path.move(to: .init(x: 0, y: 0))
-//                    path.addLines(points)
-//                }
-//                .stroke(config.lineColor, style: StrokeStyle(lineWidth: config.lineWidth, lineCap: .round, lineJoin: .round))
-////                LinearGradient(colors:
-////                                [
-////                                    config.lineColor.opacity(0.3),
-////                                    config.lineColor.opacity(0.2),
-////                                    config.lineColor.opacity(0.1)
-////                                ], startPoint: .top, endPoint: .bottom)
-////            }
-//        }
-//    }
-    var lineChart: some View {
+    func lineChart() -> some View {
         GeometryReader { geometry in
-//            let points = createPoints(with: geometry.size)
-            Path { path in
+            let points = createPoints(with: geometry.size)
+            ZStack {
 
-                path.move(to: .init(x: 0, y: 0))
-//                path.addLines(points)
-                for i in viewModel.points.indices {
-                    let segments = CGFloat(viewModel.points.count - 1)
-                    let xPosition = geometry.size.width / segments * CGFloat(i)
 
-                    let yAxis = maxY - minY
-                    let yPosition = (1 - CGFloat((viewModel.points[i].amount - minY) / yAxis)) * geometry.size.height
-                    path.addLine(to: .init(x: xPosition, y: yPosition))
+                Path { path in
+                    path.move(to: .init(x: 0, y: 0))
+                    path.addLines(points)
                 }
+                .stroke(config.lineColor, style: StrokeStyle(lineWidth: config.lineWidth, lineCap: .round, lineJoin: .round))
+                LinearGradient(colors:
+                                [
+                                    config.lineColor.opacity(0.3),
+                                    config.lineColor.opacity(0.2),
+                                    config.lineColor.opacity(0.1)
+                                ], startPoint: .top, endPoint: .bottom)
             }
-            .stroke(config.lineColor, style: StrokeStyle(lineWidth: config.lineWidth, lineCap: .round, lineJoin: .round))
         }
     }
+//    var lineChart: some View {
+//        GeometryReader { geometry in
+////            let points = createPoints(with: geometry.size)
+//            Path { path in
+//
+//                path.move(to: .init(x: 0, y: 0))
+////                path.addLines(points)
+//                for i in viewModel.points.indices {
+//                    let segments = CGFloat(viewModel.points.count - 1)
+//                    let xPosition = geometry.size.width / segments * CGFloat(i)
+//
+//                    let yAxis = maxY - minY
+//                    let yPosition = (1 - CGFloat((viewModel.points[i].amount - minY) / yAxis)) * geometry.size.height
+//                    path.addLine(to: .init(x: xPosition, y: yPosition))
+//                }
+//            }
+//            .stroke(config.lineColor, style: StrokeStyle(lineWidth: config.lineWidth, lineCap: .round, lineJoin: .round))
+//        }
+//    }
     
     var lineChartBackground: some View {
         VStack {
