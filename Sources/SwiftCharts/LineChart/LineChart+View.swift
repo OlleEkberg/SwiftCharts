@@ -125,12 +125,21 @@ private extension SwiftCharts.LineChart.ChartView {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack {
                 ForEach(LineChart.ViewModel.Filter.allCases, id: \.self) { filter in
-                    Text(filter.name)
-                        .frame(width: 80)
-                        .onTapGesture {
-                            viewModel.currentFilter = filter
-                        }
-                        .foregroundColor(config.textColor)
+                    if filter == .custom {
+                        Image(systemName: "calendar")
+                            .frame(width: 80)
+                            .onTapGesture {
+                                viewModel.currentFilter = filter
+                            }
+                            .foregroundColor(config.textColor)
+                    } else {
+                        Text(filter.name)
+                            .frame(width: 80)
+                            .onTapGesture {
+                                viewModel.currentFilter = filter
+                            }
+                            .foregroundColor(config.textColor)
+                    }
                 }
             }
         }

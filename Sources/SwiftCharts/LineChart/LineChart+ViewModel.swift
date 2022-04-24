@@ -86,31 +86,37 @@ extension LineChart {
 
 extension LineChart.ViewModel {
     public enum Filter: CaseIterable {
-        case week, month, threeMonths, sixMonths, oneYear, twoYears, threeYears, max
+        case day, week, month, threeMonths, sixMonths, oneYear, twoYears, threeYears, max, custom
         
         var name: String {
             switch self {
+            case .day:
+                return Translations.filterDay
             case .week:
-                return "Week"
+                return Translations.filterWeek
             case .month:
-                return "Month"
+                return Translations.filterMonth
             case .threeMonths:
-                return "3 months"
+                return Translations.filterThreeMonths
             case .sixMonths:
-                return "6 months"
+                return Translations.filterSixMonths
             case .oneYear:
-                return "Year"
+                return Translations.filterYear
             case .twoYears:
-                return "2 years"
+                return Translations.filterTwoYears
             case .threeYears:
-                return "3 years"
+                return Translations.filterThreeYears
             case .max:
-                return "Max"
+                return Translations.filterMax
+            case .custom:
+                return ""
             }
         }
         
         var days: Int {
             switch self {
+            case .day:
+                return 1
             case .week:
                 return 7
             case .month:
@@ -125,7 +131,7 @@ extension LineChart.ViewModel {
                 return 365 * 2
             case .threeYears:
                 return 365 * 3
-            case .max:
+            case .max, .custom:
                 return 0
             }
         }

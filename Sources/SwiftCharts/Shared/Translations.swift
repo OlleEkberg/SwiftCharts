@@ -19,4 +19,14 @@ enum Translations {
     
     static let others = NSLocalizedString("SWIFTCHARTS.PIECHART.OTHERS", bundle: .module, comment: "")
     static let totalAmount = NSLocalizedString("SWIFTCHARTS.PIECHART.TOTAL.AMOUNT", bundle: .module, comment: "")
+    
+    static let filterDay = NSLocalizedString("SWIFTCHARTS.LINECHART.DAY", bundle: .module, comment: "")
+    static let filterWeek = NSLocalizedString("SWIFTCHARTS.LINECHART.WEEK", bundle: .module, comment: "")
+    static let filterMonth = NSLocalizedString("SWIFTCHARTS.LINECHART.MONTH", bundle: .module, comment: "")
+    static let filterThreeMonths = NSLocalizedString("SWIFTCHARTS.LINECHART.THREE.MONTH", bundle: .module, comment: "")
+    static let filterSixMonths = NSLocalizedString("SWIFTCHARTS.LINECHART.SIX.MONTH", bundle: .module, comment: "")
+    static let filterYear = NSLocalizedString("SWIFTCHARTS.LINECHART.YEAR", bundle: .module, comment: "")
+    static let filterTwoYears = NSLocalizedString("SWIFTCHARTS.LINECHART.TWO.YEARS", bundle: .module, comment: "")
+    static let filterThreeYears = NSLocalizedString("SWIFTCHARTS.LINECHART.THREE.YEARS", bundle: .module, comment: "")
+    static let filterMax = NSLocalizedString("SWIFTCHARTS.LINECHART.MAX", bundle: .module, comment: "")
 }
