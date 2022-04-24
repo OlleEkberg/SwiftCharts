@@ -53,6 +53,14 @@ private extension SwiftCharts.LineChart.ChartView {
                                     config.lineColor.opacity(0.2),
                                     config.lineColor.opacity(0.1)
                                 ], startPoint: .top, endPoint: .bottom)
+                .clipShape (
+                    Path { path in
+                        path.move(to: .init(x: 0, y: 0))
+                        path.addLines(points)
+                        path.addLine(to: .init(x: geometry.size.width, y: geometry.size.height))
+                        path.addLine(to: .init(x: 0, y: geometry.size.height))
+                    }
+                )
             }
         }
     }
