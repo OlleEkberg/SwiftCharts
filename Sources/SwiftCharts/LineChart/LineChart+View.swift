@@ -27,8 +27,9 @@ extension LineChart {
             VStack {
                 lineChart()
                     .background(lineChartBackground)
-                    .overlay(lineChartOverlay, alignment: .leading)
-                lineChartDates
+                    .overlay(lineChartOverlay, alignment: .trailing)
+                lineChartDates()
+                chartFilter()
             }
         }
     }
@@ -100,20 +101,38 @@ private extension SwiftCharts.LineChart.ChartView {
         }
     }
     
-    var lineChartDates: some View {
+    @ViewBuilder
+    func lineChartDates() -> some View {
+        if let firstDate = viewModel.firstDate,
+              let latestDate = viewModel.latestDate {
+            VStack {
+                Divider()
+                HStack {
+                    Text(viewModel.formatDate(firstDate, format: config.dateFormat))
+                        .foregroundColor(config.textColor)
+                    Spacer()
+                    Text(viewModel.formatDate(latestDate, format: config.dateFormat))
+                        .foregroundColor(config.textColor)
+                }
+                Divider()
+            }
+        } else {
+            EmptyView()
+        }
+    }
+    
+    @ViewBuilder
+    func chartFilter() -> some View {
         HStack {
-            if let firstDate = viewModel.firstDate,
-                  let latestDate = viewModel.latestDate {
-                Text(viewModel.formatDate(firstDate, format: config.dateFormat))
-                    .foregroundColor(config.textColor)
-                Spacer()
-                Text(viewModel.formatDate(latestDate, format: config.dateFormat))
+            ForEach(LineChart.ViewModel.Filter.allCases, id: \.self) { filter in
+                Text(filter.name)
+                    .onTapGesture {
+                        viewModel.currentFilter = filter
+                    }
                     .foregroundColor(config.textColor)
             }
         }
     }
-    
-    
 }
 
 // MARK: Calculations
