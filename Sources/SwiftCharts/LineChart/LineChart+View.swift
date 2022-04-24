@@ -12,6 +12,9 @@ extension LineChart {
     public struct ChartView: View {
         
         @ObservedObject private var viewModel: LineChart.ViewModel
+        @State private var currentIndicatorPosition = ""
+        @State private var indicatorOffset: CGSize = .zero
+        @State private var showIndicator: Bool = false
         private let config: Config
         private let maxY: Float
         private let minY: Float
@@ -52,6 +55,20 @@ private extension SwiftCharts.LineChart.ChartView {
                     lineGradient(size: geometry.size, points: points)
                 }
             }
+            .overlay(dragIndicator, alignment: .bottomLeading)
+            .contentShape(Rectangle())
+            .gesture(DragGesture().onChanged({ value in
+                
+                withAnimation {
+                    showIndicator = true
+                }
+                let translation = value.location.x - 40
+                indicatorOffset = .init(width: translation, height: 0)
+            }).onEnded({ value in
+                withAnimation {
+                    showIndicator = false
+                }
+            }))
         }
     }
     
@@ -143,6 +160,35 @@ private extension SwiftCharts.LineChart.ChartView {
                 }
             }
         }
+    }
+    
+    var dragIndicator: some View {
+        VStack(spacing: 0) {
+            Text(currentIndicatorPosition)
+                .foregroundColor(.white)
+                .padding(.vertical, 6)
+                .padding(.horizontal, 10)
+            
+            Rectangle()
+                .fill(config.lineColor)
+                .frame(width: 1, height: 45)
+                .padding(.top)
+            
+            Circle()
+                .fill(config.lineColor)
+                .frame(width: 22, height: 22)
+                .overlay(
+                    Circle()
+                        .fill(config.backgroundColor)
+                        .frame(width: 10, height: 10)
+                )
+            
+            Rectangle()
+                .fill(config.lineColor)
+                .frame(width: 1, height: 55)
+        }
+        .frame(width: 80, height: 170)
+        .offset(indicatorOffset)
     }
 }
 
