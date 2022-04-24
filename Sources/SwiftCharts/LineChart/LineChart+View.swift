@@ -129,7 +129,7 @@ private extension SwiftCharts.LineChart.ChartView {
                         Image(systemName: "calendar")
                             .frame(width: 80)
                             .onTapGesture {
-                                viewModel.currentFilter = filter
+                                
                             }
                             .foregroundColor(config.textColor)
                     } else {
