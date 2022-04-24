@@ -189,7 +189,7 @@ private extension SwiftCharts.LineChart.ChartView {
         }
         .frame(width: 80, height: 170)
         .offset(indicatorOffset)
-        .opacity(showIndicator ? 0 : 1)
+        .opacity(showIndicator ? 1 : 0)
     }
 }
 
