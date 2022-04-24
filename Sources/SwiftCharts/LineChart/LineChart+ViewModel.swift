@@ -86,7 +86,7 @@ extension LineChart {
 
 extension LineChart.ViewModel {
     public enum Filter: CaseIterable {
-        case week, month, threeMonths, sixMonths, year, max
+        case week, month, threeMonths, sixMonths, oneYear, twoYears, threeYears, max
         
         var name: String {
             switch self {
@@ -98,8 +98,12 @@ extension LineChart.ViewModel {
                 return "3 months"
             case .sixMonths:
                 return "6 months"
-            case .year:
+            case .oneYear:
                 return "Year"
+            case .twoYears:
+                return "2 years"
+            case .threeYears:
+                return "3 years"
             case .max:
                 return "Max"
             }
@@ -115,8 +119,12 @@ extension LineChart.ViewModel {
                 return 32
             case .sixMonths:
                 return 183
-            case .year:
+            case .oneYear:
                 return 365
+            case .twoYears:
+                return 365 * 2
+            case .threeYears:
+                return 365 * 3
             case .max:
                 return 0
             }
