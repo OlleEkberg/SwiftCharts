@@ -18,9 +18,19 @@ extension LineChart {
         let dateFormat: String
         let extraHeadSpace: Float
         let chartFloor: Float
+        let showChartFloorNumber: Bool
         let gradientUnderChart: Bool
         
-        public init(lineWidth: CGFloat = 2, lineColor: Color = .blue, backgroundColor: Color = .white, textColor: Color = .black, dividerColor: Color = .gray, dateFormat: String = "dd-MM-YYYY", extraHeadSpace: Float = 200, chartFloor: Float = 0, gradientUnderChart: Bool = true) {
+        public init(lineWidth: CGFloat = 2,
+                    lineColor: Color = .blue,
+                    backgroundColor: Color = .white,
+                    textColor: Color = .black,
+                    dividerColor: Color = .gray,
+                    dateFormat: String = "dd-MM-YYYY",
+                    extraHeadSpace: Float = 200,
+                    chartFloor: Float = 0,
+                    showChartFloorNumber: Bool = false,
+                    gradientUnderChart: Bool = true) {
             self.lineWidth = lineWidth
             self.lineColor = lineColor
             self.backgroundColor = backgroundColor
@@ -29,6 +39,7 @@ extension LineChart {
             self.dateFormat = dateFormat
             self.extraHeadSpace = extraHeadSpace
             self.chartFloor = chartFloor
+            self.showChartFloorNumber = showChartFloorNumber
             self.gradientUnderChart = gradientUnderChart
         }
     }

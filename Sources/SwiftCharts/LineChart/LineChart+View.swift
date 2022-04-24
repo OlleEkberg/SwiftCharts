@@ -93,8 +93,10 @@ private extension SwiftCharts.LineChart.ChartView {
             Text(midAmount.twoDigitDecimalString())
                 .foregroundColor(config.textColor)
             Spacer()
-            Text(config.chartFloor.twoDigitDecimalString())
-                .foregroundColor(config.textColor)
+            if config.showChartFloorNumber {
+                Text(config.chartFloor.twoDigitDecimalString())
+                    .foregroundColor(config.textColor)
+            }
         }
     }
     
