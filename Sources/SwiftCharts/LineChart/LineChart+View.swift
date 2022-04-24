@@ -20,7 +20,7 @@ extension LineChart {
             self.viewModel = viewModel
             self.config = config
             self.maxY = viewModel.largestAmount + config.extraHeadSpace
-            self.minY = 0
+            self.minY = config.chartFloor
         }
         
         public var body: some View {
@@ -86,14 +86,14 @@ private extension SwiftCharts.LineChart.ChartView {
     
     var lineChartOverlay: some View {
         VStack {
-            Text(viewModel.largestAmount.twoDigitDecimalString())
+            Text((viewModel.largestAmount + config.extraHeadSpace).twoDigitDecimalString())
                 .foregroundColor(config.textColor)
             Spacer()
             let midAmount = (maxY + minY) / 2
             Text(midAmount.twoDigitDecimalString())
                 .foregroundColor(config.textColor)
             Spacer()
-            Text(viewModel.smallestAmount.twoDigitDecimalString())
+            Text(config.chartFloor.twoDigitDecimalString())
                 .foregroundColor(config.textColor)
         }
     }
