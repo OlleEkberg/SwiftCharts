@@ -20,7 +20,7 @@ extension LineChart {
             self.viewModel = viewModel
             self.config = config
             self.maxY = viewModel.largestAmount + config.extraHeadSpace
-            self.minY = viewModel.smallestAmount
+            self.minY = 0
         }
         
         public var body: some View {
