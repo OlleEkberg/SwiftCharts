@@ -122,7 +122,7 @@ private extension SwiftCharts.LineChart.ChartView {
     
     @ViewBuilder
     func chartFilter() -> some View {
-        ScrollView(.horizontal) {
+        ScrollView(.horizontal, showsIndicators: false) {
             HStack {
                 ForEach(LineChart.ViewModel.Filter.allCases, id: \.self) { filter in
                     Text(filter.name)
