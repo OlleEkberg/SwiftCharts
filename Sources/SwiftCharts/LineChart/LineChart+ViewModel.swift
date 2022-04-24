@@ -69,21 +69,12 @@ extension LineChart {
                 return
             }
             
-            var amountOfDays = 0
-            
-            switch filter {
-            case .week:
-                amountOfDays = -7
-            case .month:
-                amountOfDays = -30
-            case .year:
-                amountOfDays = -365
-            case .max:
+            if case .max = filter {
                 points = allPoints
                 return
             }
             
-            let filteredPoints = allPoints.filter { $0.date > latestDate.addOrSubtructDay(day: amountOfDays) }
+            let filteredPoints = allPoints.filter { $0.date > latestDate.addOrSubtructDay(days: -filter.days) }
             points = filteredPoints
         }
         
@@ -95,7 +86,7 @@ extension LineChart {
 
 extension LineChart.ViewModel {
     public enum Filter: CaseIterable {
-        case week, month, year, max
+        case week, month, threeMonths, sixMonths, year, max
         
         var name: String {
             switch self {
@@ -103,17 +94,38 @@ extension LineChart.ViewModel {
                 return "Week"
             case .month:
                 return "Month"
+            case .threeMonths:
+                return "3 months"
+            case .sixMonths:
+                return "6 months"
             case .year:
                 return "Year"
             case .max:
                 return "Max"
             }
         }
+        
+        var days: Int {
+            switch self {
+            case .week:
+                return 7
+            case .month:
+                return 30
+            case .threeMonths:
+                return 32
+            case .sixMonths:
+                return 183
+            case .year:
+                return 365
+            case .max:
+                return 0
+            }
+        }
     }
 }
 
 private extension Date {
-    func addOrSubtructDay(day:Int) -> Date {
-        Calendar.current.date(byAdding: .day, value: day, to: self) ?? Date()
+    func addOrSubtructDay(days: Int) -> Date {
+        Calendar.current.date(byAdding: .day, value: days, to: self) ?? Date()
     }
 }
