@@ -106,7 +106,6 @@ private extension SwiftCharts.LineChart.ChartView {
         if let firstDate = viewModel.firstDate,
               let latestDate = viewModel.latestDate {
             VStack {
-                Divider()
                 HStack {
                     Text(viewModel.formatDate(firstDate, format: config.dateFormat))
                         .foregroundColor(config.textColor)
@@ -123,13 +122,18 @@ private extension SwiftCharts.LineChart.ChartView {
     
     @ViewBuilder
     func chartFilter() -> some View {
-        HStack {
-            ForEach(LineChart.ViewModel.Filter.allCases, id: \.self) { filter in
-                Text(filter.name)
-                    .onTapGesture {
-                        viewModel.currentFilter = filter
+        GeometryReader { geometry in
+            ScrollView {
+                HStack {
+                    ForEach(LineChart.ViewModel.Filter.allCases, id: \.self) { filter in
+                        Text(filter.name)
+                            .frame(width: geometry.size.width / 3)
+                            .onTapGesture {
+                                viewModel.currentFilter = filter
+                            }
+                            .foregroundColor(config.textColor)
                     }
-                    .foregroundColor(config.textColor)
+                }
             }
         }
     }
