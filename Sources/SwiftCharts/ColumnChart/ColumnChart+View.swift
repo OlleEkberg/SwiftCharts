@@ -32,7 +32,7 @@ extension ColumnChart {
                 }
                 GeometryReader { geometry in
                     ScrollViewReader { proxy in
-                        ScrollView(.horizontal) {
+                        ScrollView(.horizontal, showsIndicators: false) {
                             ZStack {
                                 let width = columnWidth(geometry.size.width)
                                 HStack(alignment: .bottom, spacing: spacing) {
