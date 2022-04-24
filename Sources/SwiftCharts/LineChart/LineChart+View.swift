@@ -122,17 +122,15 @@ private extension SwiftCharts.LineChart.ChartView {
     
     @ViewBuilder
     func chartFilter() -> some View {
-        GeometryReader { geometry in
-            ScrollView {
-                HStack {
-                    ForEach(LineChart.ViewModel.Filter.allCases, id: \.self) { filter in
-                        Text(filter.name)
-                            .frame(width: geometry.size.width / 3)
-                            .onTapGesture {
-                                viewModel.currentFilter = filter
-                            }
-                            .foregroundColor(config.textColor)
-                    }
+        ScrollView {
+            HStack {
+                ForEach(LineChart.ViewModel.Filter.allCases, id: \.self) { filter in
+                    Text(filter.name)
+                        .frame(width: 80)
+                        .onTapGesture {
+                            viewModel.currentFilter = filter
+                        }
+                        .foregroundColor(config.textColor)
                 }
             }
         }
