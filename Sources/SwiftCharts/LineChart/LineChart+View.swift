@@ -212,7 +212,7 @@ private extension SwiftCharts.LineChart.ChartView {
                 )
         }
         .frame(width: indicatorCircleDiameter, height: indicatorCircleDiameter)
-        .offset(y: indicatorLineLength)
+        .offset(y: indicatorCircleDiameter / 2)
         .offset(indicatorOffset)
         .opacity(showIndicator ? 1 : 0)
     }
@@ -224,15 +224,15 @@ private extension SwiftCharts.LineChart.ChartView {
     var indicatorWidth: CGFloat {
         indicatorCircleDiameter
     }
-    var indicatorHeight: CGFloat {
-        indicatorCircleDiameter
-    }
-    var indicatorLineLength: CGFloat {
-        45
-    }
-    var indicatorLineWidth: CGFloat {
-        1
-    }
+//    var indicatorHeight: CGFloat {
+//        indicatorCircleDiameter
+//    }
+//    var indicatorLineLength: CGFloat {
+//        45
+//    }
+//    var indicatorLineWidth: CGFloat {
+//        1
+//    }
     var indicatorCircleDiameter: CGFloat {
         22
     }
