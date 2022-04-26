@@ -69,16 +69,14 @@ private extension SwiftCharts.LineChart.ChartView {
                 let translationOffset = CGFloat(halfWidth + (widthOfSegment / 2) < value.location.x ? 0 : 20)
                 let translation = value.location.x - translationOffset
                 
-                
                 let index = max(min(Int(translation / widthOfSegment) + 1, viewModel.points.count - 1), 0)
                 currentIndicatorPositionText = "\(viewModel.points[index].amount)"
                 
-                print(points[index].y)
-                print(geometry.size.height - points[index].y)
-                print(points[index].y)
+                let xOffset = indicatorWidth / 2
+                let yOffset = xOffset - indicatorCircleDiameter / 2
                 
-                indicatorOffset = .init(width: points[index].x - 40, height: -(geometry.size.height - points[index].y + 29))
-            }).onEnded({ value in
+                indicatorOffset = .init(width: points[index].x - xOffset, height: -(geometry.size.height - points[index].y + yOffset))
+            }).onEnded({ _ in
                 withAnimation {
                     showIndicator = false
                 }
@@ -120,10 +118,12 @@ private extension SwiftCharts.LineChart.ChartView {
         VStack {
             Text((viewModel.largestAmount + config.extraHeadSpace).twoDigitDecimalString())
                 .foregroundColor(config.textColor)
+                .background(config.backgroundColor.opacity(0.5))
             Spacer()
             let midAmount = (maxY + minY) / 2
             Text(midAmount.twoDigitDecimalString())
                 .foregroundColor(config.textColor)
+                .background(config.backgroundColor.opacity(0.5))
             Spacer()
             if config.showChartFloorNumber {
                 Text(config.chartFloor.twoDigitDecimalString())
@@ -158,14 +158,14 @@ private extension SwiftCharts.LineChart.ChartView {
                 ForEach(LineChart.ViewModel.Filter.allCases, id: \.self) { filter in
                     if filter == .custom {
                         Image(systemName: "calendar")
-                            .frame(width: 80)
+                            .frame(width: filterWidth)
                             .onTapGesture {
                                 
                             }
                             .foregroundColor(config.textColor)
                     } else {
                         Text(filter.name)
-                            .frame(width: 80)
+                            .frame(width: filterWidth)
                             .onTapGesture {
                                 viewModel.currentFilter = filter
                             }
@@ -180,8 +180,7 @@ private extension SwiftCharts.LineChart.ChartView {
         VStack(spacing: 0) {
             Text(currentIndicatorPositionText)
                 .foregroundColor(.white)
-                .padding(.vertical, 6)
-                .padding(.horizontal, 10)
+                .padding(indicatorTextPadding)
                 .background(
                     Capsule()
                         .foregroundColor(config.lineColor)
@@ -189,22 +188,48 @@ private extension SwiftCharts.LineChart.ChartView {
             
             Rectangle()
                 .fill(config.lineColor)
-                .frame(width: 1, height: 45)
+                .frame(width: indicatorLineWidth, height: indicatorLineLength)
                 .padding(.top)
             
             Circle()
                 .fill(config.lineColor)
-                .frame(width: 22, height: 22)
+                .frame(width: indicatorCircleDiameter, height: indicatorCircleDiameter)
                 .overlay(
                     Circle()
                         .fill(config.backgroundColor)
-                        .frame(width: 10, height: 10)
+                        .frame(width: indicatorCircleCenterDiameter, height: indicatorCircleCenterDiameter)
                 )
         }
-        .frame(width: 80, height: 120)
-        .offset(y: 45)
+        .frame(width: indicatorWidth, height: indicatorHeight)
+        .offset(y: indicatorLineLength)
         .offset(indicatorOffset)
         .opacity(showIndicator ? 1 : 0)
+    }
+    
+    // MARK: Drawing Constants
+    var filterWidth: CGFloat {
+        80
+    }
+    var indicatorWidth: CGFloat {
+        80
+    }
+    var indicatorHeight: CGFloat {
+        120
+    }
+    var indicatorLineLength: CGFloat {
+        45
+    }
+    var indicatorLineWidth: CGFloat {
+        1
+    }
+    var indicatorCircleDiameter: CGFloat {
+        22
+    }
+    var indicatorCircleCenterDiameter: CGFloat {
+        10
+    }
+    var indicatorTextPadding: CGFloat {
+        8
     }
 }
 
