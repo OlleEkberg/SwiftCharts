@@ -115,14 +115,14 @@ private extension SwiftCharts.LineChart.ChartView {
     var lineChartOverlay: some View {
         HStack {
             Text("VAD HÄNDER")
-                .frame(alignment: .center)
-                .foregroundColor(config.textColor)
+                .foregroundColor(config.backgroundColor)
                 .padding(padding)
                 .background(
                     Capsule()
                         .foregroundColor(config.lineColor)
                 )
                 .opacity(showIndicator ? 1 : 0)
+                .frame(alignment: .center)
             VStack {
                 Text((viewModel.largestAmount + config.extraHeadSpace).twoDigitDecimalString())
                     .foregroundColor(config.textColor)
