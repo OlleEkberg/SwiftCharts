@@ -71,21 +71,21 @@ private extension SwiftCharts.LineChart.ChartView {
                 //geometry width = 400
                 //segment = 400 / 20 = 20
                 // index = currentX / points
-                print(viewModel.points.count)
                 let segments = geometry.size.width / CGFloat(viewModel.points.count)
-                print(Int(value.location.x / segments))
+                let pointIndex = value.location.x / segments
+                let currentPoint = points[Int(pointIndex)]
                 
                 let halfWidth = geometry.size.width / 2
                 let translationOffset = CGFloat(halfWidth + (widthOfSegment / 2) < value.location.x ? 0 : 20)
                 let translation = value.location.x - translationOffset
                 
-                let index = max(min(Int(translation / widthOfSegment) + 1, viewModel.points.count - 1), 0)
-                currentIndicatorPositionText = "\(viewModel.points[index].amount)"
+//                let index = max(min(Int(translation / widthOfSegment) + 1, viewModel.points.count - 1), 0)
+                currentIndicatorPositionText = "\(viewModel.points[Int(pointIndex)])"
                 
                 let xOffset = indicatorWidth / 2
                 let yOffset = xOffset - indicatorCircleDiameter / 2
                 
-                indicatorOffset = .init(width: points[index].x - xOffset, height: -(geometry.size.height - points[index].y + yOffset))
+                indicatorOffset = .init(width: currentPoint.x - xOffset, height: -(geometry.size.height - currentPoint.y + yOffset))
             }).onEnded({ _ in
                 withAnimation {
                     showIndicator = false
