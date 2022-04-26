@@ -222,10 +222,10 @@ private extension SwiftCharts.LineChart.ChartView {
         80
     }
     var indicatorWidth: CGFloat {
-        80
+        indicatorCircleDiameter
     }
     var indicatorHeight: CGFloat {
-        120
+        indicatorCircleDiameter
     }
     var indicatorLineLength: CGFloat {
         45
