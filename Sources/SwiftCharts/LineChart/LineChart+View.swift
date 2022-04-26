@@ -171,12 +171,12 @@ private extension SwiftCharts.LineChart.ChartView {
         VStack(spacing: 0) {
             Text(currentIndicatorPositionText)
                 .foregroundColor(.white)
+                .padding(.vertical, 6)
+                .padding(.horizontal, 10)
                 .background(
                     Capsule()
                         .foregroundColor(config.lineColor)
                 )
-                .padding(.vertical, 6)
-                .padding(.horizontal, 10)
             
             Rectangle()
                 .fill(config.lineColor)
