@@ -62,7 +62,7 @@ private extension SwiftCharts.LineChart.ChartView {
                 withAnimation {
                     showIndicator = true
                 }
-                let translation = value.location.x - 40
+                let translation = value.location.x //- 40
                 let width = geometry.size.width / CGFloat(viewModel.points.count - 1)
                 
                 let index = min(Int(translation / width) + 1, viewModel.points.count - 1)
