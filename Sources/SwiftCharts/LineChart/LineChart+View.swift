@@ -65,7 +65,7 @@ private extension SwiftCharts.LineChart.ChartView {
                 let translation = value.location.x - 40
                 let width = geometry.size.width / CGFloat(viewModel.points.count - 1)
                 
-                let index = max(min(Int(translation / width) + 1, viewModel.points.count - 1), 0)
+                let index = min(Int(translation / width) + 1, viewModel.points.count - 1)
                 currentIndicatorPositionText = "\(viewModel.points[index].amount)"
                 
                 print(points[index].y)
