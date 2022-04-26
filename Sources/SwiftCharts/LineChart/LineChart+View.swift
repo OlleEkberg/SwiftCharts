@@ -62,12 +62,15 @@ private extension SwiftCharts.LineChart.ChartView {
                 withAnimation {
                     showIndicator = true
                 }
-                let halfWidth = geometry.size.width / 2
-                let translationOffset = CGFloat(halfWidth < value.location.x ? 0 : 20)
-                let translation = value.location.x - translationOffset
-                let width = geometry.size.width / CGFloat(viewModel.points.count - 1)
                 
-                let index = min(Int(translation / width) + 1, viewModel.points.count - 1)
+                let widthOfSegment = geometry.size.width / CGFloat(viewModel.points.count - 1)
+                
+                let halfWidth = geometry.size.width / 2
+                let translationOffset = CGFloat(halfWidth + (widthOfSegment / 2) < value.location.x ? 0 : 20)
+                let translation = value.location.x - translationOffset
+                
+                
+                let index = min(Int(translation / widthOfSegment) + 1, viewModel.points.count - 1)
                 currentIndicatorPositionText = "\(viewModel.points[index].amount)"
                 
                 print(points[index].y)
