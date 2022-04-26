@@ -189,18 +189,18 @@ private extension SwiftCharts.LineChart.ChartView {
     
     var dragIndicator: some View {
         VStack(spacing: 0) {
-            Text(currentIndicatorPositionText)
-                .foregroundColor(.white)
-                .padding(padding)
-                .background(
-                    Capsule()
-                        .foregroundColor(config.lineColor)
-                )
-            
-            Rectangle()
-                .fill(config.lineColor)
-                .frame(width: indicatorLineWidth, height: indicatorLineLength)
-                .padding(.top)
+//            Text(currentIndicatorPositionText)
+//                .foregroundColor(.white)
+//                .padding(padding)
+//                .background(
+//                    Capsule()
+//                        .foregroundColor(config.lineColor)
+//                )
+//            
+//            Rectangle()
+//                .fill(config.lineColor)
+//                .frame(width: indicatorLineWidth, height: indicatorLineLength)
+//                .padding(.top)
             
             Circle()
                 .fill(config.lineColor)
