@@ -70,7 +70,7 @@ private extension SwiftCharts.LineChart.ChartView {
                 let translation = value.location.x - translationOffset
                 
                 
-                let index = min(Int(translation / widthOfSegment) + 1, viewModel.points.count - 1)
+                let index = max(min(Int(translation / widthOfSegment) + 1, viewModel.points.count - 1), 0)
                 currentIndicatorPositionText = "\(viewModel.points[index].amount)"
                 
                 print(points[index].y)
