@@ -31,7 +31,7 @@ extension LineChart {
                 lineChart()
                     .background(lineChartBackground)
                     .overlay(lineChartOverlay, alignment: .trailing)
-                lineChartDates()
+//                lineChartDates()
                 chartFilter()
             }
         }
