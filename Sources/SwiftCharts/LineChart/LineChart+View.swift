@@ -63,17 +63,20 @@ private extension SwiftCharts.LineChart.ChartView {
                 withAnimation {
                     showIndicator = true
                 }
+                // Indicator Calculations
                 let segments = geometry.size.width / CGFloat(points.count)
                 let pointIndex = value.location.x / segments
                 let intIndex = Int(pointIndex) > (points.count - 1) ? points.count - 1 : Int(pointIndex)
                 let currentPoint = points[intIndex]
-                
-                currentIndicatorPositionText = "\(viewModel.points[Int(intIndex)].amount)"
-                
                 let xOffset = indicatorRadius
                 let yOffset = xOffset - indicatorRadius
                 
                 indicatorOffset = .init(width: currentPoint.x - xOffset, height: -(geometry.size.height - currentPoint.y + yOffset))
+                
+                // Text Calculations
+                currentIndicatorPositionText = "\(viewModel.points[Int(intIndex)].amount)"
+                
+                
             }).onEnded({ _ in
                 withAnimation {
                     showIndicator = false
@@ -113,46 +116,34 @@ private extension SwiftCharts.LineChart.ChartView {
     }
     
     var lineChartOverlay: some View {
-        HStack {
-            Text("VAD HÄNDER")
-                .foregroundColor(config.backgroundColor)
-                .padding(padding)
+        VStack {
+            Text((viewModel.largestAmount + config.extraHeadSpace).twoDigitDecimalString())
+                .foregroundColor(config.textColor)
+                .padding(.horizontal, padding)
                 .background(
                     Capsule()
-                        .foregroundColor(config.lineColor)
+                        .foregroundColor(config.backgroundColor.opacity(0.7))
                 )
-                .opacity(showIndicator ? 1 : 0)
-                .frame(alignment: .center)
-            VStack {
-                Text((viewModel.largestAmount + config.extraHeadSpace).twoDigitDecimalString())
+            Spacer()
+            let midAmount = (maxY + minY) / 2
+            Text(midAmount.twoDigitDecimalString())
+                .foregroundColor(config.textColor)
+                .padding(.horizontal, padding)
+                .background(
+                    Capsule()
+                        .foregroundColor(config.backgroundColor.opacity(0.7))
+                )
+            Spacer()
+            if config.showChartFloorNumber {
+                Text(config.chartFloor.twoDigitDecimalString())
                     .foregroundColor(config.textColor)
                     .padding(.horizontal, padding)
                     .background(
                         Capsule()
                             .foregroundColor(config.backgroundColor.opacity(0.7))
                     )
-                Spacer()
-                let midAmount = (maxY + minY) / 2
-                Text(midAmount.twoDigitDecimalString())
-                    .foregroundColor(config.textColor)
-                    .padding(.horizontal, padding)
-                    .background(
-                        Capsule()
-                            .foregroundColor(config.backgroundColor.opacity(0.7))
-                    )
-                Spacer()
-                if config.showChartFloorNumber {
-                    Text(config.chartFloor.twoDigitDecimalString())
-                        .foregroundColor(config.textColor)
-                        .padding(.horizontal, padding)
-                        .background(
-                            Capsule()
-                                .foregroundColor(config.backgroundColor.opacity(0.7))
-                        )
-                }
             }
         }
-        
     }
     
     @ViewBuilder
