@@ -188,18 +188,28 @@ private extension SwiftCharts.LineChart.ChartView {
     }
     
     var dragIndicator: some View {
-        Circle()
-            .fill(config.lineColor)
-            .frame(width: indicatorCircleDiameter, height: indicatorCircleDiameter)
-            .overlay(
-                Circle()
-                    .fill(config.backgroundColor)
-                    .frame(width: indicatorCircleCenterDiameter, height: indicatorCircleCenterDiameter)
-            )
-            .frame(width: indicatorCircleDiameter, height: indicatorCircleDiameter)
-            .offset(y: indicatorRadius)
-            .offset(indicatorOffset)
-            .opacity(showIndicator ? 1 : 0)
+        VStack {
+            Text("VAD HÄNDER")
+                .foregroundColor(config.textColor)
+                .padding(padding)
+                .background(
+                    Capsule()
+                        .foregroundColor(config.lineColor)
+                )
+            Circle()
+                .fill(config.lineColor)
+                .frame(width: indicatorCircleDiameter, height: indicatorCircleDiameter)
+                .overlay(
+                    Circle()
+                        .fill(config.backgroundColor)
+                        .frame(width: indicatorCircleCenterDiameter, height: indicatorCircleCenterDiameter)
+                )
+                .frame(width: indicatorCircleDiameter, height: indicatorCircleDiameter)
+                .offset(y: indicatorRadius)
+                .offset(indicatorOffset)
+                .opacity(showIndicator ? 1 : 0)
+        }
+        
     }
     
     // MARK: Drawing Constants
