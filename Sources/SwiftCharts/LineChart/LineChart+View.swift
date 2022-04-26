@@ -118,16 +118,29 @@ private extension SwiftCharts.LineChart.ChartView {
         VStack {
             Text((viewModel.largestAmount + config.extraHeadSpace).twoDigitDecimalString())
                 .foregroundColor(config.textColor)
-                .background(config.backgroundColor.opacity(0.5))
+                .padding(padding)
+                .background(
+                    Capsule()
+                        .foregroundColor(config.backgroundColor.opacity(0.7))
+                )
             Spacer()
             let midAmount = (maxY + minY) / 2
             Text(midAmount.twoDigitDecimalString())
                 .foregroundColor(config.textColor)
-                .background(config.backgroundColor.opacity(0.5))
+                .padding(padding)
+                .background(
+                    Capsule()
+                        .foregroundColor(config.backgroundColor.opacity(0.7))
+                )
             Spacer()
             if config.showChartFloorNumber {
                 Text(config.chartFloor.twoDigitDecimalString())
                     .foregroundColor(config.textColor)
+                    .padding(padding)
+                    .background(
+                        Capsule()
+                            .foregroundColor(config.backgroundColor.opacity(0.7))
+                    )
             }
         }
     }
@@ -180,7 +193,7 @@ private extension SwiftCharts.LineChart.ChartView {
         VStack(spacing: 0) {
             Text(currentIndicatorPositionText)
                 .foregroundColor(.white)
-                .padding(indicatorTextPadding)
+                .padding(padding)
                 .background(
                     Capsule()
                         .foregroundColor(config.lineColor)
@@ -228,7 +241,7 @@ private extension SwiftCharts.LineChart.ChartView {
     var indicatorCircleCenterDiameter: CGFloat {
         10
     }
-    var indicatorTextPadding: CGFloat {
+    var padding: CGFloat {
         8
     }
 }
