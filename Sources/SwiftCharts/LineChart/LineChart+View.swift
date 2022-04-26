@@ -67,12 +67,12 @@ private extension SwiftCharts.LineChart.ChartView {
                 let widthOfSegment = geometry.size.width / CGFloat(numberOfSegments)
                 var currentSegment = 1
                 
-                print(value.location.x)
-                print(geometry.size.width)
-                if value.location.x == widthOfSegment * CGFloat(currentSegment) {
-                    print("segment \(currentSegment)")
-                    currentSegment += 1
-                }
+                //points = 20
+                //geometry width = 400
+                //segment = 400 / 20 = 20
+                // index = currentX / points
+                
+                print(Int(value.location.x / viewModel.points.count))
                 
                 let halfWidth = geometry.size.width / 2
                 let translationOffset = CGFloat(halfWidth + (widthOfSegment / 2) < value.location.x ? 0 : 20)
