@@ -118,7 +118,7 @@ private extension SwiftCharts.LineChart.ChartView {
         VStack {
             Text((viewModel.largestAmount + config.extraHeadSpace).twoDigitDecimalString())
                 .foregroundColor(config.textColor)
-                .padding(padding)
+                .padding(.horizontal, padding)
                 .background(
                     Capsule()
                         .foregroundColor(config.backgroundColor.opacity(0.7))
@@ -127,7 +127,7 @@ private extension SwiftCharts.LineChart.ChartView {
             let midAmount = (maxY + minY) / 2
             Text(midAmount.twoDigitDecimalString())
                 .foregroundColor(config.textColor)
-                .padding(padding)
+                .padding(.horizontal, padding)
                 .background(
                     Capsule()
                         .foregroundColor(config.backgroundColor.opacity(0.7))
@@ -136,7 +136,7 @@ private extension SwiftCharts.LineChart.ChartView {
             if config.showChartFloorNumber {
                 Text(config.chartFloor.twoDigitDecimalString())
                     .foregroundColor(config.textColor)
-                    .padding(padding)
+                    .padding(.horizontal, padding)
                     .background(
                         Capsule()
                             .foregroundColor(config.backgroundColor.opacity(0.7))
