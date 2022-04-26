@@ -31,7 +31,7 @@ extension LineChart {
                 lineChart()
                     .background(lineChartBackground)
                     .overlay(lineChartOverlay, alignment: .trailing)
-//                lineChartDates()
+                lineChartDates()
                 chartFilter()
             }
         }
@@ -193,7 +193,7 @@ private extension SwiftCharts.LineChart.ChartView {
                 )
         }
         .frame(width: 80, height: 170)
-        .offset(y: 70)
+//        .offset(y: 70)
         .offset(indicatorOffset)
         .opacity(showIndicator ? 1 : 0)
     }
