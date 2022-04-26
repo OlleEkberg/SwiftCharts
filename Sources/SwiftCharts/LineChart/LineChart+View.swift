@@ -196,7 +196,7 @@ private extension SwiftCharts.LineChart.ChartView {
 //                    Capsule()
 //                        .foregroundColor(config.lineColor)
 //                )
-//            
+//
 //            Rectangle()
 //                .fill(config.lineColor)
 //                .frame(width: indicatorLineWidth, height: indicatorLineLength)
@@ -211,7 +211,7 @@ private extension SwiftCharts.LineChart.ChartView {
                         .frame(width: indicatorCircleCenterDiameter, height: indicatorCircleCenterDiameter)
                 )
         }
-        .frame(width: indicatorWidth, height: indicatorHeight)
+        .frame(width: indicatorCircleDiameter, height: indicatorCircleDiameter)
         .offset(y: indicatorLineLength)
         .offset(indicatorOffset)
         .opacity(showIndicator ? 1 : 0)
