@@ -12,7 +12,7 @@ extension LineChart {
     public struct ChartView: View {
         
         @ObservedObject private var viewModel: LineChart.ViewModel
-        @State private var currentIndicatorPosition = ""
+        @State private var currentIndicatorPositionText = ""
         @State private var indicatorOffset: CGSize = .zero
         @State private var showIndicator: Bool = false
         private let config: Config
@@ -63,7 +63,12 @@ private extension SwiftCharts.LineChart.ChartView {
                     showIndicator = true
                 }
                 let translation = value.location.x - 40
-                indicatorOffset = .init(width: translation, height: 0)
+                let width = geometry.size.width / CGFloat(viewModel.points.count - 1)
+                
+                let index = min(Int(translation / width), viewModel.points.count - 1)
+                currentIndicatorPositionText = "\(viewModel.points[index].amount)"
+                
+                indicatorOffset = .init(width: points[index].x, height: points[index].y)
             }).onEnded({ value in
                 withAnimation {
                     showIndicator = false
@@ -164,7 +169,7 @@ private extension SwiftCharts.LineChart.ChartView {
     
     var dragIndicator: some View {
         VStack(spacing: 0) {
-            Text(currentIndicatorPosition)
+            Text(currentIndicatorPositionText)
                 .foregroundColor(.white)
                 .padding(.vertical, 6)
                 .padding(.horizontal, 10)
@@ -182,10 +187,6 @@ private extension SwiftCharts.LineChart.ChartView {
                         .fill(config.backgroundColor)
                         .frame(width: 10, height: 10)
                 )
-            
-            Rectangle()
-                .fill(config.lineColor)
-                .frame(width: 1, height: 55)
         }
         .frame(width: 80, height: 170)
         .offset(indicatorOffset)
