@@ -113,34 +113,47 @@ private extension SwiftCharts.LineChart.ChartView {
     }
     
     var lineChartOverlay: some View {
-        VStack {
-            Text((viewModel.largestAmount + config.extraHeadSpace).twoDigitDecimalString())
+        HStack {
+            Spacer()
+            Text("VAD HÄNDER")
                 .foregroundColor(config.textColor)
-                .padding(.horizontal, padding)
+                .padding(padding)
                 .background(
                     Capsule()
-                        .foregroundColor(config.backgroundColor.opacity(0.7))
+                        .foregroundColor(config.lineColor)
                 )
+                .opacity(showIndicator ? 1 : 0)
             Spacer()
-            let midAmount = (maxY + minY) / 2
-            Text(midAmount.twoDigitDecimalString())
-                .foregroundColor(config.textColor)
-                .padding(.horizontal, padding)
-                .background(
-                    Capsule()
-                        .foregroundColor(config.backgroundColor.opacity(0.7))
-                )
-            Spacer()
-            if config.showChartFloorNumber {
-                Text(config.chartFloor.twoDigitDecimalString())
+            VStack {
+                Text((viewModel.largestAmount + config.extraHeadSpace).twoDigitDecimalString())
                     .foregroundColor(config.textColor)
                     .padding(.horizontal, padding)
                     .background(
                         Capsule()
                             .foregroundColor(config.backgroundColor.opacity(0.7))
                     )
+                Spacer()
+                let midAmount = (maxY + minY) / 2
+                Text(midAmount.twoDigitDecimalString())
+                    .foregroundColor(config.textColor)
+                    .padding(.horizontal, padding)
+                    .background(
+                        Capsule()
+                            .foregroundColor(config.backgroundColor.opacity(0.7))
+                    )
+                Spacer()
+                if config.showChartFloorNumber {
+                    Text(config.chartFloor.twoDigitDecimalString())
+                        .foregroundColor(config.textColor)
+                        .padding(.horizontal, padding)
+                        .background(
+                            Capsule()
+                                .foregroundColor(config.backgroundColor.opacity(0.7))
+                        )
+                }
             }
         }
+        
     }
     
     @ViewBuilder
@@ -188,28 +201,18 @@ private extension SwiftCharts.LineChart.ChartView {
     }
     
     var dragIndicator: some View {
-        VStack {
-            Text("VAD HÄNDER")
-                .foregroundColor(config.textColor)
-                .padding(padding)
-                .background(
-                    Capsule()
-                        .foregroundColor(config.lineColor)
-                )
-            Circle()
-                .fill(config.lineColor)
-                .frame(width: indicatorCircleDiameter, height: indicatorCircleDiameter)
-                .overlay(
-                    Circle()
-                        .fill(config.backgroundColor)
-                        .frame(width: indicatorCircleCenterDiameter, height: indicatorCircleCenterDiameter)
-                )
-                .frame(width: indicatorCircleDiameter, height: indicatorCircleDiameter)
-                .offset(y: indicatorRadius)
-                .offset(indicatorOffset)
-                .opacity(showIndicator ? 1 : 0)
-        }
-        
+        Circle()
+            .fill(config.lineColor)
+            .frame(width: indicatorCircleDiameter, height: indicatorCircleDiameter)
+            .overlay(
+                Circle()
+                    .fill(config.backgroundColor)
+                    .frame(width: indicatorCircleCenterDiameter, height: indicatorCircleCenterDiameter)
+            )
+            .frame(width: indicatorCircleDiameter, height: indicatorCircleDiameter)
+            .offset(y: indicatorRadius)
+            .offset(indicatorOffset)
+            .opacity(showIndicator ? 1 : 0)
     }
     
     // MARK: Drawing Constants
