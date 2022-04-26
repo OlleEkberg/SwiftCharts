@@ -62,7 +62,9 @@ private extension SwiftCharts.LineChart.ChartView {
                 withAnimation {
                     showIndicator = true
                 }
-                let translation = value.location.x //- 40
+                let halfWidth = geometry.size.width / 2
+                let translationOffset = CGFloat(halfWidth < value.location.x ? 0 : 20)
+                let translation = value.location.x - translationOffset
                 let width = geometry.size.width / CGFloat(viewModel.points.count - 1)
                 
                 let index = min(Int(translation / width) + 1, viewModel.points.count - 1)
@@ -72,7 +74,7 @@ private extension SwiftCharts.LineChart.ChartView {
                 print(geometry.size.height - points[index].y)
                 print(points[index].y)
                 
-                indicatorOffset = .init(width: points[index].x - 0, height: -(geometry.size.height - points[index].y + 29))//points[index].y )//- geometry.size.height)
+                indicatorOffset = .init(width: points[index].x - 40, height: -(geometry.size.height - points[index].y + 29))
             }).onEnded({ value in
                 withAnimation {
                     showIndicator = false
