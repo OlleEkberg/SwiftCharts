@@ -72,7 +72,7 @@ private extension SwiftCharts.LineChart.ChartView {
                 print(geometry.size.height - points[index].y)
                 print(points[index].y)
                 
-                indicatorOffset = .init(width: points[index].x - 40, height: -(geometry.size.height - points[index].y + 40))//points[index].y )//- geometry.size.height)
+                indicatorOffset = .init(width: points[index].x - 40, height: -(geometry.size.height - points[index].y + 29))//points[index].y )//- geometry.size.height)
             }).onEnded({ value in
                 withAnimation {
                     showIndicator = false
