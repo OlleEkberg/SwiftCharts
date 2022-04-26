@@ -114,8 +114,8 @@ private extension SwiftCharts.LineChart.ChartView {
     
     var lineChartOverlay: some View {
         HStack {
-            Spacer()
             Text("VAD HÄNDER")
+                .frame(alignment: .center)
                 .foregroundColor(config.textColor)
                 .padding(padding)
                 .background(
@@ -123,7 +123,6 @@ private extension SwiftCharts.LineChart.ChartView {
                         .foregroundColor(config.lineColor)
                 )
                 .opacity(showIndicator ? 1 : 0)
-            Spacer()
             VStack {
                 Text((viewModel.largestAmount + config.extraHeadSpace).twoDigitDecimalString())
                     .foregroundColor(config.textColor)
