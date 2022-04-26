@@ -70,8 +70,8 @@ private extension SwiftCharts.LineChart.ChartView {
                 
                 currentIndicatorPositionText = "\(viewModel.points[Int(intIndex)].amount)"
                 
-                let xOffset = indicatorWidth / 2
-                let yOffset = xOffset - indicatorCircleDiameter / 2
+                let xOffset = indicatorRadius
+                let yOffset = xOffset - indicatorRadius
                 
                 indicatorOffset = .init(width: currentPoint.x - xOffset, height: -(geometry.size.height - currentPoint.y + yOffset))
             }).onEnded({ _ in
@@ -188,56 +188,32 @@ private extension SwiftCharts.LineChart.ChartView {
     }
     
     var dragIndicator: some View {
-        VStack(spacing: 0) {
-//            Text(currentIndicatorPositionText)
-//                .foregroundColor(.white)
-//                .padding(padding)
-//                .background(
-//                    Capsule()
-//                        .foregroundColor(config.lineColor)
-//                )
-//
-//            Rectangle()
-//                .fill(config.lineColor)
-//                .frame(width: indicatorLineWidth, height: indicatorLineLength)
-//                .padding(.top)
-            
-            Circle()
-                .fill(config.lineColor)
-                .frame(width: indicatorCircleDiameter, height: indicatorCircleDiameter)
-                .overlay(
-                    Circle()
-                        .fill(config.backgroundColor)
-                        .frame(width: indicatorCircleCenterDiameter, height: indicatorCircleCenterDiameter)
-                )
-        }
-        .frame(width: indicatorCircleDiameter, height: indicatorCircleDiameter)
-        .offset(y: indicatorCircleDiameter / 2)
-        .offset(indicatorOffset)
-        .opacity(showIndicator ? 1 : 0)
+        Circle()
+            .fill(config.lineColor)
+            .frame(width: indicatorCircleDiameter, height: indicatorCircleDiameter)
+            .overlay(
+                Circle()
+                    .fill(config.backgroundColor)
+                    .frame(width: indicatorCircleCenterDiameter, height: indicatorCircleCenterDiameter)
+            )
+            .frame(width: indicatorCircleDiameter, height: indicatorCircleDiameter)
+            .offset(y: indicatorRadius)
+            .offset(indicatorOffset)
+            .opacity(showIndicator ? 1 : 0)
     }
     
     // MARK: Drawing Constants
     var filterWidth: CGFloat {
         80
     }
-    var indicatorWidth: CGFloat {
-        indicatorCircleDiameter
-    }
-//    var indicatorHeight: CGFloat {
-//        indicatorCircleDiameter
-//    }
-//    var indicatorLineLength: CGFloat {
-//        45
-//    }
-//    var indicatorLineWidth: CGFloat {
-//        1
-//    }
     var indicatorCircleDiameter: CGFloat {
         22
     }
     var indicatorCircleCenterDiameter: CGFloat {
         10
+    }
+    var indicatorRadius: CGFloat {
+        indicatorCircleDiameter / 2
     }
     var padding: CGFloat {
         8
