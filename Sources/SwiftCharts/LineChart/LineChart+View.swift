@@ -68,7 +68,7 @@ private extension SwiftCharts.LineChart.ChartView {
                 let intIndex = Int(pointIndex) > (points.count - 1) ? points.count - 1 : Int(pointIndex)
                 let currentPoint = points[intIndex]
                 
-                currentIndicatorPositionText = "\(viewModel.points[Int(pointIndex)].amount)"
+                currentIndicatorPositionText = "\(viewModel.points[Int(intIndex)].amount)"
                 
                 let xOffset = indicatorWidth / 2
                 let yOffset = xOffset - indicatorCircleDiameter / 2
