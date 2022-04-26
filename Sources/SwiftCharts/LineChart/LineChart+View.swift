@@ -15,6 +15,7 @@ extension LineChart {
         @State private var currentIndicatorPositionText = ""
         @State private var indicatorOffset: CGSize = .zero
         @State private var showIndicator: Bool = false
+        @State private var indicatorTextOffset: CGFloat = .zero
         private let config: Config
         private let maxY: Float
         private let minY: Float
@@ -62,9 +63,10 @@ private extension SwiftCharts.LineChart.ChartView {
                 withAnimation {
                     showIndicator = true
                 }
-                let segments = geometry.size.width / CGFloat(viewModel.points.count)
+                let segments = geometry.size.width / CGFloat(points.count)
                 let pointIndex = value.location.x / segments
-                let currentPoint = points[Int(pointIndex)]
+                let intIndex = Int(pointIndex) > (points.count - 1) ? points.count - 1 : Int(pointIndex)
+                let currentPoint = points[intIndex]
                 
                 currentIndicatorPositionText = "\(viewModel.points[Int(pointIndex)].amount)"
                 
