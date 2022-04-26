@@ -68,6 +68,7 @@ private extension SwiftCharts.LineChart.ChartView {
                 var currentSegment = 1
                 
                 print(value.location.x)
+                print(geometry.size.width)
                 if value.location.x == widthOfSegment * CGFloat(currentSegment) {
                     print("segment \(currentSegment)")
                     currentSegment += 1
