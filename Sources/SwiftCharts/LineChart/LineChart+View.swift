@@ -65,10 +65,10 @@ private extension SwiftCharts.LineChart.ChartView {
                 let translation = value.location.x - 40
                 let width = geometry.size.width / CGFloat(viewModel.points.count - 1)
                 
-                let index = max(min(Int(translation / width) - 1, viewModel.points.count - 1), 0)
+                let index = max(min(Int(translation / width) + 1, viewModel.points.count - 1), 0)
                 currentIndicatorPositionText = "\(viewModel.points[index].amount)"
                 
-                indicatorOffset = .init(width: points[index].x, height: points[index].y)
+                indicatorOffset = .init(width: points[index].x - 40, height: points[index].y - geometry.size.height)
             }).onEnded({ value in
                 withAnimation {
                     showIndicator = false
@@ -189,6 +189,7 @@ private extension SwiftCharts.LineChart.ChartView {
                 )
         }
         .frame(width: 80, height: 170)
+        .offset(y: 70)
         .offset(indicatorOffset)
         .opacity(showIndicator ? 1 : 0)
     }
