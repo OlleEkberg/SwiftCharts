@@ -38,7 +38,7 @@ extension LineChart {
         public init(points: [LineChart.Point]) {
             self.allPoints = points.sorted { $0.date < $1.date }
             self.points = allPoints
-            self.currentFilter = .month
+            self.filterDates(by: .month)
         }
         
         func add(_ point: LineChart.Point) {
