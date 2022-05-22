@@ -45,7 +45,7 @@ extension ColumnChart {
                                             .animation(.default)
                                             .onTapGesture {
                                                 proxy.scrollTo(0)
-                                                if previewModeActive{
+                                                if previewModeActive {
                                                     viewModel.didReset(data: data)
                                                     previewModeActive = false
                                                 } else {

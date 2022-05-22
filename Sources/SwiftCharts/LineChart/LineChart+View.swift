@@ -46,7 +46,6 @@ private extension SwiftCharts.LineChart.ChartView {
         GeometryReader { geometry in
             let points = createPoints(with: geometry.size)
             ZStack {
-
                 Path { path in
                     path.move(to: .init(x: 0, y: 0))
                     path.addLines(points)
@@ -184,6 +183,7 @@ private extension SwiftCharts.LineChart.ChartView {
                                 viewModel.currentFilter = filter
                             }
                             .foregroundColor(config.textColor)
+                            .clipShape(RoundedRectangle(cornerRadius: padding).shadow(radius: padding))
                     }
                 }
             }
