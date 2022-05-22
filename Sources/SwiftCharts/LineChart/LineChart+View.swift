@@ -20,6 +20,7 @@ extension LineChart {
         private let maxY: Float
         private let minY: Float
         @State var selectedDate = Date()
+        @State var showPicker = false
         
         public init(viewModel: LineChart.ViewModel, config: LineChart.Config = .init()) {
             self.viewModel = viewModel
@@ -174,9 +175,7 @@ private extension SwiftCharts.LineChart.ChartView {
                         Image(systemName: "calendar")
                             .frame(width: filterWidth)
                             .onTapGesture {
-                                DatePicker(selection: $selectedDate, in: ...Date(), displayedComponents: .date) {
-                                    Text("Select a range of dates")
-                                }
+                                
                                 viewModel.currentFilter = filter
                             }
                             .background(
@@ -200,6 +199,11 @@ private extension SwiftCharts.LineChart.ChartView {
                             
                     }
                 }
+            }
+        }
+        .sheet(isPresented: $showPicker) {
+            DatePicker(selection: $selectedDate, in: ...Date(), displayedComponents: .date) {
+                Text("Select a range of dates")
             }
         }
     }
