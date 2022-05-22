@@ -20,25 +20,24 @@ extension LineChart {
         }
         
         var maxAmount: Float {
-            points.reduce(0) { $0 + $1.amount }
+            allPoints.reduce(0) { $0 + $1.amount }
         }
         var largestAmount: Float {
-            points.max(by: { $0.amount < $1.amount })?.amount ?? 0
+            allPoints.max(by: { $0.amount < $1.amount })?.amount ?? 0
         }
         var smallestAmount: Float {
-            points.min(by: { $0.amount < $1.amount })?.amount ?? 0
+            allPoints.min(by: { $0.amount < $1.amount })?.amount ?? 0
         }
         var firstDate: Date? {
-            points.first?.date
+            allPoints.first?.date
         }
         var latestDate: Date? {
-            points.last?.date
+            allPoints.last?.date
         }
         
         public init(points: [LineChart.Point]) {
             self.allPoints = points.sorted { $0.date < $1.date }
-            self.points = []
-            self.filterDates(by: .month)
+            self.points = allPoints.filteredBy(.month, latestDate: allPoints.last?.date)
         }
         
         func add(_ point: LineChart.Point) {
@@ -79,7 +78,7 @@ extension LineChart {
             points = filteredPoints
         }
         
-        private func addOrSubtructDay(day:Int) -> Date {
+        private func addOrSubtructDay(day: Int) -> Date {
             return Calendar.current.date(byAdding: .day, value: day, to: Date()) ?? Date()
           }
     }
@@ -142,5 +141,15 @@ extension LineChart.ViewModel {
 private extension Date {
     func addOrSubtructDay(days: Int) -> Date {
         Calendar.current.date(byAdding: .day, value: days, to: self) ?? Date()
+    }
+}
+
+private extension Array where Element == LineChart.Point {
+    func filteredBy(_ filter: LineChart.ViewModel.Filter, latestDate: Date?) -> [Element] {
+        guard let latestDate = latestDate else {
+            return []
+        }
+
+        return self.filter { $0.date > latestDate.addOrSubtructDay(days: -filter.days) }
     }
 }
