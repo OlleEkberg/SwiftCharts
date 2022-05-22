@@ -175,6 +175,11 @@ private extension SwiftCharts.LineChart.ChartView {
                             .onTapGesture {
                                 
                             }
+                            .background(
+                                RoundedRectangle(cornerRadius: padding)
+                                    .foregroundColor(config.lineColor.opacity(filter == viewModel.currentFilter ? 0.8 : 0.0))
+                                
+                            )
                             .foregroundColor(config.textColor)
                     } else {
                         Text(filter.name)
@@ -184,8 +189,8 @@ private extension SwiftCharts.LineChart.ChartView {
                             }
                             .background(
                                 RoundedRectangle(cornerRadius: padding)
-                                    .foregroundColor(config.lineColor.opacity(0.3))
-                                    .border(config.lineColor, width: 2)
+                                    .foregroundColor(config.lineColor.opacity(filter == viewModel.currentFilter ? 0.8 : 0.0))
+                                
                             )
                             .foregroundColor(config.textColor)
                             
