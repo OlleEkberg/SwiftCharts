@@ -19,6 +19,7 @@ extension LineChart {
         private let config: Config
         private let maxY: Float
         private let minY: Float
+        @State var selectedDate = Date()
         
         public init(viewModel: LineChart.ViewModel, config: LineChart.Config = .init()) {
             self.viewModel = viewModel
@@ -31,7 +32,7 @@ extension LineChart {
             VStack {
                 lineChart()
                     .background(lineChartBackground)
-                    .overlay(lineChartOverlay, alignment: .leading)
+                    .overlay(lineChartOverlay, alignment: .trailing)
                 lineChartDates()
                 chartFilter()
             }
@@ -173,7 +174,10 @@ private extension SwiftCharts.LineChart.ChartView {
                         Image(systemName: "calendar")
                             .frame(width: filterWidth)
                             .onTapGesture {
-                                
+                                DatePicker(selection: $selectedDate, in: ...Date(), displayedComponents: .date) {
+                                    Text("Select a range of dates")
+                                }
+                                viewModel.currentFilter = filter
                             }
                             .background(
                                 RoundedRectangle(cornerRadius: padding)
