@@ -25,19 +25,19 @@ extension LineChart {
         }
         
         var maxAmount: Float {
-            allPoints.reduce(0) { $0 + $1.amount }
+            points.reduce(0) { $0 + $1.amount }
         }
         var largestAmount: Float {
-            allPoints.max(by: { $0.amount < $1.amount })?.amount ?? 0
+            points.max(by: { $0.amount < $1.amount })?.amount ?? 0
         }
         var smallestAmount: Float {
-            allPoints.min(by: { $0.amount < $1.amount })?.amount ?? 0
+            points.min(by: { $0.amount < $1.amount })?.amount ?? 0
         }
         var firstDate: Date? {
-            allPoints.first?.date
+            points.first?.date
         }
         var latestDate: Date? {
-            allPoints.last?.date
+            points.last?.date
         }
         
         public init(points: [LineChart.Point], startingFilter: Filter = .month) {
