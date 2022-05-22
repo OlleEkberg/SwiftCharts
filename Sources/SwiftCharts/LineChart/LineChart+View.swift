@@ -182,8 +182,9 @@ private extension SwiftCharts.LineChart.ChartView {
                             .onTapGesture {
                                 viewModel.currentFilter = filter
                             }
-                            .foregroundColor(config.textColor)
                             .background(config.backgroundColor)
+                            .foregroundColor(config.textColor)
+                            
                     }
                 }
             }
