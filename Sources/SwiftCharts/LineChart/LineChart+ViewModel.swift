@@ -13,7 +13,7 @@ extension LineChart {
         
         private let allPoints: [LineChart.Point]
         @Published private(set) var points: [LineChart.Point]
-        var currentFilter: Filter = .max {
+        var currentFilter: Filter = .month {
             didSet {
                 filterDates(by: currentFilter)
             }
