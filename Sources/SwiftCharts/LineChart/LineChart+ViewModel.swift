@@ -69,20 +69,6 @@ extension LineChart {
             
             return dateformatter.string(from: date)
         }
-        
-//        private func filterDates(by filter: LineChart.ViewModel.Filter) {
-//           if case .max = filter {
-//                points = allPoints
-//                return
-//            }
-//
-//            let filteredPoints = allPoints.filter { $0.date > latestDate.addOrSubtructDay(days: -filter.days) }
-//            points = filteredPoints
-//        }
-        
-        private func addOrSubtructDay(day: Int) -> Date {
-            return Calendar.current.date(byAdding: .day, value: day, to: Date()) ?? Date()
-          }
     }
 }
 
