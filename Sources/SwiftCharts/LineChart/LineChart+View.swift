@@ -183,9 +183,7 @@ private extension SwiftCharts.LineChart.ChartView {
                                 viewModel.currentFilter = filter
                             }
                             .foregroundColor(config.textColor)
-                            .background(
-                                RoundedRectangle(cornerRadius: padding).foregroundColor(config.backgroundColor)
-                            )
+                            .background(config.backgroundColor)
                     }
                 }
             }
