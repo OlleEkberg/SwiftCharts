@@ -12,8 +12,8 @@ extension LineChart {
     public class ViewModel: ObservableObject, ChartViewModel {
         
         private let allPoints: [LineChart.Point]
-        @Published private(set) var points: [LineChart.Point]
-        var currentFilter: Filter {
+        @Published private(set) var points: [LineChart.Point] = []
+        var currentFilter: Filter = .month {
             didSet {
                 filterDates(by: currentFilter)
             }
@@ -35,10 +35,9 @@ extension LineChart {
             points.last?.date
         }
         
-        public init(points: [LineChart.Point], startFilter: Filter = .month) {
+        public init(points: [LineChart.Point]) {
             self.allPoints = points.sorted { $0.date < $1.date }
-            self.points = allPoints
-            self.currentFilter = startFilter
+            self.currentFilter = .month
         }
         
         func add(_ point: LineChart.Point) {
