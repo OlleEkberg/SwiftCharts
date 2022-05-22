@@ -31,7 +31,7 @@ extension LineChart {
             VStack {
                 lineChart()
                     .background(lineChartBackground)
-                    .overlay(lineChartOverlay, alignment: .trailing)
+                    .overlay(lineChartOverlay, alignment: .leading)
                 lineChartDates()
                 chartFilter()
             }
