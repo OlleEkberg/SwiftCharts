@@ -40,7 +40,7 @@ extension LineChart {
             allPoints.last?.date
         }
         
-        public init(points: [LineChart.Point], startingFilter: Filter) {
+        public init(points: [LineChart.Point], startingFilter: Filter = .month) {
             self.allPoints = points.sorted { $0.date < $1.date }
             self.currentFilter = startingFilter
             self.points = allPoints.filteredBy(startingFilter, latestDate: allPoints.last?.date)
