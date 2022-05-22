@@ -13,9 +13,14 @@ extension LineChart {
         
         private let allPoints: [LineChart.Point]
         @Published private(set) var points: [LineChart.Point]
-        var currentFilter: Filter = .month {
+        var currentFilter: Filter {
             didSet {
-                filterDates(by: currentFilter)
+                if currentFilter == .max {
+                    points = allPoints
+                    
+                    return
+                }
+                points = allPoints.filteredBy(currentFilter, latestDate: allPoints.last?.date)
             }
         }
         
@@ -35,9 +40,10 @@ extension LineChart {
             allPoints.last?.date
         }
         
-        public init(points: [LineChart.Point]) {
+        public init(points: [LineChart.Point], startingFilter: Filter) {
             self.allPoints = points.sorted { $0.date < $1.date }
-            self.points = allPoints.filteredBy(.month, latestDate: allPoints.last?.date)
+            self.currentFilter = startingFilter
+            self.points = allPoints.filteredBy(startingFilter, latestDate: allPoints.last?.date)
         }
         
         func add(_ point: LineChart.Point) {
@@ -64,19 +70,15 @@ extension LineChart {
             return dateformatter.string(from: date)
         }
         
-        private func filterDates(by filter: LineChart.ViewModel.Filter) {
-            guard let latestDate = latestDate else {
-                return
-            }
-            
-            if case .max = filter {
-                points = allPoints
-                return
-            }
-            
-            let filteredPoints = allPoints.filter { $0.date > latestDate.addOrSubtructDay(days: -filter.days) }
-            points = filteredPoints
-        }
+//        private func filterDates(by filter: LineChart.ViewModel.Filter) {
+//           if case .max = filter {
+//                points = allPoints
+//                return
+//            }
+//
+//            let filteredPoints = allPoints.filter { $0.date > latestDate.addOrSubtructDay(days: -filter.days) }
+//            points = filteredPoints
+//        }
         
         private func addOrSubtructDay(day: Int) -> Date {
             return Calendar.current.date(byAdding: .day, value: day, to: Date()) ?? Date()
