@@ -110,7 +110,7 @@ extension LineChart.ViewModel {
             case .month:
                 return 30
             case .threeMonths:
-                return 32
+                return 365 / 4
             case .sixMonths:
                 return 183
             case .oneYear:
