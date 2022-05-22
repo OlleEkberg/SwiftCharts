@@ -183,7 +183,9 @@ private extension SwiftCharts.LineChart.ChartView {
                                 viewModel.currentFilter = filter
                             }
                             .foregroundColor(config.textColor)
-                            .clipShape(RoundedRectangle(cornerRadius: padding).shadow(radius: padding))
+                            .overlay(
+                                RoundedRectangle(cornerRadius: padding).foregroundColor(.red)
+                            )
                     }
                 }
             }
