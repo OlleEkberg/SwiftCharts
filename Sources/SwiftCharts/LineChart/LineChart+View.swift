@@ -175,7 +175,7 @@ private extension SwiftCharts.LineChart.ChartView {
                         Image(systemName: "calendar")
                             .frame(width: filterWidth)
                             .onTapGesture {
-                                
+                                showPicker = true
                                 viewModel.currentFilter = filter
                             }
                             .background(
