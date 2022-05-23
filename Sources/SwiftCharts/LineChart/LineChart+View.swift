@@ -211,15 +211,15 @@ private extension SwiftCharts.LineChart.ChartView {
     
     var dragIndicator: some View {
         Circle()
-            .stroke(lineWidth: indicatorCircleCenterDiameter)
+            .stroke(lineWidth: indicatorStrokeWidth)
             .fill(config.lineColor)
             .frame(width: indicatorCircleDiameter, height: indicatorCircleDiameter)
             
-//            .overlay(
-//                Circle()
-//                    .fill(config.backgroundColor)
-//                    .frame(width: indicatorCircleCenterDiameter, height: indicatorCircleCenterDiameter)
-//            )
+            .overlay(
+                Circle()
+                    .fill(.red)
+                    .frame(width: indicatorCircleCenterDiameter, height: indicatorCircleCenterDiameter)
+            )
             .offset(y: indicatorRadius)
             .offset(indicatorOffset)
             .opacity(showIndicator ? 1 : 0)
@@ -232,8 +232,11 @@ private extension SwiftCharts.LineChart.ChartView {
     var indicatorCircleDiameter: CGFloat {
         22
     }
-    var indicatorCircleCenterDiameter: CGFloat {
+    var indicatorStrokeWidth: CGFloat {
         8
+    }
+    var indicatorCircleCenterDiameter: CGFloat {
+        indicatorCircleDiameter - indicatorStrokeWidth * 2
     }
     var indicatorRadius: CGFloat {
         indicatorCircleDiameter / 2
