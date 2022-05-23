@@ -145,6 +145,7 @@ private extension SwiftCharts.LineChart.ChartView {
                     )
             }
         }
+        .opacity(showIndicator ? 0 : 1)
     }
     
     @ViewBuilder
@@ -181,7 +182,6 @@ private extension SwiftCharts.LineChart.ChartView {
                             .background(
                                 RoundedRectangle(cornerRadius: padding)
                                     .foregroundColor(config.lineColor.opacity(filter == viewModel.currentFilter ? 0.8 : 0.0))
-                                
                             )
                             .foregroundColor(config.textColor)
                     } else {
@@ -193,7 +193,6 @@ private extension SwiftCharts.LineChart.ChartView {
                             .background(
                                 RoundedRectangle(cornerRadius: padding)
                                     .foregroundColor(config.lineColor.opacity(filter == viewModel.currentFilter ? 0.8 : 0.0))
-                                
                             )
                             .foregroundColor(config.textColor)
                             
