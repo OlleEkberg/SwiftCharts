@@ -217,7 +217,7 @@ private extension SwiftCharts.LineChart.ChartView {
             
             .overlay(
                 Circle()
-                    .fill(.red)
+                    .background(blur(radius: 8))
                     .frame(width: indicatorCircleCenterDiameter, height: indicatorCircleCenterDiameter)
             )
             .offset(y: indicatorRadius)
