@@ -211,7 +211,7 @@ private extension SwiftCharts.LineChart.ChartView {
     
     var dragIndicator: some View {
         Circle()
-            .stroke(lineWidth: indicatorCircleCenterDiameter / 2)
+            .stroke(lineWidth: indicatorCircleCenterDiameter)
             .fill(config.lineColor)
             .frame(width: indicatorCircleDiameter, height: indicatorCircleDiameter)
             
