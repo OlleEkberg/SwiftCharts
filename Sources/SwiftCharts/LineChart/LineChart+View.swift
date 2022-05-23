@@ -206,13 +206,12 @@ private extension SwiftCharts.LineChart.ChartView {
                 DatePicker("Select a range of dates", selection: $selectedDate, in: ...Date(), displayedComponents: .date)
                 .datePickerStyle(GraphicalDatePickerStyle())
             }
-            
         }
     }
     
     var dragIndicator: some View {
         Circle()
-            .fill(config.lineColor)
+            .fill(.clear)
             .frame(width: indicatorCircleDiameter, height: indicatorCircleDiameter)
             .overlay(
                 Circle()
