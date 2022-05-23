@@ -218,7 +218,8 @@ private extension SwiftCharts.LineChart.ChartView {
             .overlay(
                 Circle()
                     .frame(width: indicatorCircleCenterDiameter, height: indicatorCircleCenterDiameter)
-                    .background(.ultraThinMaterial)
+                    .background(.white)
+                    .opacity(0.3)
             )
             .offset(y: indicatorRadius)
             .offset(indicatorOffset)
