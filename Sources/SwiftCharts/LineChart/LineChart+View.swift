@@ -202,9 +202,13 @@ private extension SwiftCharts.LineChart.ChartView {
             }
         }
         .sheet(isPresented: $showPicker) {
-            DatePicker(selection: $selectedDate, in: ...Date(), displayedComponents: .date) {
-                Text("Select a range of dates")
+            Form {
+                DatePicker(selection: $selectedDate, in: ...Date(), displayedComponents: .date) {
+                    Text("Select a range of dates")
+                }
+                .datePickerStyle(GraphicalDatePickerStyle())
             }
+            
         }
     }
     
