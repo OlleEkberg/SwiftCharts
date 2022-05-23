@@ -214,11 +214,10 @@ private extension SwiftCharts.LineChart.ChartView {
             .stroke(lineWidth: indicatorStrokeWidth)
             .fill(config.lineColor)
             .frame(width: indicatorCircleDiameter, height: indicatorCircleDiameter)
-            
             .overlay(
                 Circle()
                     .frame(width: indicatorCircleCenterDiameter, height: indicatorCircleCenterDiameter)
-                    .background(.white)
+                    .background(Color.white)
                     .opacity(0.3)
             )
             .offset(y: indicatorRadius)
