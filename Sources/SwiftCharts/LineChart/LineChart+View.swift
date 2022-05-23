@@ -229,9 +229,6 @@ private extension SwiftCharts.LineChart.ChartView {
     var indicatorStrokeWidth: CGFloat {
         8
     }
-    var indicatorCircleCenterDiameter: CGFloat {
-        indicatorCircleDiameter - indicatorStrokeWidth
-    }
     var indicatorRadius: CGFloat {
         indicatorCircleDiameter / 2
     }
